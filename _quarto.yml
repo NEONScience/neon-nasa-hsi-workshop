@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: _site
+  output-dir: docs
 
 execute:
   freeze: true  # never re-execute computational content during project render, needed for .qmd and .rmd since quarto does not render .ipynb by default
@@ -10,13 +10,13 @@ website:
   page-footer: 
     center: "NASA and NEON Airborne Hyperspectral Workshop 2025"
 
-  title: "VITALS"
+  title: "NEON AOP & NASA AVIRIS Workshop"
   site-url: https://NEONScience.github.io/neon-nasa-hsi-workshop/
   repo-url: https://github.com/nasa/neon-nasa-hsi-workshop/
 
   sidebar:
     title: "NEON AOP & NASA AVIRIS Workshop"
-    logo: img/lp_jpl_vitals_light.png
+    logo: img/nasa_neon_combined_logo_light.png
     pinned: true
     align: center
     tools: 

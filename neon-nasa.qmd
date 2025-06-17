@@ -1,5 +1,5 @@
 ---
-title: "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets"
+title: "NEON and NASA Airborne and Field Tutorials"
 ---
 
 > Please view the [NEON NASA Workshop Page](https://NEONScience.github.io/neon-nasa-hsi-workshop/) for workshop details. **Resources in this repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace. For local Python environment setup instructions please see the [Setup Instructions](setup/setup_instructions.md).**
