@@ -55,302 +55,11 @@
     ]
   },
   {
-    "objectID": "neon/intro_hyperspectral_functions.html",
-    "href": "neon/intro_hyperspectral_functions.html",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "",
-    "text": "In this tutorial, you will learn how to efficiently read in hdf5 data and metadata, plot a single band and rgb band combinations of a reflectance data tile using Python functions created for working with and visualizing NEON AOP hyperspectral data.\nThis tutorial uses the Level 3 Spectrometer orthorectified surface directional reflectance - mosaic data product.\nWe can combine any three bands from the NEON reflectance data to make an RGB image that will depict different information about the Earth’s surface. A natural color image, made with bands from the red, green, and blue wavelengths looks close to what we would see with the naked eye. We can also choose band combinations from other wavelenghts, and map them to the red, blue, and green colors to highlight different features. A false color image is made with one or more bands from a non-visible portion of the electromagnetic spectrum that are mapped to red, green, and blue colors. These images can display other information about the landscape that is not easily seen with a natural color image.\nThe NASA Goddard Media Studio video “Peeling Back Landsat’s Layers of Data” gives a good quick overview of natural and false color band combinations. Note that the Landsat multispectral sensor collects information from 11 bands, while NEON AOP hyperspectral data captures information spanning 426 bands!"
-  },
-  {
-    "objectID": "neon/intro_hyperspectral_functions.html#load-function-module",
-    "href": "neon/intro_hyperspectral_functions.html#load-function-module",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "Load Function Module",
-    "text": "Load Function Module\nFirst we can import the required packages and the neon_aop_hyperspectral module, which includes a number of functions which we will use to read in the hyperspectral hdf5 data as well as visualize the data.\n\nimport os\nimport sys\nimport time\nimport h5py\nimport requests\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nThis next function is a handy way to download the Python module and data that we will be using for this lesson. This uses the requests package.\n\n# function to download data stored on the internet in a public url to a local file\ndef download_url(url,download_dir):\n    if not os.path.isdir(download_dir):\n        os.makedirs(download_dir)\n    filename = url.split('/')[-1]\n    r = requests.get(url, allow_redirects=True)\n    file_object = open(os.path.join(download_dir,filename),'wb')\n    file_object.write(r.content)\n\nDownload the module from its location on GitHub, add the python_modules to the path and import the neon_aop_hyperspectral.py module.\n\nmodule_url = \"https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/aop_python_modules/neon_aop_hyperspectral.py\"\ndownload_url(module_url,'../python_modules')\n# os.listdir('../python_modules') #optionally show the contents of this directory to confirm the file downloaded\n\nsys.path.insert(0, '../python_modules')\n# import the neon_aop_hyperspectral module, the semicolon supresses an empty plot from displaying\nimport neon_aop_hyperspectral as neon_hs;\n\nThe first function we will use is aop_h5refl2array. We encourage you to look through the code to understand what it is doing behind the scenes. This function automates the steps required to read AOP hdf5 reflectance files into a Python numpy array. This function also cleans the data: it sets any no data values within the reflectance tile to nan (not a number) and applies the reflectance scale factor so the final array that is returned represents unitless scaled reflectance, with values ranging between 0 and 1 (0-100%).\nIf you forget what this function does, or don’t want to scroll up to read the docstrings, remember you can use help or ? to display the associated docstrings.\n\nhelp(neon_hs.aop_h5refl2array)\n# neon_hs.aop_h5refl2array? #uncomment for an alternate way to show the help\n\nHelp on function aop_h5refl2array in module neon_aop_hyperspectral:\n\naop_h5refl2array(h5_filename, raster_type_: Literal['Cast_Shadow', 'Data_Selection_Index', 'GLT_Data', 'Haze_Cloud_Water_Map', 'IGM_Data', 'Illumination_Factor', 'OBS_Data', 'Radiance', 'Reflectance', 'Sky_View_Factor', 'to-sensor_Azimuth_Angle', 'to-sensor_Zenith_Angle', 'Visibility_Index_Map', 'Weather_Quality_Indicator'], only_metadata=False)\n    read in NEON AOP reflectance hdf5 file and return the un-scaled \n    reflectance array, associated metadata, and wavelengths\n           \n    Parameters\n    ----------\n        h5_filename : string\n            reflectance hdf5 file name, including full or relative path\n        raster : string\n            name of raster value to read in; this will typically be the reflectance data, \n            but other data stored in the h5 file can be accessed as well\n            valid options: \n                Cast_Shadow (ATCOR input)\n                Data_Selection_Index\n                GLT_Data\n                Haze_Cloud_Water_Map (ATCOR output)\n                IGM_Data\n                Illumination_Factor (ATCOR input)\n                OBS_Data \n                Reflectance\n                Radiance\n                Sky_View_Factor (ATCOR input)\n                to-sensor_Azimuth_Angle\n                to-sensor_Zenith_Angle\n                Visibility_Index_Map: sea level values of visibility index / total optical thickeness\n                Weather_Quality_Indicator: estimated percentage of overhead cloud cover during acquisition\n    \n    Returns \n    --------\n    raster_array : ndarray\n        array of reflectance values\n    metadata: dictionary \n        associated metadata containing\n            bad_band_window1 (tuple)\n            bad_band_window2 (tuple)\n            bands: # of bands (float)\n            data ignore value: value corresponding to no data (float)\n            epsg: coordinate system code (float)\n            map info: coordinate system, datum & ellipsoid, pixel dimensions, and origin coordinates (string)\n            reflectance scale factor: factor by which reflectance is scaled (float)\n    wavelengths: array\n            wavelength values, in nm\n    --------\n    Example Execution:\n    --------\n    refl, refl_metadata = aop_h5refl2array('NEON_D02_SERC_DP3_368000_4306000_reflectance.h5','Reflectance')\n\n\n\nNow that we have an idea of how this function works, let’s try it out. First, let’s download a file. For this tutorial, we will use requests to download from the public link where the data is stored on the cloud (Google Cloud Storage). This downloads to a data folder in the working directory, but you can download it to a different location if you prefer.\n\n# define the data_url to point to the cloud storage location of the the hyperspectral hdf5 data file\ndata_url = \"https://storage.googleapis.com/neon-aop-products/2021/FullSite/D03/2021_DSNY_6/L3/Spectrometer/Reflectance/NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\"\n\n\n# download the h5 data and display how much time it took to download (uncomment 1st and 3rd lines)\n# start_time = time.time()\ndownload_url(data_url,'.\\data')\n# print(\"--- It took %s seconds to download the data ---\" % round((time.time() - start_time),1))\n\n\n# display the contents in the ./data folder to confirm the download completed\nos.listdir('./data')\n\n['NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5']\n\n\n\n# read the h5 reflectance file (including the full path) to the variable h5_file_name\nh5_file_name = data_url.split('/')[-1]\nh5_tile = os.path.join(\".\\data\",h5_file_name)\nprint(f'h5_tile: {h5_tile}')\n\nh5_tile: .\\data\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\n\n\nNow that we’ve specified our reflectance tile, we can call aop_h5refl2array to read in the reflectance tile as a python array called refl , the metadata into a dictionary called refl_metadata, and the wavelengths into an array.\n\n# read in the reflectance data using the aop_h5refl2array function, this may also take a bit of time\nstart_time = time.time()\nrefl, refl_metadata, wavelengths = neon_hs.aop_h5refl2array(h5_tile,'Reflectance')\nprint(\"--- It took %s seconds to read in the data ---\" % round((time.time() - start_time),0))\n\nReading in  .\\data\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\n--- It took 7.0 seconds to read in the data ---\n\n\n\n# display the reflectance metadata dictionary contents\nrefl_metadata\n\n{'shape': (1000, 1000, 426),\n 'no_data_value': -9999.0,\n 'scale_factor': 10000.0,\n 'bad_band_window1': array([1340, 1445]),\n 'bad_band_window2': array([1790, 1955]),\n 'projection': b'+proj=UTM +zone=17 +ellps=WGS84 +datum=WGS84 +units=m +no_defs',\n 'EPSG': 32617,\n 'res': {'pixelWidth': 1.0, 'pixelHeight': 1.0},\n 'extent': (454000.0, 455000.0, 3113000.0, 3114000.0),\n 'ext_dict': {'xMin': 454000.0,\n  'xMax': 455000.0,\n  'yMin': 3113000.0,\n  'yMax': 3114000.0},\n 'source': '.\\\\data\\\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5'}\n\n\n\n# display the first 5 values of the wavelengths\nwavelengths[:5]\n\narray([383.884 , 388.8917, 393.8995, 398.9072, 403.915 ], dtype=float32)\n\n\nWe can use the shape method to see the dimensions of the array we read in. Use this method to confirm that the size of the reflectance array makes sense given the hyperspectral data cube, which is 1000 meters x 1000 meters x 426 bands.\n\nrefl.shape\n\n(1000, 1000, 426)"
-  },
-  {
-    "objectID": "neon/intro_hyperspectral_functions.html#plot_aop_refl-plot-a-single-band-of-the-reflectance-data",
-    "href": "neon/intro_hyperspectral_functions.html#plot_aop_refl-plot-a-single-band-of-the-reflectance-data",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "plot_aop_refl: plot a single band of the reflectance data",
-    "text": "plot_aop_refl: plot a single band of the reflectance data\nNext we’ll use the function plot_aop_refl to plot a single band of reflectance data. You can use help to understand the required inputs and data types for each of these; only the band and spatial extent are required inputs, the rest are optional inputs. If specified, these optional inputs allow you to set the range color values, specify the axis, add a title, colorbar, colorbar title, and change the colormap (default is to plot in greyscale).\n\nband56 = refl[:,:,55]\n\n\nneon_hs.plot_aop_refl(band56/refl_metadata['scale_factor'],\n                      refl_metadata['extent'],\n                      colorlimit=(0,0.3),\n                      title='DSNY Tile Band 56',\n                      cmap_title='Reflectance',\n                      colormap='gist_earth')"
-  },
-  {
-    "objectID": "neon/intro_hyperspectral_functions.html#rgb-plots---band-stacking",
-    "href": "neon/intro_hyperspectral_functions.html#rgb-plots---band-stacking",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "RGB Plots - Band Stacking",
-    "text": "RGB Plots - Band Stacking\nIt is often useful to look at several bands together. We can extract and stack three reflectance bands in the red, green, and blue (RGB) spectrums to produce a color image that looks like what we see with our eyes; this is your typical camera image. In the next part of this tutorial, we will learn to stack multiple bands and make a geotif raster from the compilation of these bands. We can see that different combinations of bands allow for different visualizations of the remotely-sensed objects and also conveys useful information about the chemical makeup of the Earth’s surface.\nWe will select bands that fall within the visible range of the electromagnetic spectrum (400-700 nm) and at specific points that correspond to what we see as red, green, and blue.\n\n \n\nNEON Imaging Spectrometer bands and their respective wavelengths. Source: National Ecological Observatory Network (NEON)\n\n\n\nFor this exercise, we’ll first use the function stack_rgb to extract the bands we want to stack. This function uses splicing to extract the nth band from the reflectance array, and then uses the numpy function stack to create a new 3D array (1000 x 1000 x 3) consisting of only the three bands we want.\n\n# pull out the true-color band combinations\nrgb_bands = (58,34,19) # set the red, green, and blue bands\n\n# stack the 3-band combinations (rgb and cir) using stack_rgb function\nrgb_unscaled = neon_hs.stack_rgb(refl,rgb_bands)\n\n# apply the reflectance scale factor\nrgb = rgb_unscaled/refl_metadata['scale_factor']\n\nWe can display the red, green, and blue band center wavelengths, whose indices were defined above. To confirm that these band indices correspond to wavelengths in the expected portion of the spectrum, we can print out the wavelength values in nanometers.\n\nprint('Center wavelengths:')\nprint('Band 58: %.1f' %(wavelengths[57]),'nm')\nprint('Band 33: %.1f' %(wavelengths[33]),'nm')\nprint('Band 19: %.1f' %(wavelengths[18]),'nm')\n\nCenter wavelengths:\nBand 58: 669.3 nm\nBand 33: 549.1 nm\nBand 19: 474.0 nm"
-  },
-  {
-    "objectID": "neon/intro_hyperspectral_functions.html#plot_aop_rgb-plot-an-rgb-band-combination",
-    "href": "neon/intro_hyperspectral_functions.html#plot_aop_rgb-plot-an-rgb-band-combination",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "plot_aop_rgb: plot an RGB band combination",
-    "text": "plot_aop_rgb: plot an RGB band combination\nNext, we can use the function plot_aop_rgb to plot the band stack as follows:\n\n# plot the true color image (rgb)\nneon_hs.plot_aop_rgb(rgb,\n                     refl_metadata['extent'],\n                     plot_title='DSNY Reflectance RGB Image')"
-  },
-  {
-    "objectID": "neon/intro_hyperspectral_functions.html#false-color-image---color-infrared-cir",
-    "href": "neon/intro_hyperspectral_functions.html#false-color-image---color-infrared-cir",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "False Color Image - Color Infrared (CIR)",
-    "text": "False Color Image - Color Infrared (CIR)\nWe can also create an image from bands outside of the visible spectrum. An image containing one or more bands outside of the visible range is called a false-color image. Here we’ll use the green and blue bands as before, but we replace the red band with a near-infrared (NIR) band.\nFor more information about non-visible wavelengths, false color images, and some frequently used false-color band combinations, refer to NASA’s Earth Observatory page.\n\ncir_bands = (90,34,19)\nprint('Band 90 Center Wavelength = %.1f' %(wavelengths[89]),'nm')\nprint('Band 34 Center Wavelength = %.1f' %(wavelengths[33]),'nm')\nprint('Band 19 Center Wavelength = %.1f' %(wavelengths[18]),'nm')\n\ncir = neon_hs.stack_rgb(refl,cir_bands)\nneon_hs.plot_aop_rgb(cir,\n                     refl_metadata['extent'],\n                     ls_pct=20,\n                     plot_title='DSNY Color Infrared Image')\n\nClipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).\n\n\nBand 90 Center Wavelength = 829.6 nm\nBand 34 Center Wavelength = 549.1 nm\nBand 19 Center Wavelength = 474.0 nm"
-  },
-  {
-    "objectID": "neon/intro_hyperspectral_functions.html#references",
-    "href": "neon/intro_hyperspectral_functions.html#references",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "References",
-    "text": "References\nKekesi, Alex et al.   “NASA | Peeling Back Landsat’s Layers of Data”.  https://svs.gsfc.nasa.gov/vis/a010000/a011400/a011491/. Published on Feb 24, 2014.\nRiebeek, Holli.  “Why is that Forest Red and that Cloud Blue? How to Interpret a False-Color Satellite Image”  https://earthobservatory.nasa.gov/Features/FalseColor/"
-  },
-  {
-    "objectID": "neon/01_neon-hyperspectral-functions.html",
-    "href": "neon/01_neon-hyperspectral-functions.html",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "",
-    "text": "In this tutorial, you will learn how to efficiently read in hdf5 data and metadata, plot a single band and rgb band combinations of a reflectance data tile using Python functions created for working with and visualizing NEON AOP hyperspectral data.\nThis tutorial uses the Level 3 Spectrometer orthorectified surface directional reflectance - mosaic data product.\nWe can combine any three bands from the NEON reflectance data to make an RGB image that will depict different information about the Earth’s surface. A natural color image, made with bands from the red, green, and blue wavelengths looks close to what we would see with the naked eye. We can also choose band combinations from other wavelenghts, and map them to the red, blue, and green colors to highlight different features. A false color image is made with one or more bands from a non-visible portion of the electromagnetic spectrum that are mapped to red, green, and blue colors. These images can display other information about the landscape that is not easily seen with a natural color image.\nThe NASA Goddard Media Studio video “Peeling Back Landsat’s Layers of Data” gives a good quick overview of natural and false color band combinations. Note that the Landsat multispectral sensor collects information from 11 bands, while NEON AOP hyperspectral data captures information spanning 426 bands!",
-    "crumbs": [
-      "Python Notebooks",
-      "1 NEON - Working with Hyperspectral Data using Functions"
-    ]
-  },
-  {
-    "objectID": "neon/01_neon-hyperspectral-functions.html#load-function-module",
-    "href": "neon/01_neon-hyperspectral-functions.html#load-function-module",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "Load Function Module",
-    "text": "Load Function Module\nFirst we can import the required packages and the neon_aop_hyperspectral module, which includes a number of functions which we will use to read in the hyperspectral hdf5 data as well as visualize the data.\n\nimport os\nimport sys\nimport time\nimport h5py\nimport requests\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nThis next function is a handy way to download the Python module and data that we will be using for this lesson. This uses the requests package.\n\n# function to download data stored on the internet in a public url to a local file\ndef download_url(url,download_dir):\n    if not os.path.isdir(download_dir):\n        os.makedirs(download_dir)\n    filename = url.split('/')[-1]\n    r = requests.get(url, allow_redirects=True)\n    file_object = open(os.path.join(download_dir,filename),'wb')\n    file_object.write(r.content)\n\nDownload the module from its location on GitHub, add the python_modules to the path and import the neon_aop_hyperspectral.py module.\n\nmodule_url = \"https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/aop_python_modules/neon_aop_hyperspectral.py\"\ndownload_url(module_url,'../python_modules')\n# os.listdir('../python_modules') #optionally show the contents of this directory to confirm the file downloaded\n\nsys.path.insert(0, '../python_modules')\n# import the neon_aop_hyperspectral module, the semicolon supresses an empty plot from displaying\nimport neon_aop_hyperspectral as neon_hs;\n\nThe first function we will use is aop_h5refl2array. We encourage you to look through the code to understand what it is doing behind the scenes. This function automates the steps required to read AOP hdf5 reflectance files into a Python numpy array. This function also cleans the data: it sets any no data values within the reflectance tile to nan (not a number) and applies the reflectance scale factor so the final array that is returned represents unitless scaled reflectance, with values ranging between 0 and 1 (0-100%).\nIf you forget what this function does, or don’t want to scroll up to read the docstrings, remember you can use help or ? to display the associated docstrings.\n\nhelp(neon_hs.aop_h5refl2array)\n# neon_hs.aop_h5refl2array? #uncomment for an alternate way to show the help\n\nHelp on function aop_h5refl2array in module neon_aop_hyperspectral:\n\naop_h5refl2array(h5_filename, raster_type_: Literal['Cast_Shadow', 'Data_Selection_Index', 'GLT_Data', 'Haze_Cloud_Water_Map', 'IGM_Data', 'Illumination_Factor', 'OBS_Data', 'Radiance', 'Reflectance', 'Sky_View_Factor', 'to-sensor_Azimuth_Angle', 'to-sensor_Zenith_Angle', 'Visibility_Index_Map', 'Weather_Quality_Indicator'], only_metadata=False)\n    read in NEON AOP reflectance hdf5 file and return the un-scaled \n    reflectance array, associated metadata, and wavelengths\n           \n    Parameters\n    ----------\n        h5_filename : string\n            reflectance hdf5 file name, including full or relative path\n        raster : string\n            name of raster value to read in; this will typically be the reflectance data, \n            but other data stored in the h5 file can be accessed as well\n            valid options: \n                Cast_Shadow (ATCOR input)\n                Data_Selection_Index\n                GLT_Data\n                Haze_Cloud_Water_Map (ATCOR output)\n                IGM_Data\n                Illumination_Factor (ATCOR input)\n                OBS_Data \n                Reflectance\n                Radiance\n                Sky_View_Factor (ATCOR input)\n                to-sensor_Azimuth_Angle\n                to-sensor_Zenith_Angle\n                Visibility_Index_Map: sea level values of visibility index / total optical thickeness\n                Weather_Quality_Indicator: estimated percentage of overhead cloud cover during acquisition\n    \n    Returns \n    --------\n    raster_array : ndarray\n        array of reflectance values\n    metadata: dictionary \n        associated metadata containing\n            bad_band_window1 (tuple)\n            bad_band_window2 (tuple)\n            bands: # of bands (float)\n            data ignore value: value corresponding to no data (float)\n            epsg: coordinate system code (float)\n            map info: coordinate system, datum & ellipsoid, pixel dimensions, and origin coordinates (string)\n            reflectance scale factor: factor by which reflectance is scaled (float)\n    wavelengths: array\n            wavelength values, in nm\n    --------\n    Example Execution:\n    --------\n    refl, refl_metadata = aop_h5refl2array('NEON_D02_SERC_DP3_368000_4306000_reflectance.h5','Reflectance')\n\n\n\nNow that we have an idea of how this function works, let’s try it out. First, let’s download a file. For this tutorial, we will use requests to download from the public link where the data is stored on the cloud (Google Cloud Storage). This downloads to a data folder in the working directory, but you can download it to a different location if you prefer.\n\n# define the data_url to point to the cloud storage location of the the hyperspectral hdf5 data file\ndata_url = \"https://storage.googleapis.com/neon-aop-products/2021/FullSite/D03/2021_DSNY_6/L3/Spectrometer/Reflectance/NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\"\n\n\n# download the h5 data and display how much time it took to download (uncomment 1st and 3rd lines)\n# start_time = time.time()\ndownload_url(data_url,'.\\data')\n# print(\"--- It took %s seconds to download the data ---\" % round((time.time() - start_time),1))\n\n\n# display the contents in the ./data folder to confirm the download completed\nos.listdir('./data')\n\n['NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5']\n\n\n\n# read the h5 reflectance file (including the full path) to the variable h5_file_name\nh5_file_name = data_url.split('/')[-1]\nh5_tile = os.path.join(\".\\data\",h5_file_name)\nprint(f'h5_tile: {h5_tile}')\n\nh5_tile: .\\data\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\n\n\nNow that we’ve specified our reflectance tile, we can call aop_h5refl2array to read in the reflectance tile as a python array called refl , the metadata into a dictionary called refl_metadata, and the wavelengths into an array.\n\n# read in the reflectance data using the aop_h5refl2array function, this may also take a bit of time\nstart_time = time.time()\nrefl, refl_metadata, wavelengths = neon_hs.aop_h5refl2array(h5_tile,'Reflectance')\nprint(\"--- It took %s seconds to read in the data ---\" % round((time.time() - start_time),0))\n\nReading in  .\\data\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\n--- It took 7.0 seconds to read in the data ---\n\n\n\n# display the reflectance metadata dictionary contents\nrefl_metadata\n\n{'shape': (1000, 1000, 426),\n 'no_data_value': -9999.0,\n 'scale_factor': 10000.0,\n 'bad_band_window1': array([1340, 1445]),\n 'bad_band_window2': array([1790, 1955]),\n 'projection': b'+proj=UTM +zone=17 +ellps=WGS84 +datum=WGS84 +units=m +no_defs',\n 'EPSG': 32617,\n 'res': {'pixelWidth': 1.0, 'pixelHeight': 1.0},\n 'extent': (454000.0, 455000.0, 3113000.0, 3114000.0),\n 'ext_dict': {'xMin': 454000.0,\n  'xMax': 455000.0,\n  'yMin': 3113000.0,\n  'yMax': 3114000.0},\n 'source': '.\\\\data\\\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5'}\n\n\n\n# display the first 5 values of the wavelengths\nwavelengths[:5]\n\narray([383.884 , 388.8917, 393.8995, 398.9072, 403.915 ], dtype=float32)\n\n\nWe can use the shape method to see the dimensions of the array we read in. Use this method to confirm that the size of the reflectance array makes sense given the hyperspectral data cube, which is 1000 meters x 1000 meters x 426 bands.\n\nrefl.shape\n\n(1000, 1000, 426)",
-    "crumbs": [
-      "Python Notebooks",
-      "1 NEON - Working with Hyperspectral Data using Functions"
-    ]
-  },
-  {
-    "objectID": "neon/01_neon-hyperspectral-functions.html#plot_aop_refl-plot-a-single-band-of-the-reflectance-data",
-    "href": "neon/01_neon-hyperspectral-functions.html#plot_aop_refl-plot-a-single-band-of-the-reflectance-data",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "plot_aop_refl: plot a single band of the reflectance data",
-    "text": "plot_aop_refl: plot a single band of the reflectance data\nNext we’ll use the function plot_aop_refl to plot a single band of reflectance data. You can use help to understand the required inputs and data types for each of these; only the band and spatial extent are required inputs, the rest are optional inputs. If specified, these optional inputs allow you to set the range color values, specify the axis, add a title, colorbar, colorbar title, and change the colormap (default is to plot in greyscale).\n\nband56 = refl[:,:,55]\n\n\nneon_hs.plot_aop_refl(band56/refl_metadata['scale_factor'],\n                      refl_metadata['extent'],\n                      colorlimit=(0,0.3),\n                      title='DSNY Tile Band 56',\n                      cmap_title='Reflectance',\n                      colormap='gist_earth')",
-    "crumbs": [
-      "Python Notebooks",
-      "1 NEON - Working with Hyperspectral Data using Functions"
-    ]
-  },
-  {
-    "objectID": "neon/01_neon-hyperspectral-functions.html#rgb-plots---band-stacking",
-    "href": "neon/01_neon-hyperspectral-functions.html#rgb-plots---band-stacking",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "RGB Plots - Band Stacking",
-    "text": "RGB Plots - Band Stacking\nIt is often useful to look at several bands together. We can extract and stack three reflectance bands in the red, green, and blue (RGB) spectrums to produce a color image that looks like what we see with our eyes; this is your typical camera image. In the next part of this tutorial, we will learn to stack multiple bands and make a geotif raster from the compilation of these bands. We can see that different combinations of bands allow for different visualizations of the remotely-sensed objects and also conveys useful information about the chemical makeup of the Earth’s surface.\nWe will select bands that fall within the visible range of the electromagnetic spectrum (400-700 nm) and at specific points that correspond to what we see as red, green, and blue.\n\n \n\nNEON Imaging Spectrometer bands and their respective wavelengths. Source: National Ecological Observatory Network (NEON)\n\n\n\nFor this exercise, we’ll first use the function stack_rgb to extract the bands we want to stack. This function uses splicing to extract the nth band from the reflectance array, and then uses the numpy function stack to create a new 3D array (1000 x 1000 x 3) consisting of only the three bands we want.\n\n# pull out the true-color band combinations\nrgb_bands = (58,34,19) # set the red, green, and blue bands\n\n# stack the 3-band combinations (rgb and cir) using stack_rgb function\nrgb_unscaled = neon_hs.stack_rgb(refl,rgb_bands)\n\n# apply the reflectance scale factor\nrgb = rgb_unscaled/refl_metadata['scale_factor']\n\nWe can display the red, green, and blue band center wavelengths, whose indices were defined above. To confirm that these band indices correspond to wavelengths in the expected portion of the spectrum, we can print out the wavelength values in nanometers.\n\nprint('Center wavelengths:')\nprint('Band 58: %.1f' %(wavelengths[57]),'nm')\nprint('Band 33: %.1f' %(wavelengths[33]),'nm')\nprint('Band 19: %.1f' %(wavelengths[18]),'nm')\n\nCenter wavelengths:\nBand 58: 669.3 nm\nBand 33: 549.1 nm\nBand 19: 474.0 nm",
-    "crumbs": [
-      "Python Notebooks",
-      "1 NEON - Working with Hyperspectral Data using Functions"
-    ]
-  },
-  {
-    "objectID": "neon/01_neon-hyperspectral-functions.html#plot_aop_rgb-plot-an-rgb-band-combination",
-    "href": "neon/01_neon-hyperspectral-functions.html#plot_aop_rgb-plot-an-rgb-band-combination",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "plot_aop_rgb: plot an RGB band combination",
-    "text": "plot_aop_rgb: plot an RGB band combination\nNext, we can use the function plot_aop_rgb to plot the band stack as follows:\n\n# plot the true color image (rgb)\nneon_hs.plot_aop_rgb(rgb,\n                     refl_metadata['extent'],\n                     plot_title='DSNY Reflectance RGB Image')",
-    "crumbs": [
-      "Python Notebooks",
-      "1 NEON - Working with Hyperspectral Data using Functions"
-    ]
-  },
-  {
-    "objectID": "neon/01_neon-hyperspectral-functions.html#false-color-image---color-infrared-cir",
-    "href": "neon/01_neon-hyperspectral-functions.html#false-color-image---color-infrared-cir",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "False Color Image - Color Infrared (CIR)",
-    "text": "False Color Image - Color Infrared (CIR)\nWe can also create an image from bands outside of the visible spectrum. An image containing one or more bands outside of the visible range is called a false-color image. Here we’ll use the green and blue bands as before, but we replace the red band with a near-infrared (NIR) band.\nFor more information about non-visible wavelengths, false color images, and some frequently used false-color band combinations, refer to NASA’s Earth Observatory page.\n\ncir_bands = (90,34,19)\nprint('Band 90 Center Wavelength = %.1f' %(wavelengths[89]),'nm')\nprint('Band 34 Center Wavelength = %.1f' %(wavelengths[33]),'nm')\nprint('Band 19 Center Wavelength = %.1f' %(wavelengths[18]),'nm')\n\ncir = neon_hs.stack_rgb(refl,cir_bands)\nneon_hs.plot_aop_rgb(cir,\n                     refl_metadata['extent'],\n                     ls_pct=20,\n                     plot_title='DSNY Color Infrared Image')\n\nClipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).\n\n\nBand 90 Center Wavelength = 829.6 nm\nBand 34 Center Wavelength = 549.1 nm\nBand 19 Center Wavelength = 474.0 nm",
-    "crumbs": [
-      "Python Notebooks",
-      "1 NEON - Working with Hyperspectral Data using Functions"
-    ]
-  },
-  {
-    "objectID": "neon/01_neon-hyperspectral-functions.html#references",
-    "href": "neon/01_neon-hyperspectral-functions.html#references",
-    "title": "Read in and visualize hyperspectral data in Python",
-    "section": "References",
-    "text": "References\nKekesi, Alex et al.   “NASA | Peeling Back Landsat’s Layers of Data”.  https://svs.gsfc.nasa.gov/vis/a010000/a011400/a011491/. Published on Feb 24, 2014.\nRiebeek, Holli.  “Why is that Forest Red and that Cloud Blue? How to Interpret a False-Color Satellite Image”  https://earthobservatory.nasa.gov/Features/FalseColor/",
-    "crumbs": [
-      "Python Notebooks",
-      "1 NEON - Working with Hyperspectral Data using Functions"
-    ]
-  },
-  {
-    "objectID": "CONTRIBUTING.html",
-    "href": "CONTRIBUTING.html",
-    "title": "Contributing to this Repository",
-    "section": "",
-    "text": "Please submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.\n\nWe want your help! Even if you’re not a coder! There are several ways you can contribute to this repository:\n\nReport an Issue or make a recommendation\nUpdate code, documentation, notebooks, or other files (even fixing typos)\nPropose a new notebook\n\nIn the sections below we outline how to approach each of these types of contributions. If you’re new to GitHub, you can sign up here. There are a bunch of great resources on the GitHub Quickstart page. The GitHub Cheatsheet is also quite helpful, even for experienced users. Please reach out to lpdaac@usgs.gov with questions or concerns.\n\n\nIf you’ve found a problem with the repository, we want to know about it! Please submit an Issue. Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!\n\n\n\nTo contribute a solution to an issue or make a change to files within the repository we’ve created a typical outline of how to do that below. If you want to make a simple change, like correcting a typo within a markdown document or other documentation, there’s a great video explaining how to do that without leaving the GitHub website here. To make a more complex change to a notebook, code, or other file follow the instructions below.\n\nPlease create an Issue or comment on an existing issue describing the changes you intend to make.\n\nCreate a fork of this repository. This will create your own copy of the repository. When working from your fork, you can do whatever you want, you won’t mess up anyone else’s work so you’re safe to try things out. Worst case scenario you can delete your fork and recreate it.\n\nClone your fork to your local computer or cloud workspace using your preferred command line interface after navigating to the directory you want to place the repository in:\ngit clone your-fork-repository-url\n\nChange directories to the one you cloned\n\ncd repository-name\n\nAdd the upstream repository, this is the original repository that you want to contribute to.\n\ngit remote add upstream original-repository-url\n\nYou can use the following to view the remote repositories:\n\ngit remote -v\n\nupstream, which refers to the original repository\n\norigin, which refers to your personal fork\n\nDevelop your contribution:\n\nCreate a new branch named appropriately for the feature you want to work on:\n\ngit checkout -b new-branch-name\n\nOften, updates to an upstream repository will occur while you are developing changes on your personal fork. You can pull the latest changes from upstream\n\ngit pull upstream dev\n\nYou can check the status of your local copy of the repository to see what changes have been made using:\n\ngit status\n\nCommit locally as you progress using git add and git commit. For example, updating a readme.md file:\n\ngit add readme.md\ngit commit -m \"updated readme file\"\n\nYou can check the status of your local copy of the repository again to see what pending changes have not been added or committed using:\n\ngit status\n\nAfter making some changes, push your changes back to your fork on GitHub:\n\ngit push origin branch-name\n\nEnter username and password, depending on your settings, you may need to use a Personal access token\n\nTo submit your contribution, navigate to your forked repository GitHub page and make a pull request using the Compare &pull request green button. Make sure to select the base repository and its dev branch. Also select your forked repository as head repository and make sure compare shows your branch name. You can add your comments and press Create pull request green button. Our team will be notified and will review your suggested revisions.\n\nPlease submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.\n\n\n\n\n\nIn the spirit of open science, we want to minimize barriers to sharing code and examples. We have added a community_contributed directory to the repository for anyone to share examples of their work in notebook or code form. Documentation and descriptions do not need to be as thorough as the examples we’ve created, but we ask that you provide as much as possible. Follow the instructions above, placing your new notebook or module in a suitably named directory within the community_contributed directory. Be sure to remove any large datasets and indicate where users can retrieve them.\n\n\n\nThese contributing guidelines are adapted from the NASA Transform to Open Science GitHub, available at https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md.",
-    "crumbs": [
-      "Contributing",
-      "Contributing to this Repository"
-    ]
-  },
-  {
-    "objectID": "CONTRIBUTING.html#report-an-issue-or-make-a-recommendation",
-    "href": "CONTRIBUTING.html#report-an-issue-or-make-a-recommendation",
-    "title": "Contributing to this Repository",
-    "section": "",
-    "text": "If you’ve found a problem with the repository, we want to know about it! Please submit an Issue. Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!",
-    "crumbs": [
-      "Contributing",
-      "Contributing to this Repository"
-    ]
-  },
-  {
-    "objectID": "CONTRIBUTING.html#updating-code-documentation-notebooks-or-other-files",
-    "href": "CONTRIBUTING.html#updating-code-documentation-notebooks-or-other-files",
-    "title": "Contributing to this Repository",
-    "section": "",
-    "text": "To contribute a solution to an issue or make a change to files within the repository we’ve created a typical outline of how to do that below. If you want to make a simple change, like correcting a typo within a markdown document or other documentation, there’s a great video explaining how to do that without leaving the GitHub website here. To make a more complex change to a notebook, code, or other file follow the instructions below.\n\nPlease create an Issue or comment on an existing issue describing the changes you intend to make.\n\nCreate a fork of this repository. This will create your own copy of the repository. When working from your fork, you can do whatever you want, you won’t mess up anyone else’s work so you’re safe to try things out. Worst case scenario you can delete your fork and recreate it.\n\nClone your fork to your local computer or cloud workspace using your preferred command line interface after navigating to the directory you want to place the repository in:\ngit clone your-fork-repository-url\n\nChange directories to the one you cloned\n\ncd repository-name\n\nAdd the upstream repository, this is the original repository that you want to contribute to.\n\ngit remote add upstream original-repository-url\n\nYou can use the following to view the remote repositories:\n\ngit remote -v\n\nupstream, which refers to the original repository\n\norigin, which refers to your personal fork\n\nDevelop your contribution:\n\nCreate a new branch named appropriately for the feature you want to work on:\n\ngit checkout -b new-branch-name\n\nOften, updates to an upstream repository will occur while you are developing changes on your personal fork. You can pull the latest changes from upstream\n\ngit pull upstream dev\n\nYou can check the status of your local copy of the repository to see what changes have been made using:\n\ngit status\n\nCommit locally as you progress using git add and git commit. For example, updating a readme.md file:\n\ngit add readme.md\ngit commit -m \"updated readme file\"\n\nYou can check the status of your local copy of the repository again to see what pending changes have not been added or committed using:\n\ngit status\n\nAfter making some changes, push your changes back to your fork on GitHub:\n\ngit push origin branch-name\n\nEnter username and password, depending on your settings, you may need to use a Personal access token\n\nTo submit your contribution, navigate to your forked repository GitHub page and make a pull request using the Compare &pull request green button. Make sure to select the base repository and its dev branch. Also select your forked repository as head repository and make sure compare shows your branch name. You can add your comments and press Create pull request green button. Our team will be notified and will review your suggested revisions.\n\nPlease submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.",
-    "crumbs": [
-      "Contributing",
-      "Contributing to this Repository"
-    ]
-  },
-  {
-    "objectID": "CONTRIBUTING.html#adding-new-notebooks-or-example-workflows",
-    "href": "CONTRIBUTING.html#adding-new-notebooks-or-example-workflows",
-    "title": "Contributing to this Repository",
-    "section": "",
-    "text": "In the spirit of open science, we want to minimize barriers to sharing code and examples. We have added a community_contributed directory to the repository for anyone to share examples of their work in notebook or code form. Documentation and descriptions do not need to be as thorough as the examples we’ve created, but we ask that you provide as much as possible. Follow the instructions above, placing your new notebook or module in a suitably named directory within the community_contributed directory. Be sure to remove any large datasets and indicate where users can retrieve them.",
-    "crumbs": [
-      "Contributing",
-      "Contributing to this Repository"
-    ]
-  },
-  {
-    "objectID": "CONTRIBUTING.html#attribution",
-    "href": "CONTRIBUTING.html#attribution",
-    "title": "Contributing to this Repository",
-    "section": "",
-    "text": "These contributing guidelines are adapted from the NASA Transform to Open Science GitHub, available at https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md.",
-    "crumbs": [
-      "Contributing",
-      "Contributing to this Repository"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html",
-    "href": "CODE_OF_CONDUCT.html",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "We are dedicated to fostering a respectful environment for everyone contributing to this project. We expect all participants to treat each other with respect, professionalism, and kindness.\n\n\n\n\nBe respectful and considerate of others.\nEngage in constructive discussions and offer helpful feedback.\nGracefully accept constructive criticism.\n\n\n\n\nThe following behaviors will not be tolerated:\n\nHarassment, discrimination, or intimidation of any kind.\nOffensive, abusive, or derogatory language and actions.\nPersonal attacks or insults.\nTrolling or disruptive conduct.\nSharing inappropriate content.\n\n\n\n\nIf you experience or witness any behavior that violates this Code of Conduct, please report it by contacting the project maintainers. All reports will be reviewed confidentially.\n\n\n\nViolations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.\n\n\n\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\nDate last modified: 01-22-2025\n¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html#our-commitment",
-    "href": "CODE_OF_CONDUCT.html#our-commitment",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "We are dedicated to fostering a respectful environment for everyone contributing to this project. We expect all participants to treat each other with respect, professionalism, and kindness.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html#expected-behavior",
-    "href": "CODE_OF_CONDUCT.html#expected-behavior",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "Be respectful and considerate of others.\nEngage in constructive discussions and offer helpful feedback.\nGracefully accept constructive criticism.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html#unacceptable-behavior",
-    "href": "CODE_OF_CONDUCT.html#unacceptable-behavior",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "The following behaviors will not be tolerated:\n\nHarassment, discrimination, or intimidation of any kind.\nOffensive, abusive, or derogatory language and actions.\nPersonal attacks or insults.\nTrolling or disruptive conduct.\nSharing inappropriate content.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html#reporting-violations",
-    "href": "CODE_OF_CONDUCT.html#reporting-violations",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "If you experience or witness any behavior that violates this Code of Conduct, please report it by contacting the project maintainers. All reports will be reviewed confidentially.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html#enforcement",
-    "href": "CODE_OF_CONDUCT.html#enforcement",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "Violations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html#contact-info",
-    "href": "CODE_OF_CONDUCT.html#contact-info",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "Email: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\nDate last modified: 01-22-2025\n¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
-    "section": "",
-    "text": "NASA’s airborne science program and the NSF-funded National Ecological Observatory Network’s (NEON’s) Airborne Observation Platform (AOP) offer complementary remote sensing datasets ideal for carrying out large-scale ecological research. Both facilities operate similar airborne imaging spectrometers to collect visible to shortwave infrared (VSWIR) hyperspectral data, supporting regional ecosystem studies.\nThe Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) archives data from NASA-funded ecological campaigns focusing on diverse environments such as river deltas and wetlands, the arctic, and tropics across multiple continents (North and Central America, South Africa). NEON’s AOP gathers high-resolution hyperspectral imagery, lidar, and RGB photography at 81 U.S. sites, offering repeat data spanning 2-10 years, with collections starting in 2013.\nThis workshop introduces NEON and NASA airborne and field datasets through live-coding exercises presented as Python Jupyter Notebook tutorials, demonstrating data access, exploration, and analysis. Participants will learn to apply these datasets to answer ecological research questions, gaining insights into regional and landscape areas of interest.\nThis workshop is hosted by National Ecological Observatory Network (NEON), NASA Land Processes Distributed Activate Archive Center(LP DAAC) and NASA Jet Propulsion Laboratory (JPL) with support from the NASA Openscapes project.\nHands-on exercises will be executed from a Jupyter Hub on the Openscapes 2i2c cloud instance.",
-    "crumbs": [
-      "Welcome",
-      "2025 ESA Workshop"
-    ]
-  },
-  {
-    "objectID": "index.html#agenda",
-    "href": "index.html#agenda",
-    "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
-    "section": "Agenda",
-    "text": "Agenda\n\n\n\n\n\n\n\n\nTime\nDescription\nLeads/Instructors\n\n\n\n\n8:00 AM\nIntroduction and Overview of NEON and NASA Airborne and Field Data\nBridget Hass and Michele Thornton\n\n\n8:05 AM\nOverview of NEON Airborne Observation Platform\nBridget Hass\n\n\n8:30 AM\nNotebook 1: Working with NEON Hyperspectral Data\nBridget Hass\n\n\n9:00 AM\nNotebook 2: Pairing NEON and Field Hyperspectral Data\nBridget Hass\n\n\n9:30 AM\nBreak\n\n\n\n9:35 AM\nOverview of NASA AVIRIS Missions\nMichele Thornton\n\n\n10:00 AM\nNotebook 3: Exploring SHIFT Data\nMichele Thornton\n\n\n10:55 AM\nDiscussion and Wrap Up\nAll",
-    "crumbs": [
-      "Welcome",
-      "2025 ESA Workshop"
-    ]
-  },
-  {
-    "objectID": "index.html#contact-info",
-    "href": "index.html#contact-info",
-    "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
-    "section": "Contact Info",
-    "text": "Contact Info\nLP DAAC\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\n¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)2\nWebsite: https://neonscience.org/\n2NEON is a project fully funded by the National Science Foundation and operated by Battelle.",
-    "crumbs": [
-      "Welcome",
-      "2025 ESA Workshop"
-    ]
-  },
-  {
     "objectID": "neon/02_neon-l3-refl-h5-brdf-corrected.html",
     "href": "neon/02_neon-l3-refl-h5-brdf-corrected.html",
     "title": "Introduction to Bidirectional Hyperspectral Reflectance Data in Python",
     "section": "",
-    "text": "In this introductory tutorial, we demonstrate how to read NEON AOP bidirectional hyperspectral reflectance (Level 3, tiled - DP3.30006.002) data in Python. For a more general introduction to Hyperspectral remote sensing data in Python, please refer to the related lesson: NEON AOP Hyperspectral Data in HDF5 format with Python, which works with the previous revision of the same reflectance data product.\nIn Spring 2024, AOP started producing revised (.002) spectrometer data products, which incorporate Bidirectional Reflectance Distribution Function (BRDF) and topographic corrections. Airborne hyperspectral data acquired betwee 2022 - 2024 are being processed with these corrections, and downstream Level 2 and Level 3 derived spectrometer data products (eg. vegetation and water indices, fPAR, LAI, etc.) are now generated from this bidirectional (BRDF-corrected) reflectance data. The L1 directional reflectance data will still be available under the original .001 revision # (DP1.30006.001). Eventually, all previous years of data (2013-2021) will also be re-processed to apply the BRDF and topographic corrections. Updates on this progress will be posted as Data Notifications on the NEON Data Portal.\nThe new bidirectional data includes some slight modifications to the H5 contents, including some additional fields specific to the BRDF corrections. This tutorial outlines the major differences and highlights information you may want to incorporate when working with this revised data product. The tutorial also covers fundamental steps of reading in and exploring the HDF5 (h5) format that the reflectance data is delivered in. You will learn skills to explore and visualize the spectral data, and learn to make some functions for streamlining this process. .",
+    "text": "In this introductory tutorial, we demonstrate how to read NEON AOP bidirectional hyperspectral reflectance (Level 3, tiled - DP3.30006.002) data in Python. For a more general introduction to Hyperspectral remote sensing data in Python, please refer to the related lesson: NEON AOP Hyperspectral Data in HDF5 format with Python, which works with the previous revision of the same reflectance data product.\nIn Spring 2024, AOP started producing revised (.002) spectrometer data products, which incorporate Bidirectional Reflectance Distribution Function (BRDF) and topographic corrections. Airborne hyperspectral data acquired between 2022 - 2024 have been processed with these corrections, and downstream Level 2 and Level 3 derived spectrometer data products (eg. vegetation and water indices, fPAR, LAI, etc.) are now generated from this bidirectional (BRDF-corrected) reflectance data. The L1 directional reflectance data will still be available under the original .001 revision # (DP1.30006.001). Eventually, all previous years of data (2013-2021) will also be re-processed to apply the BRDF and topographic corrections. Updates on this progress will be posted as Data Notifications on the NEON Data Portal.\nThe new bidirectional data includes some slight modifications to the H5 contents, including some additional fields specific to the BRDF corrections. This tutorial outlines the major differences and highlights information you may want to incorporate when working with this revised data product. The tutorial also covers fundamental steps of reading in and exploring the HDF5 (h5) format that the reflectance data is delivered in. You will learn skills to explore and visualize the spectral data, and learn to make some functions for streamlining this process. .",
     "crumbs": [
       "Python Notebooks",
       "2 NEON - BRDF-Corrected Hyperspectral Data"
@@ -442,6 +151,248 @@
     "crumbs": [
       "Python Notebooks",
       "2 NEON - BRDF-Corrected Hyperspectral Data"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
+    "section": "",
+    "text": "NASA’s airborne science program and the NSF-funded National Ecological Observatory Network’s (NEON’s) Airborne Observation Platform (AOP) offer complementary remote sensing datasets ideal for carrying out large-scale ecological research. Both facilities operate similar airborne imaging spectrometers to collect visible to shortwave infrared (VSWIR) hyperspectral data, supporting regional ecosystem studies.\nThe Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) archives data from NASA-funded ecological campaigns focusing on diverse environments such as river deltas and wetlands, the arctic, and tropics across multiple continents (North and Central America, South Africa). NEON’s AOP gathers high-resolution hyperspectral imagery, lidar, and RGB photography at 81 U.S. sites, offering repeat data spanning 2-10 years, with collections starting in 2013.\nThis workshop introduces NEON and NASA airborne and field datasets through live-coding exercises presented as Python Jupyter Notebook tutorials, demonstrating data access, exploration, and analysis. Participants will learn to apply these datasets to answer ecological research questions, gaining insights into regional and landscape areas of interest.\nThis workshop is hosted by National Ecological Observatory Network (NEON), NASA Land Processes Distributed Activate Archive Center (LP DAAC) and NASA Jet Propulsion Laboratory (JPL) with support from the NASA Openscapes project.\nHands-on exercises will be executed from a Jupyter Hub on the Openscapes 2i2c cloud instance.",
+    "crumbs": [
+      "Welcome",
+      "2025 ESA Workshop"
+    ]
+  },
+  {
+    "objectID": "index.html#agenda",
+    "href": "index.html#agenda",
+    "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
+    "section": "Agenda",
+    "text": "Agenda\n\n\n\n\n\n\n\n\nTime\nDescription\nLeads/Instructors\n\n\n\n\n8:00 AM\nIntroduction and Overview of NEON and NASA Airborne and Field Data\nBridget Hass and Michele Thornton\n\n\n8:05 AM\nOverview of NEON Airborne Observation Platform\nBridget Hass\n\n\n8:30 AM\nNotebook 1: Working with NEON Hyperspectral Data\nBridget Hass\n\n\n9:00 AM\nNotebook 2: Pairing NEON and Field Hyperspectral Data\nBridget Hass\n\n\n9:30 AM\nBreak\n\n\n\n9:35 AM\nOverview of NASA AVIRIS Missions\nMichele Thornton\n\n\n10:00 AM\nNotebook 3: Exploring SHIFT Data\nMichele Thornton\n\n\n10:55 AM\nDiscussion and Wrap Up\nAll",
+    "crumbs": [
+      "Welcome",
+      "2025 ESA Workshop"
+    ]
+  },
+  {
+    "objectID": "index.html#contact-info",
+    "href": "index.html#contact-info",
+    "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
+    "section": "Contact Info",
+    "text": "Contact Info\nLP DAAC\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\n¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)2\nWebsite: https://neonscience.org/\n2NEON is a project fully funded by the National Science Foundation and operated by Battelle.",
+    "crumbs": [
+      "Welcome",
+      "2025 ESA Workshop"
+    ]
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html",
+    "href": "CODE_OF_CONDUCT.html",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "We are dedicated to fostering a respectful environment for everyone contributing to this project. We expect all participants to treat each other with respect, professionalism, and kindness.\n\n\n\n\nBe respectful and considerate of others.\nEngage in constructive discussions and offer helpful feedback.\nGracefully accept constructive criticism.\n\n\n\n\nThe following behaviors will not be tolerated:\n\nHarassment, discrimination, or intimidation of any kind.\nOffensive, abusive, or derogatory language and actions.\nPersonal attacks or insults.\nTrolling or disruptive conduct.\nSharing inappropriate content.\n\n\n\n\nIf you experience or witness any behavior that violates this Code of Conduct, please report it by contacting the project maintainers. All reports will be reviewed confidentially.\n\n\n\nViolations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.\n\n\n\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\nDate last modified: 01-22-2025\n¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.",
+    "crumbs": [
+      "Contributing",
+      "Code of Conduct"
+    ]
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#our-commitment",
+    "href": "CODE_OF_CONDUCT.html#our-commitment",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "We are dedicated to fostering a respectful environment for everyone contributing to this project. We expect all participants to treat each other with respect, professionalism, and kindness.",
+    "crumbs": [
+      "Contributing",
+      "Code of Conduct"
+    ]
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#expected-behavior",
+    "href": "CODE_OF_CONDUCT.html#expected-behavior",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "Be respectful and considerate of others.\nEngage in constructive discussions and offer helpful feedback.\nGracefully accept constructive criticism.",
+    "crumbs": [
+      "Contributing",
+      "Code of Conduct"
+    ]
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#unacceptable-behavior",
+    "href": "CODE_OF_CONDUCT.html#unacceptable-behavior",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "The following behaviors will not be tolerated:\n\nHarassment, discrimination, or intimidation of any kind.\nOffensive, abusive, or derogatory language and actions.\nPersonal attacks or insults.\nTrolling or disruptive conduct.\nSharing inappropriate content.",
+    "crumbs": [
+      "Contributing",
+      "Code of Conduct"
+    ]
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#reporting-violations",
+    "href": "CODE_OF_CONDUCT.html#reporting-violations",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "If you experience or witness any behavior that violates this Code of Conduct, please report it by contacting the project maintainers. All reports will be reviewed confidentially.",
+    "crumbs": [
+      "Contributing",
+      "Code of Conduct"
+    ]
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#enforcement",
+    "href": "CODE_OF_CONDUCT.html#enforcement",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "Violations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.",
+    "crumbs": [
+      "Contributing",
+      "Code of Conduct"
+    ]
+  },
+  {
+    "objectID": "CODE_OF_CONDUCT.html#contact-info",
+    "href": "CODE_OF_CONDUCT.html#contact-info",
+    "title": "Code of Conduct",
+    "section": "",
+    "text": "Email: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\nDate last modified: 01-22-2025\n¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.",
+    "crumbs": [
+      "Contributing",
+      "Code of Conduct"
+    ]
+  },
+  {
+    "objectID": "CONTRIBUTING.html",
+    "href": "CONTRIBUTING.html",
+    "title": "Contributing to this Repository",
+    "section": "",
+    "text": "Please submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.\n\nWe want your help! Even if you’re not a coder! There are several ways you can contribute to this repository:\n\nReport an Issue or make a recommendation\nUpdate code, documentation, notebooks, or other files (even fixing typos)\nPropose a new notebook\n\nIn the sections below we outline how to approach each of these types of contributions. If you’re new to GitHub, you can sign up here. There are a bunch of great resources on the GitHub Quickstart page. The GitHub Cheatsheet is also quite helpful, even for experienced users. Please reach out to lpdaac@usgs.gov with questions or concerns.\n\n\nIf you’ve found a problem with the repository, we want to know about it! Please submit an Issue. Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!\n\n\n\nTo contribute a solution to an issue or make a change to files within the repository we’ve created a typical outline of how to do that below. If you want to make a simple change, like correcting a typo within a markdown document or other documentation, there’s a great video explaining how to do that without leaving the GitHub website here. To make a more complex change to a notebook, code, or other file follow the instructions below.\n\nPlease create an Issue or comment on an existing issue describing the changes you intend to make.\n\nCreate a fork of this repository. This will create your own copy of the repository. When working from your fork, you can do whatever you want, you won’t mess up anyone else’s work so you’re safe to try things out. Worst case scenario you can delete your fork and recreate it.\n\nClone your fork to your local computer or cloud workspace using your preferred command line interface after navigating to the directory you want to place the repository in:\ngit clone your-fork-repository-url\n\nChange directories to the one you cloned\n\ncd repository-name\n\nAdd the upstream repository, this is the original repository that you want to contribute to.\n\ngit remote add upstream original-repository-url\n\nYou can use the following to view the remote repositories:\n\ngit remote -v\n\nupstream, which refers to the original repository\n\norigin, which refers to your personal fork\n\nDevelop your contribution:\n\nCreate a new branch named appropriately for the feature you want to work on:\n\ngit checkout -b new-branch-name\n\nOften, updates to an upstream repository will occur while you are developing changes on your personal fork. You can pull the latest changes from upstream\n\ngit pull upstream dev\n\nYou can check the status of your local copy of the repository to see what changes have been made using:\n\ngit status\n\nCommit locally as you progress using git add and git commit. For example, updating a readme.md file:\n\ngit add readme.md\ngit commit -m \"updated readme file\"\n\nYou can check the status of your local copy of the repository again to see what pending changes have not been added or committed using:\n\ngit status\n\nAfter making some changes, push your changes back to your fork on GitHub:\n\ngit push origin branch-name\n\nEnter username and password, depending on your settings, you may need to use a Personal access token\n\nTo submit your contribution, navigate to your forked repository GitHub page and make a pull request using the Compare &pull request green button. Make sure to select the base repository and its dev branch. Also select your forked repository as head repository and make sure compare shows your branch name. You can add your comments and press Create pull request green button. Our team will be notified and will review your suggested revisions.\n\nPlease submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.\n\n\n\n\n\nIn the spirit of open science, we want to minimize barriers to sharing code and examples. We have added a community_contributed directory to the repository for anyone to share examples of their work in notebook or code form. Documentation and descriptions do not need to be as thorough as the examples we’ve created, but we ask that you provide as much as possible. Follow the instructions above, placing your new notebook or module in a suitably named directory within the community_contributed directory. Be sure to remove any large datasets and indicate where users can retrieve them.\n\n\n\nThese contributing guidelines are adapted from the NASA Transform to Open Science GitHub, available at https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md.",
+    "crumbs": [
+      "Contributing",
+      "Contributing to this Repository"
+    ]
+  },
+  {
+    "objectID": "CONTRIBUTING.html#report-an-issue-or-make-a-recommendation",
+    "href": "CONTRIBUTING.html#report-an-issue-or-make-a-recommendation",
+    "title": "Contributing to this Repository",
+    "section": "",
+    "text": "If you’ve found a problem with the repository, we want to know about it! Please submit an Issue. Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!",
+    "crumbs": [
+      "Contributing",
+      "Contributing to this Repository"
+    ]
+  },
+  {
+    "objectID": "CONTRIBUTING.html#updating-code-documentation-notebooks-or-other-files",
+    "href": "CONTRIBUTING.html#updating-code-documentation-notebooks-or-other-files",
+    "title": "Contributing to this Repository",
+    "section": "",
+    "text": "To contribute a solution to an issue or make a change to files within the repository we’ve created a typical outline of how to do that below. If you want to make a simple change, like correcting a typo within a markdown document or other documentation, there’s a great video explaining how to do that without leaving the GitHub website here. To make a more complex change to a notebook, code, or other file follow the instructions below.\n\nPlease create an Issue or comment on an existing issue describing the changes you intend to make.\n\nCreate a fork of this repository. This will create your own copy of the repository. When working from your fork, you can do whatever you want, you won’t mess up anyone else’s work so you’re safe to try things out. Worst case scenario you can delete your fork and recreate it.\n\nClone your fork to your local computer or cloud workspace using your preferred command line interface after navigating to the directory you want to place the repository in:\ngit clone your-fork-repository-url\n\nChange directories to the one you cloned\n\ncd repository-name\n\nAdd the upstream repository, this is the original repository that you want to contribute to.\n\ngit remote add upstream original-repository-url\n\nYou can use the following to view the remote repositories:\n\ngit remote -v\n\nupstream, which refers to the original repository\n\norigin, which refers to your personal fork\n\nDevelop your contribution:\n\nCreate a new branch named appropriately for the feature you want to work on:\n\ngit checkout -b new-branch-name\n\nOften, updates to an upstream repository will occur while you are developing changes on your personal fork. You can pull the latest changes from upstream\n\ngit pull upstream dev\n\nYou can check the status of your local copy of the repository to see what changes have been made using:\n\ngit status\n\nCommit locally as you progress using git add and git commit. For example, updating a readme.md file:\n\ngit add readme.md\ngit commit -m \"updated readme file\"\n\nYou can check the status of your local copy of the repository again to see what pending changes have not been added or committed using:\n\ngit status\n\nAfter making some changes, push your changes back to your fork on GitHub:\n\ngit push origin branch-name\n\nEnter username and password, depending on your settings, you may need to use a Personal access token\n\nTo submit your contribution, navigate to your forked repository GitHub page and make a pull request using the Compare &pull request green button. Make sure to select the base repository and its dev branch. Also select your forked repository as head repository and make sure compare shows your branch name. You can add your comments and press Create pull request green button. Our team will be notified and will review your suggested revisions.\n\nPlease submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.",
+    "crumbs": [
+      "Contributing",
+      "Contributing to this Repository"
+    ]
+  },
+  {
+    "objectID": "CONTRIBUTING.html#adding-new-notebooks-or-example-workflows",
+    "href": "CONTRIBUTING.html#adding-new-notebooks-or-example-workflows",
+    "title": "Contributing to this Repository",
+    "section": "",
+    "text": "In the spirit of open science, we want to minimize barriers to sharing code and examples. We have added a community_contributed directory to the repository for anyone to share examples of their work in notebook or code form. Documentation and descriptions do not need to be as thorough as the examples we’ve created, but we ask that you provide as much as possible. Follow the instructions above, placing your new notebook or module in a suitably named directory within the community_contributed directory. Be sure to remove any large datasets and indicate where users can retrieve them.",
+    "crumbs": [
+      "Contributing",
+      "Contributing to this Repository"
+    ]
+  },
+  {
+    "objectID": "CONTRIBUTING.html#attribution",
+    "href": "CONTRIBUTING.html#attribution",
+    "title": "Contributing to this Repository",
+    "section": "",
+    "text": "These contributing guidelines are adapted from the NASA Transform to Open Science GitHub, available at https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md.",
+    "crumbs": [
+      "Contributing",
+      "Contributing to this Repository"
+    ]
+  },
+  {
+    "objectID": "neon/01_neon-hyperspectral-functions.html",
+    "href": "neon/01_neon-hyperspectral-functions.html",
+    "title": "Read in and visualize hyperspectral data in Python",
+    "section": "",
+    "text": "In this tutorial, you will learn how to efficiently read in hdf5 data and metadata, plot a single band and rgb band combinations of a reflectance data tile using Python functions created for working with and visualizing NEON AOP hyperspectral data.\nThis tutorial uses the Level 3 Spectrometer orthorectified surface directional reflectance - mosaic data product.\nWe can combine any three bands from the NEON reflectance data to make an RGB image that will depict different information about the Earth’s surface. A natural color image, made with bands from the red, green, and blue wavelengths looks close to what we would see with the naked eye. We can also choose band combinations from other wavelenghts, and map them to the red, blue, and green colors to highlight different features. A false color image is made with one or more bands from a non-visible portion of the electromagnetic spectrum that are mapped to red, green, and blue colors. These images can display other information about the landscape that is not easily seen with a natural color image.\nThe NASA Goddard Media Studio video “Peeling Back Landsat’s Layers of Data” gives a good quick overview of natural and false color band combinations. Note that the Landsat multispectral sensor collects information from 11 bands, while NEON AOP hyperspectral data captures information spanning 426 bands!",
+    "crumbs": [
+      "Python Notebooks",
+      "1 NEON - Working with Hyperspectral Data using Functions"
+    ]
+  },
+  {
+    "objectID": "neon/01_neon-hyperspectral-functions.html#load-function-module",
+    "href": "neon/01_neon-hyperspectral-functions.html#load-function-module",
+    "title": "Read in and visualize hyperspectral data in Python",
+    "section": "Load Function Module",
+    "text": "Load Function Module\nFirst we can import the required packages and the neon_aop_hyperspectral module, which includes a number of functions which we will use to read in the hyperspectral hdf5 data as well as visualize the data.\n\nimport os\nimport sys\nimport time\nimport h5py\nimport requests\nimport numpy as np\nimport matplotlib.pyplot as plt\n\nThis next function is a handy way to download the Python module and data that we will be using for this lesson. This uses the requests package.\n\n# function to download data stored on the internet in a public url to a local file\ndef download_url(url,download_dir):\n    if not os.path.isdir(download_dir):\n        os.makedirs(download_dir)\n    filename = url.split('/')[-1]\n    r = requests.get(url, allow_redirects=True)\n    file_object = open(os.path.join(download_dir,filename),'wb')\n    file_object.write(r.content)\n\nDownload the module from its location on GitHub, add the python_modules to the path and import the neon_aop_hyperspectral.py module.\n\nmodule_url = \"https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/aop_python_modules/neon_aop_hyperspectral.py\"\ndownload_url(module_url,'../python_modules')\n# os.listdir('../python_modules') #optionally show the contents of this directory to confirm the file downloaded\n\nsys.path.insert(0, '../python_modules')\n# import the neon_aop_hyperspectral module, the semicolon supresses an empty plot from displaying\nimport neon_aop_hyperspectral as neon_hs;\n\nThe first function we will use is aop_h5refl2array. We encourage you to look through the code to understand what it is doing behind the scenes. This function automates the steps required to read AOP hdf5 reflectance files into a Python numpy array. This function also cleans the data: it sets any no data values within the reflectance tile to nan (not a number) and applies the reflectance scale factor so the final array that is returned represents unitless scaled reflectance, with values ranging between 0 and 1 (0-100%).\nIf you forget what this function does, or don’t want to scroll up to read the docstrings, remember you can use help or ? to display the associated docstrings.\n\nhelp(neon_hs.aop_h5refl2array)\n# neon_hs.aop_h5refl2array? #uncomment for an alternate way to show the help\n\nHelp on function aop_h5refl2array in module neon_aop_hyperspectral:\n\naop_h5refl2array(h5_filename, raster_type_: Literal['Cast_Shadow', 'Data_Selection_Index', 'GLT_Data', 'Haze_Cloud_Water_Map', 'IGM_Data', 'Illumination_Factor', 'OBS_Data', 'Radiance', 'Reflectance', 'Sky_View_Factor', 'to-sensor_Azimuth_Angle', 'to-sensor_Zenith_Angle', 'Visibility_Index_Map', 'Weather_Quality_Indicator'], only_metadata=False)\n    read in NEON AOP reflectance hdf5 file and return the un-scaled \n    reflectance array, associated metadata, and wavelengths\n           \n    Parameters\n    ----------\n        h5_filename : string\n            reflectance hdf5 file name, including full or relative path\n        raster : string\n            name of raster value to read in; this will typically be the reflectance data, \n            but other data stored in the h5 file can be accessed as well\n            valid options: \n                Cast_Shadow (ATCOR input)\n                Data_Selection_Index\n                GLT_Data\n                Haze_Cloud_Water_Map (ATCOR output)\n                IGM_Data\n                Illumination_Factor (ATCOR input)\n                OBS_Data \n                Reflectance\n                Radiance\n                Sky_View_Factor (ATCOR input)\n                to-sensor_Azimuth_Angle\n                to-sensor_Zenith_Angle\n                Visibility_Index_Map: sea level values of visibility index / total optical thickeness\n                Weather_Quality_Indicator: estimated percentage of overhead cloud cover during acquisition\n    \n    Returns \n    --------\n    raster_array : ndarray\n        array of reflectance values\n    metadata: dictionary \n        associated metadata containing\n            bad_band_window1 (tuple)\n            bad_band_window2 (tuple)\n            bands: # of bands (float)\n            data ignore value: value corresponding to no data (float)\n            epsg: coordinate system code (float)\n            map info: coordinate system, datum & ellipsoid, pixel dimensions, and origin coordinates (string)\n            reflectance scale factor: factor by which reflectance is scaled (float)\n    wavelengths: array\n            wavelength values, in nm\n    --------\n    Example Execution:\n    --------\n    refl, refl_metadata = aop_h5refl2array('NEON_D02_SERC_DP3_368000_4306000_reflectance.h5','Reflectance')\n\n\n\nNow that we have an idea of how this function works, let’s try it out. First, let’s download a file. For this tutorial, we will use requests to download from the public link where the data is stored on the cloud (Google Cloud Storage). This downloads to a data folder in the working directory, but you can download it to a different location if you prefer.\n\n# define the data_url to point to the cloud storage location of the the hyperspectral hdf5 data file\ndata_url = \"https://storage.googleapis.com/neon-aop-products/2021/FullSite/D03/2021_DSNY_6/L3/Spectrometer/Reflectance/NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\"\n\n\n# download the h5 data and display how much time it took to download (uncomment 1st and 3rd lines)\n# start_time = time.time()\ndownload_url(data_url,'.\\data')\n# print(\"--- It took %s seconds to download the data ---\" % round((time.time() - start_time),1))\n\n\n# display the contents in the ./data folder to confirm the download completed\nos.listdir('./data')\n\n['NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5']\n\n\n\n# read the h5 reflectance file (including the full path) to the variable h5_file_name\nh5_file_name = data_url.split('/')[-1]\nh5_tile = os.path.join(\".\\data\",h5_file_name)\nprint(f'h5_tile: {h5_tile}')\n\nh5_tile: .\\data\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\n\n\nNow that we’ve specified our reflectance tile, we can call aop_h5refl2array to read in the reflectance tile as a python array called refl , the metadata into a dictionary called refl_metadata, and the wavelengths into an array.\n\n# read in the reflectance data using the aop_h5refl2array function, this may also take a bit of time\nstart_time = time.time()\nrefl, refl_metadata, wavelengths = neon_hs.aop_h5refl2array(h5_tile,'Reflectance')\nprint(\"--- It took %s seconds to read in the data ---\" % round((time.time() - start_time),0))\n\nReading in  .\\data\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5\n--- It took 7.0 seconds to read in the data ---\n\n\n\n# display the reflectance metadata dictionary contents\nrefl_metadata\n\n{'shape': (1000, 1000, 426),\n 'no_data_value': -9999.0,\n 'scale_factor': 10000.0,\n 'bad_band_window1': array([1340, 1445]),\n 'bad_band_window2': array([1790, 1955]),\n 'projection': b'+proj=UTM +zone=17 +ellps=WGS84 +datum=WGS84 +units=m +no_defs',\n 'EPSG': 32617,\n 'res': {'pixelWidth': 1.0, 'pixelHeight': 1.0},\n 'extent': (454000.0, 455000.0, 3113000.0, 3114000.0),\n 'ext_dict': {'xMin': 454000.0,\n  'xMax': 455000.0,\n  'yMin': 3113000.0,\n  'yMax': 3114000.0},\n 'source': '.\\\\data\\\\NEON_D03_DSNY_DP3_454000_3113000_reflectance.h5'}\n\n\n\n# display the first 5 values of the wavelengths\nwavelengths[:5]\n\narray([383.884 , 388.8917, 393.8995, 398.9072, 403.915 ], dtype=float32)\n\n\nWe can use the shape method to see the dimensions of the array we read in. Use this method to confirm that the size of the reflectance array makes sense given the hyperspectral data cube, which is 1000 meters x 1000 meters x 426 bands.\n\nrefl.shape\n\n(1000, 1000, 426)",
+    "crumbs": [
+      "Python Notebooks",
+      "1 NEON - Working with Hyperspectral Data using Functions"
+    ]
+  },
+  {
+    "objectID": "neon/01_neon-hyperspectral-functions.html#plot_aop_refl-plot-a-single-band-of-the-reflectance-data",
+    "href": "neon/01_neon-hyperspectral-functions.html#plot_aop_refl-plot-a-single-band-of-the-reflectance-data",
+    "title": "Read in and visualize hyperspectral data in Python",
+    "section": "plot_aop_refl: plot a single band of the reflectance data",
+    "text": "plot_aop_refl: plot a single band of the reflectance data\nNext we’ll use the function plot_aop_refl to plot a single band of reflectance data. You can use help to understand the required inputs and data types for each of these; only the band and spatial extent are required inputs, the rest are optional inputs. If specified, these optional inputs allow you to set the range color values, specify the axis, add a title, colorbar, colorbar title, and change the colormap (default is to plot in greyscale).\n\nband56 = refl[:,:,55]\n\n\nneon_hs.plot_aop_refl(band56/refl_metadata['scale_factor'],\n                      refl_metadata['extent'],\n                      colorlimit=(0,0.3),\n                      title='DSNY Tile Band 56',\n                      cmap_title='Reflectance',\n                      colormap='gist_earth')",
+    "crumbs": [
+      "Python Notebooks",
+      "1 NEON - Working with Hyperspectral Data using Functions"
+    ]
+  },
+  {
+    "objectID": "neon/01_neon-hyperspectral-functions.html#rgb-plots---band-stacking",
+    "href": "neon/01_neon-hyperspectral-functions.html#rgb-plots---band-stacking",
+    "title": "Read in and visualize hyperspectral data in Python",
+    "section": "RGB Plots - Band Stacking",
+    "text": "RGB Plots - Band Stacking\nIt is often useful to look at several bands together. We can extract and stack three reflectance bands in the red, green, and blue (RGB) spectrums to produce a color image that looks like what we see with our eyes; this is your typical camera image. In the next part of this tutorial, we will learn to stack multiple bands and make a geotif raster from the compilation of these bands. We can see that different combinations of bands allow for different visualizations of the remotely-sensed objects and also conveys useful information about the chemical makeup of the Earth’s surface.\nWe will select bands that fall within the visible range of the electromagnetic spectrum (400-700 nm) and at specific points that correspond to what we see as red, green, and blue.\n\n \n\nNEON Imaging Spectrometer bands and their respective wavelengths. Source: National Ecological Observatory Network (NEON)\n\n\n\nFor this exercise, we’ll first use the function stack_rgb to extract the bands we want to stack. This function uses splicing to extract the nth band from the reflectance array, and then uses the numpy function stack to create a new 3D array (1000 x 1000 x 3) consisting of only the three bands we want.\n\n# pull out the true-color band combinations\nrgb_bands = (58,34,19) # set the red, green, and blue bands\n\n# stack the 3-band combinations (rgb and cir) using stack_rgb function\nrgb_unscaled = neon_hs.stack_rgb(refl,rgb_bands)\n\n# apply the reflectance scale factor\nrgb = rgb_unscaled/refl_metadata['scale_factor']\n\nWe can display the red, green, and blue band center wavelengths, whose indices were defined above. To confirm that these band indices correspond to wavelengths in the expected portion of the spectrum, we can print out the wavelength values in nanometers.\n\nprint('Center wavelengths:')\nprint('Band 58: %.1f' %(wavelengths[57]),'nm')\nprint('Band 33: %.1f' %(wavelengths[33]),'nm')\nprint('Band 19: %.1f' %(wavelengths[18]),'nm')\n\nCenter wavelengths:\nBand 58: 669.3 nm\nBand 33: 549.1 nm\nBand 19: 474.0 nm",
+    "crumbs": [
+      "Python Notebooks",
+      "1 NEON - Working with Hyperspectral Data using Functions"
+    ]
+  },
+  {
+    "objectID": "neon/01_neon-hyperspectral-functions.html#plot_aop_rgb-plot-an-rgb-band-combination",
+    "href": "neon/01_neon-hyperspectral-functions.html#plot_aop_rgb-plot-an-rgb-band-combination",
+    "title": "Read in and visualize hyperspectral data in Python",
+    "section": "plot_aop_rgb: plot an RGB band combination",
+    "text": "plot_aop_rgb: plot an RGB band combination\nNext, we can use the function plot_aop_rgb to plot the band stack as follows:\n\n# plot the true color image (rgb)\nneon_hs.plot_aop_rgb(rgb,\n                     refl_metadata['extent'],\n                     plot_title='DSNY Reflectance RGB Image')",
+    "crumbs": [
+      "Python Notebooks",
+      "1 NEON - Working with Hyperspectral Data using Functions"
+    ]
+  },
+  {
+    "objectID": "neon/01_neon-hyperspectral-functions.html#false-color-image---color-infrared-cir",
+    "href": "neon/01_neon-hyperspectral-functions.html#false-color-image---color-infrared-cir",
+    "title": "Read in and visualize hyperspectral data in Python",
+    "section": "False Color Image - Color Infrared (CIR)",
+    "text": "False Color Image - Color Infrared (CIR)\nWe can also create an image from bands outside of the visible spectrum. An image containing one or more bands outside of the visible range is called a false-color image. Here we’ll use the green and blue bands as before, but we replace the red band with a near-infrared (NIR) band.\nFor more information about non-visible wavelengths, false color images, and some frequently used false-color band combinations, refer to NASA’s Earth Observatory page.\n\ncir_bands = (90,34,19)\nprint('Band 90 Center Wavelength = %.1f' %(wavelengths[89]),'nm')\nprint('Band 34 Center Wavelength = %.1f' %(wavelengths[33]),'nm')\nprint('Band 19 Center Wavelength = %.1f' %(wavelengths[18]),'nm')\n\ncir = neon_hs.stack_rgb(refl,cir_bands)\nneon_hs.plot_aop_rgb(cir,\n                     refl_metadata['extent'],\n                     ls_pct=20,\n                     plot_title='DSNY Color Infrared Image')\n\nClipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).\n\n\nBand 90 Center Wavelength = 829.6 nm\nBand 34 Center Wavelength = 549.1 nm\nBand 19 Center Wavelength = 474.0 nm",
+    "crumbs": [
+      "Python Notebooks",
+      "1 NEON - Working with Hyperspectral Data using Functions"
+    ]
+  },
+  {
+    "objectID": "neon/01_neon-hyperspectral-functions.html#references",
+    "href": "neon/01_neon-hyperspectral-functions.html#references",
+    "title": "Read in and visualize hyperspectral data in Python",
+    "section": "References",
+    "text": "References\nKekesi, Alex et al.   “NASA | Peeling Back Landsat’s Layers of Data”.  https://svs.gsfc.nasa.gov/vis/a010000/a011400/a011491/. Published on Feb 24, 2014.\nRiebeek, Holli.  “Why is that Forest Red and that Cloud Blue? How to Interpret a False-Color Satellite Image”  https://earthobservatory.nasa.gov/Features/FalseColor/",
+    "crumbs": [
+      "Python Notebooks",
+      "1 NEON - Working with Hyperspectral Data using Functions"
     ]
   },
   {

@@ -9,7 +9,7 @@ The Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) 
 
 This workshop introduces NEON and NASA airborne and field datasets through live-coding exercises presented as Python Jupyter Notebook tutorials, demonstrating data access, exploration, and analysis. Participants will learn to apply these datasets to answer ecological research questions, gaining insights into regional and landscape areas of interest. 
 
-This workshop is hosted by [National Ecological Observatory Network (NEON)](https://neonscience.org/), NASA [Land Processes Distributed Activate Archive Center(LP DAAC)](https://lpdaac.usgs.gov/) and [NASA Jet Propulsion Laboratory (JPL)](https://www.jpl.nasa.gov/) with support from the NASA [Openscapes](https://nasa-openscapes.github.io/) project.  
+This workshop is hosted by [National Ecological Observatory Network (NEON)](https://neonscience.org/), NASA [Land Processes Distributed Activate Archive Center (LP DAAC)](https://lpdaac.usgs.gov/) and NASA [Jet Propulsion Laboratory (JPL)](https://www.jpl.nasa.gov/) with support from the NASA [Openscapes](https://nasa-openscapes.github.io/) project.  
 Hands-on exercises will be executed from a [Jupyter Hub on the Openscapes 2i2c cloud instance](https://workshop.openscapes.2i2c.cloud/).
 
 <iframe src="https://docs.google.com/presentation/d/1XrdG9P5rLNR8C1TeLpf80YZUCtqdmUev/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
