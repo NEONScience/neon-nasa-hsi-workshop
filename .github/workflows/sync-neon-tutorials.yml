@@ -1,4 +1,4 @@
-name: Sync Selected NEON Tutorials
+name: sync-neon-tutorials
 
 on:
   workflow_dispatch:
