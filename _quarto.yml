@@ -16,7 +16,7 @@ website:
 
   sidebar:
     title: "NEON AOP & NASA AVIRIS Hyperspectral Data Workshop"
-    logo: img/nasa_neon_combined_logo_light.png
+    logo: img/nsf_neon_blue.png
     pinned: true
     align: center
     tools: 

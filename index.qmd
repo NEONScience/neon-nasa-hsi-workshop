@@ -20,12 +20,11 @@ Hands-on exercises will be executed from a [Jupyter Hub on the Openscapes 2i2c c
 |------|---------------------|-------------| 
 |8:00 AM|Introduction and Overview of NEON and NASA Airborne and Field Data|Bridget Hass and Michele Thornton|  
 |8:05 AM|Overview of NEON Airborne Observation Platform|Bridget Hass|  
-|8:30 AM|Notebook 1: Working with NEON Hyperspectral Data|Bridget Hass|
+|8:30 AM|Notebook 1: Download and Explore NEON Hyperspectral Data|Bridget Hass|
 |9:00 AM|Notebook 2: Pairing NEON and Field Hyperspectral Data|Bridget Hass|
 |9:30 AM|Break||
-|9:35 AM|Overview of NASA AVIRIS Missions|Michele Thornton|  
-|10:00 AM|Notebook 3: Finding AVIRIS Data|Michele Thornton| 
-|10:25 AM|Notebook 3: Exploring AVIRIS Data|Michele Thornton| 
+|9:35 AM|Overview of Recent NASA Airborne Missions (SHIFT, BioSCape, AUVELO)|Michele Thornton|  
+|10:00 AM|Notebook 3: Discovery and Analysis of VegPlot and AVIRIS Instrument Data|Michele Thornton| 
 |10:55 AM|Discussion and Wrap Up|All|
 
 
