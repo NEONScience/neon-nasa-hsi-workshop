@@ -301,7 +301,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <img src="../img/ornl_daac_neon_combined_logo.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="../">NEON AOP &amp; NASA AVIRIS Hyperspectral Data Workshop</a> 
+      <a href="../">NEON AOP &amp; NASA AVIRIS Airborne Hyperspectral Data Workshop</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://NEONScience.github.io/neon-nasa-hsi-workshop/" title="NEON NASA Hyperspectral Workshop Website" class="quarto-navigation-tool px-1" aria-label="NEON NASA Hyperspectral Workshop Website"><i class="bi bi-globe"></i></a>
     <a href="https://github.com/NEONScience/neon-nasa-hsi-workshop" title="NEON NASA Repository" class="quarto-navigation-tool px-1" aria-label="NEON NASA Repository"><i class="bi bi-github"></i></a>
@@ -440,7 +440,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="repository-setup-instructions" class="level1">
 <h1>Repository Setup Instructions</h1>
-<p>The how-tos and tutorials in this repository require a <a href="https://urs.earthdata.nasa.gov/">NASA Earthdata account</a>, an installation of <a href="https://git-scm.com/downloads">Git</a>, and a compatible Python Environment. Resources in the VITALS repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace.</p>
+<p>The how-tos and tutorials in this repository require a <a href="https://urs.earthdata.nasa.gov/">NASA Earthdata account</a>, an installation of <a href="https://git-scm.com/downloads">Git</a>, and a compatible Python Environment. Resources in this repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace.</p>
 <p>For local Python environment setup we recommend using <a href="https://mamba.readthedocs.io/en/latest/">mamba</a> to manage Python packages. To install <em>mamba</em>, download <a href="https://github.com/conda-forge/miniforge">miniforge</a> for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. <strong>Note that this may cause an issue if you have an existing mamba install through Anaconda.</strong></p>
 <section id="python-environment-setup" class="level2">
 <h2 class="anchored" data-anchor-id="python-environment-setup">Python Environment Setup</h2>
@@ -448,15 +448,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p>Using your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to create a compatible Python environment.</p>
 <p>For Windows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> lpdaac_vitals <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> jupyterlab seaborn dask ray<span class="at">-default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> ornl_daac_neon <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> jupyterlab seaborn dask ray<span class="at">-default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For MacOSX:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> lpdaac_vitals <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> seaborn jupyterlab dask ray<span class="at">-default</span> ray<span class="at">-dashboard</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> ornl_daac_neon <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> seaborn jupyterlab dask ray<span class="at">-default</span> ray<span class="at">-dashboard</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Next, activate the Python Environment that you just created.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mamba activate lpdaac_vitals </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mamba activate ornl_daac_neon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Now you can launch Jupyter Notebook to open the notebooks included.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jupyter notebook </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ol>
-<p><strong>Still having trouble getting a compatible Python environment set up? Contact <a href="https://lpdaac.usgs.gov/lpdaac-contact-us/">LP DAAC User Services</a>.</strong></p>
+<p><strong>Still having trouble getting a compatible Python environment set up? Contact <a href="uso@daac.ornl.gov">ORNL DAAC User Services</a>.</strong></p>
 
 
 </section>

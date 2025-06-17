@@ -15,7 +15,7 @@ website:
   repo-url: https://github.com/nasa/neon-nasa-hsi-workshop/
 
   sidebar:
-    title: "NEON AOP & NASA AVIRIS Hyperspectral Data Workshop"
+    title: "NEON AOP & NASA AVIRIS Airborne Hyperspectral Data Workshop"
     logo: img/ornl_daac_neon_combined_logo.png
     pinned: true
     align: center

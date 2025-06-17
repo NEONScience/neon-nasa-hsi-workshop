@@ -11,11 +11,11 @@
     ]
   },
   {
-    "objectID": "setup/workshop_setup.html#cloning-the-vitals-repository",
-    "href": "setup/workshop_setup.html#cloning-the-vitals-repository",
+    "objectID": "setup/workshop_setup.html#cloning-the-neon-data-skills-repository",
+    "href": "setup/workshop_setup.html#cloning-the-neon-data-skills-repository",
     "title": "Cloud Workspace Setup",
-    "section": "Cloning the VITALS Repository",
-    "text": "Cloning the VITALS Repository\nIf you plan to edit or contribute to the VITALS repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository. An example can be found in the CONTRIBUTING.md file.\nIf you just want to work with the notebooks or modules, you can simply clone the repository.\nTo clone the repository, navigate to the directory where you want to store the repository on your local machine, then type the following:\ngit clone https://github.com/nasa/VITALS.git",
+    "section": "Cloning the NEON-Data-Skills Repository",
+    "text": "Cloning the NEON-Data-Skills Repository\nIf you plan to edit or contribute to the NEON-Data-Skills repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository. An example can be found in the CONTRIBUTING.md file.\nIf you just want to work with the notebooks or modules, you can simply clone the repository.\nTo clone the repository, navigate to the directory where you want to store the repository on your local machine, then type the following:\ngit clone https://github.com/NEONScience/NEON-Data-Skills.git",
     "crumbs": [
       "Setup Instructions",
       "Cloud Workspace Setup"
@@ -26,18 +26,7 @@
     "href": "setup/workshop_setup.html#troubleshooting",
     "title": "Cloud Workspace Setup",
     "section": "Troubleshooting",
-    "text": "Troubleshooting\nWe recommend Shutting down all kernels after running each notebook. This will clear the memory used by the previous notebook, and is necessary to run some of the more memory intensive notebooks.\n\n\n\nNo single notebook exceeds roughly the limit using the provided data, but if you choose to use your own data in the notebook, or have 2 notebooks open and do not shut down the kernel, you may get an out of memory error.\nIf you elect to try this on your own data/ROI, you may need to select a larger server size. This will often happen if you are using the last EMIT scene from an orbit. In some cases those can be almost double the size of a normal scene. Please select the smallest possible.",
-    "crumbs": [
-      "Setup Instructions",
-      "Cloud Workspace Setup"
-    ]
-  },
-  {
-    "objectID": "setup/workshop_setup.html#contact-info",
-    "href": "setup/workshop_setup.html#contact-info",
-    "title": "Cloud Workspace Setup",
-    "section": "Contact Info",
-    "text": "Contact Info",
+    "text": "Troubleshooting\nWe recommend Shutting down all kernels after running each notebook. This will clear the memory used by the previous notebook, and is necessary to run some of the more memory intensive notebooks.\n\n\n\nNo single notebook exceeds roughly the limit using the provided data, but if you choose to use your own data in the notebook, or have 2 notebooks open and do not shut down the kernel, you may get an out of memory error.",
     "crumbs": [
       "Setup Instructions",
       "Cloud Workspace Setup"
@@ -169,7 +158,7 @@
     "href": "index.html#agenda",
     "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
     "section": "Agenda",
-    "text": "Agenda\n\n\n\n\n\n\n\n\nTime\nDescription\nLeads/Instructors\n\n\n\n\n8:00 AM\nIntroduction and Overview of NEON and NASA Airborne and Field Data\nBridget Hass and Michele Thornton\n\n\n8:05 AM\nOverview of NEON Airborne Observation Platform\nBridget Hass\n\n\n8:30 AM\nNotebook 1: Download and Explore NEON Hyperspectral Data\nBridget Hass\n\n\n9:00 AM\nNotebook 2: Pairing NEON and Field Hyperspectral Data\nBridget Hass\n\n\n9:30 AM\nBreak\n\n\n\n9:35 AM\nOverview of Recent NASA Airborne Missions (SHIFT, BioSCape, AUVELO)\nMichele Thornton\n\n\n10:00 AM\nNotebook 3: Discovery and Analysis of VegPlot and AVIRIS Instrument Data\nMichele Thornton\n\n\n10:55 AM\nDiscussion and Wrap Up\nAll",
+    "text": "Agenda\n\n\n\n\n\n\n\n\nTime\nDescription\nLeads/Instructors\n\n\n\n\n8:00 AM\nIntroduction: NEON and NASA Airborne and Field Data\nBridget Hass and Michele Thornton\n\n\n8:05 AM\nOverview of NEON Airborne Observation Platform\nBridget Hass\n\n\n8:30 AM\nNotebook 1: Download and Explore NEON Hyperspectral Data\nBridget Hass\n\n\n9:00 AM\nNotebook 2: Pairing NEON and Field Hyperspectral Data\nBridget Hass\n\n\n9:30 AM\nBreak\n\n\n\n9:35 AM\nOverview of Recent NASA Airborne Missions (SHIFT, BioSCape, AUVELO)\nMichele Thornton\n\n\n10:00 AM\nNotebook 3: Discovery and Analysis of VegPlot and AVIRIS Instrument Data\nMichele Thornton\n\n\n10:55 AM\nDiscussion and Wrap Up\nAll",
     "crumbs": [
       "Welcome",
       "2025 ESA Workshop"
@@ -180,7 +169,7 @@
     "href": "index.html#contact-info",
     "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
     "section": "Contact Info",
-    "text": "Contact Info\nNEON AOP\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1\nContact: https://www.neonscience.org/about/contact-us/\nWebsite: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nORNL DAAC\nOrganization: NASA Earthdata Data Center Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) Contact:\nNASA Earthdata Forum: https://forum.earthdata.nasa.gov/\nORNL DAAC - uso@daac.ornl.gov\nWebsite: https://www.earthdata.nasa.gov/centers/ornl-daac",
+    "text": "Contact Info\nNEON AOP\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1\nWebsite: https://neonscience.org/\nContact: https://www.neonscience.org/about/contact-us/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nORNL DAAC\nOrganization: NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)\nWebsite: https://www.earthdata.nasa.gov/centers/ornl-daac\nContact:\nNASA Earthdata Forum: https://forum.earthdata.nasa.gov/\nORNL DAAC - uso@daac.ornl.gov",
     "crumbs": [
       "Welcome",
       "2025 ESA Workshop"
@@ -400,7 +389,7 @@
     "href": "neon-nasa.html#contact-info",
     "title": "NEON and NASA Airborne and Field Tutorials",
     "section": "Contact Info",
-    "text": "Contact Info\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1 Website: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nDate last modified: 06-16-2025\nORNL DAAC\nOrganization: NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) Contact:\nNASA Earthdata Forum: https://forum.earthdata.nasa.gov/ ORNL DAAC - uso@daac.ornl.gov Website: https://www.earthdata.nasa.gov/centers/ornl-daac",
+    "text": "Contact Info\nNEON AOP\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1\nWebsite: https://neonscience.org/\nContact: https://www.neonscience.org/about/contact-us/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nORNL DAAC\nOrganization: NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)\nWebsite: https://www.earthdata.nasa.gov/centers/ornl-daac\nContact:\nNASA Earthdata Forum: https://forum.earthdata.nasa.gov/\nORNL DAAC - uso@daac.ornl.gov\nDate last modified: 06-17-2025",
     "crumbs": [
       "Welcome",
       "Repository Description"
@@ -411,7 +400,7 @@
     "href": "setup/setup_instructions.html",
     "title": "Repository Setup Instructions",
     "section": "",
-    "text": "The how-tos and tutorials in this repository require a NASA Earthdata account, an installation of Git, and a compatible Python Environment. Resources in the VITALS repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace.\nFor local Python environment setup we recommend using mamba to manage Python packages. To install mamba, download miniforge for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. Note that this may cause an issue if you have an existing mamba install through Anaconda.\n\n\nThese Python Environments will work for all of the guides, how-to’s, and tutorials within this repository.\n\nUsing your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to create a compatible Python environment.\nFor Windows:\nmamba create -n lpdaac_vitals -c conda-forge --yes python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default\nFor MacOSX:\nmamba create -n lpdaac_vitals -c conda-forge --yes python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image seaborn jupyterlab dask ray-default ray-dashboard\nNext, activate the Python Environment that you just created.\nmamba activate lpdaac_vitals \nNow you can launch Jupyter Notebook to open the notebooks included.\njupyter notebook \n\nStill having trouble getting a compatible Python environment set up? Contact LP DAAC User Services.",
+    "text": "The how-tos and tutorials in this repository require a NASA Earthdata account, an installation of Git, and a compatible Python Environment. Resources in this repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace.\nFor local Python environment setup we recommend using mamba to manage Python packages. To install mamba, download miniforge for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. Note that this may cause an issue if you have an existing mamba install through Anaconda.\n\n\nThese Python Environments will work for all of the guides, how-to’s, and tutorials within this repository.\n\nUsing your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to create a compatible Python environment.\nFor Windows:\nmamba create -n ornl_daac_neon -c conda-forge --yes python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default\nFor MacOSX:\nmamba create -n ornl_daac_neon -c conda-forge --yes python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image seaborn jupyterlab dask ray-default ray-dashboard\nNext, activate the Python Environment that you just created.\nmamba activate ornl_daac_neon\nNow you can launch Jupyter Notebook to open the notebooks included.\njupyter notebook \n\nStill having trouble getting a compatible Python environment set up? Contact ORNL DAAC User Services.",
     "crumbs": [
       "Setup Instructions",
       "Local Python Environment Setup"
@@ -422,7 +411,7 @@
     "href": "setup/setup_instructions.html#python-environment-setup",
     "title": "Repository Setup Instructions",
     "section": "",
-    "text": "These Python Environments will work for all of the guides, how-to’s, and tutorials within this repository.\n\nUsing your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to create a compatible Python environment.\nFor Windows:\nmamba create -n lpdaac_vitals -c conda-forge --yes python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default\nFor MacOSX:\nmamba create -n lpdaac_vitals -c conda-forge --yes python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image seaborn jupyterlab dask ray-default ray-dashboard\nNext, activate the Python Environment that you just created.\nmamba activate lpdaac_vitals \nNow you can launch Jupyter Notebook to open the notebooks included.\njupyter notebook \n\nStill having trouble getting a compatible Python environment set up? Contact LP DAAC User Services.",
+    "text": "These Python Environments will work for all of the guides, how-to’s, and tutorials within this repository.\n\nUsing your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to create a compatible Python environment.\nFor Windows:\nmamba create -n ornl_daac_neon -c conda-forge --yes python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image jupyterlab seaborn dask ray-default\nFor MacOSX:\nmamba create -n ornl_daac_neon -c conda-forge --yes python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit-image seaborn jupyterlab dask ray-default ray-dashboard\nNext, activate the Python Environment that you just created.\nmamba activate ornl_daac_neon\nNow you can launch Jupyter Notebook to open the notebooks included.\njupyter notebook \n\nStill having trouble getting a compatible Python environment set up? Contact ORNL DAAC User Services.",
     "crumbs": [
       "Setup Instructions",
       "Local Python Environment Setup"

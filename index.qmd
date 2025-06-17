@@ -12,7 +12,9 @@ This workshop introduces NEON and NASA airborne and field datasets through live-
 This workshop is hosted by [National Ecological Observatory Network (NEON)](https://neonscience.org/), NASA [Land Processes Distributed Activate Archive Center (LP DAAC)](https://lpdaac.usgs.gov/) and NASA [Jet Propulsion Laboratory (JPL)](https://www.jpl.nasa.gov/) with support from the NASA [Openscapes](https://nasa-openscapes.github.io/) project.  
 Hands-on exercises will be executed from a [Jupyter Hub on the Openscapes 2i2c cloud instance](https://workshop.openscapes.2i2c.cloud/).
 
+<!--
 <iframe src="https://docs.google.com/presentation/d/1XrdG9P5rLNR8C1TeLpf80YZUCtqdmUev/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+-->
 
 ## Agenda
 
@@ -32,15 +34,21 @@ Hands-on exercises will be executed from a [Jupyter Hub on the Openscapes 2i2c c
 
 **NEON AOP**
 
-Organization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)^1^  
-Contact: <https://www.neonscience.org/about/contact-us/>  
-Website: <https://neonscience.org/>  
+*Organization*: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)^1^  
+
+*Website*: <https://neonscience.org/>  
+
+*Contact*: <https://www.neonscience.org/about/contact-us/>  
 
 ^1^NEON is a project fully funded by the National Science Foundation and operated by Battelle.
 
+
 **ORNL DAAC**
 
-Organization: NASA Earthdata Data Center Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)  Contact:  
+*Organization*: NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) 
+ 
+*Website*:  <https://www.earthdata.nasa.gov/centers/ornl-daac>  
+
+*Contact*:  
     NASA Earthdata Forum: <https://forum.earthdata.nasa.gov/>  
-    ORNL DAAC - <uso@daac.ornl.gov>  
-Website:  <https://www.earthdata.nasa.gov/centers/ornl-daac>  
+    ORNL DAAC - <uso@daac.ornl.gov> 
