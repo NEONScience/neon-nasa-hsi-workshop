@@ -18,7 +18,7 @@ Hands-on exercises will be executed from a [Jupyter Hub on the Openscapes 2i2c c
 
 | Time | Description | Leads/Instructors |  
 |------|---------------------|-------------| 
-|8:00 AM|Introduction and Overview of NEON and NASA Airborne and Field Data|Bridget Hass and Michele Thornton|  
+|8:00 AM|Introduction: NEON and NASA Airborne and Field Data|Bridget Hass and Michele Thornton|  
 |8:05 AM|Overview of NEON Airborne Observation Platform|Bridget Hass|  
 |8:30 AM|Notebook 1: Download and Explore NEON Hyperspectral Data|Bridget Hass|
 |9:00 AM|Notebook 2: Pairing NEON and Field Hyperspectral Data|Bridget Hass|
@@ -32,8 +32,15 @@ Hands-on exercises will be executed from a [Jupyter Hub on the Openscapes 2i2c c
 
 **NEON AOP**
 
-Contact: <https://www.neonscience.org/about/contact-us/>  
 Organization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)^1^  
+Contact: <https://www.neonscience.org/about/contact-us/>  
 Website: <https://neonscience.org/>  
 
 ^1^NEON is a project fully funded by the National Science Foundation and operated by Battelle.
+
+**ORNL DAAC**
+
+Organization: NASA Earthdata Data Center Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)  Contact:  
+    NASA Earthdata Forum: <https://forum.earthdata.nasa.gov/>  
+    ORNL DAAC - <uso@daac.ornl.gov>  
+Website:  <https://www.earthdata.nasa.gov/centers/ornl-daac>  

@@ -180,7 +180,7 @@
     "href": "index.html#contact-info",
     "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
     "section": "Contact Info",
-    "text": "Contact Info\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1\nWebsite: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.",
+    "text": "Contact Info\nNEON AOP\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1\nContact: https://www.neonscience.org/about/contact-us/\nWebsite: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nORNL DAAC\nOrganization: NASA Earthdata Data Center Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) Contact:\nNASA Earthdata Forum: https://forum.earthdata.nasa.gov/\nORNL DAAC - uso@daac.ornl.gov\nWebsite: https://www.earthdata.nasa.gov/centers/ornl-daac",
     "crumbs": [
       "Welcome",
       "2025 ESA Workshop"
@@ -400,7 +400,7 @@
     "href": "neon-nasa.html#contact-info",
     "title": "NEON and NASA Airborne and Field Tutorials",
     "section": "Contact Info",
-    "text": "Contact Info\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1 Website: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nDate last modified: 06-16-2025\nORNL DAAC\nNASA Earthdata Forum: https://forum.earthdata.nasa.gov/\nORNL DAAC: uso@daac.ornl.gov Organization: NASA Earthdata Data Center Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)\nWebsite: https://www.earthdata.nasa.gov/centers/ornl-daac",
+    "text": "Contact Info\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1 Website: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nDate last modified: 06-16-2025\nORNL DAAC\nOrganization: NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) Contact:\nNASA Earthdata Forum: https://forum.earthdata.nasa.gov/ ORNL DAAC - uso@daac.ornl.gov Website: https://www.earthdata.nasa.gov/centers/ornl-daac",
     "crumbs": [
       "Welcome",
       "Repository Description"

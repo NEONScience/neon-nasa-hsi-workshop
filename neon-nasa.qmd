@@ -23,7 +23,8 @@ Date last modified: 06-16-2025
 
 **ORNL DAAC**
 
-NASA Earthdata Forum:  https://forum.earthdata.nasa.gov/  
-ORNL DAAC:  <uso@daac.ornl.gov>
-Organization:  NASA Earthdata Data Center Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)  
-Website:  https://www.earthdata.nasa.gov/centers/ornl-daac
+Organization: NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) 
+Contact:  
+    NASA Earthdata Forum:  https://forum.earthdata.nasa.gov/ 
+    ORNL DAAC - <uso@daac.ornl.gov>
+Website:  <https://www.earthdata.nasa.gov/centers/ornl-daac>
