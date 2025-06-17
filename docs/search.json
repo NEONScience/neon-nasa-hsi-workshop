@@ -37,7 +37,7 @@
     "href": "setup/workshop_setup.html#contact-info",
     "title": "Cloud Workspace Setup",
     "section": "Contact Info",
-    "text": "Contact Info\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\nDate last modified: 05-24-2024\n¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.",
+    "text": "Contact Info",
     "crumbs": [
       "Setup Instructions",
       "Cloud Workspace Setup"
@@ -48,7 +48,7 @@
     "href": "setup/prerequisites.html",
     "title": "Prerequisites",
     "section": "",
-    "text": "Prerequisites\nTo follow along during the workshop, or to run through the notebooks contained within the repository using the Openscapes 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software or accounts are free.\n\nEarthdata Login account\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov/users/new\nRemember your username and password; you will need them to download or access data during the workshop and beyond.\n\nGitHub username\n\nCreate a GitHub account (if you don’t already have one) at https://github.com/join. Follow optional advice on choosing your username\nYour GitHub username is used to enable you access to a cloud environment during the workshop. To gain access, please request access to the NASA Openscapes JupyterHub using this form. You will receive an email invitation to join the organization on GitHub. You must join to gain access to the workspace.\n\n\nNetrc file\n\nThis file is needed to access NASA Earthdata assets from a scripting environment like Python.\nThere are multiple methods to create a .netrc file. For this workshop, earthaccess package is used to automatically create a netrc file using your Earthdata login credentials if one does not exist. There are detailed instruction available for creating a .netrc file using other methods here.\n\nLaptop or tablet\n\nParticipation in the exercises requires a laptop or tablet. Yes, a tablet works too! All workshop participants will have access to a 2i2c Jupyter Lab instance running in AWS us-west 2.",
+    "text": "Prerequisites\nTo follow along during the workshop, or to run through the notebooks contained within the repository using the Openscapes 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software or accounts are free.\n\nEarthdata Login account\n\nCreate an Earthdata Login account (if you don’t already have one) at https://urs.earthdata.nasa.gov/users/new\nRemember your username and password; you will need them to download or access data during the workshop and beyond.\n\nNEON User accout and API token\n\nCreate a NEON User account (if you don’t already have one) following the instructions here: https://www.neonscience.org/about/user-accounts/\nCreate an API token and save this; you will use this to download and access NEON data during the workshop and beyond. Instructions on creating an API token can be found here: https://www.neonscience.org/resources/learning-hub/tutorials/neon-api-tokens-tutorial\n\nGitHub username\n\nCreate a GitHub account (if you don’t already have one) at https://github.com/join. Follow optional advice on choosing your username\nYour GitHub username is used to enable you access to a cloud environment during the workshop. To gain access, please request access to the NASA Openscapes JupyterHub using this form. You will receive an email invitation to join the organization on GitHub. You must join to gain access to the workspace.\n\n\n.netrc file\n\nThis file is needed to access NASA Earthdata assets from a scripting environment like Python.\nThere are multiple methods to create a .netrc file. For this workshop, earthaccess package is used to automatically create a netrc file using your Earthdata login credentials if one does not exist. There are detailed instruction available for creating a .netrc file using other methods here.\n\nLaptop or tablet\n\nParticipation in the exercises requires a laptop or tablet. Yes, a tablet works too! All workshop participants will have access to a 2i2c Jupyter Lab instance running in AWS us-west 2.",
     "crumbs": [
       "Setup Instructions",
       "Prerequisites"
@@ -169,7 +169,7 @@
     "href": "index.html#agenda",
     "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
     "section": "Agenda",
-    "text": "Agenda\n\n\n\n\n\n\n\n\nTime\nDescription\nLeads/Instructors\n\n\n\n\n8:00 AM\nIntroduction and Overview of NEON and NASA Airborne and Field Data\nBridget Hass and Michele Thornton\n\n\n8:05 AM\nOverview of NEON Airborne Observation Platform\nBridget Hass\n\n\n8:30 AM\nNotebook 1: Working with NEON Hyperspectral Data\nBridget Hass\n\n\n9:00 AM\nNotebook 2: Pairing NEON and Field Hyperspectral Data\nBridget Hass\n\n\n9:30 AM\nBreak\n\n\n\n9:35 AM\nOverview of NASA AVIRIS Missions\nMichele Thornton\n\n\n10:00 AM\nNotebook 3: Exploring SHIFT Data\nMichele Thornton\n\n\n10:55 AM\nDiscussion and Wrap Up\nAll",
+    "text": "Agenda\n\n\n\n\n\n\n\n\nTime\nDescription\nLeads/Instructors\n\n\n\n\n8:00 AM\nIntroduction and Overview of NEON and NASA Airborne and Field Data\nBridget Hass and Michele Thornton\n\n\n8:05 AM\nOverview of NEON Airborne Observation Platform\nBridget Hass\n\n\n8:30 AM\nNotebook 1: Working with NEON Hyperspectral Data\nBridget Hass\n\n\n9:00 AM\nNotebook 2: Pairing NEON and Field Hyperspectral Data\nBridget Hass\n\n\n9:30 AM\nBreak\n\n\n\n9:35 AM\nOverview of NASA AVIRIS Missions\nMichele Thornton\n\n\n10:00 AM\nNotebook 3: Finding AVIRIS Data\nMichele Thornton\n\n\n10:25 AM\nNotebook 3: Exploring AVIRIS Data\nMichele Thornton\n\n\n10:55 AM\nDiscussion and Wrap Up\nAll",
     "crumbs": [
       "Welcome",
       "2025 ESA Workshop"
@@ -180,7 +180,7 @@
     "href": "index.html#contact-info",
     "title": "Plot to Plane: Working with NASA and NEON Airborne and Field Datasets",
     "section": "Contact Info",
-    "text": "Contact Info\nLP DAAC\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\n¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)2\nWebsite: https://neonscience.org/\n2NEON is a project fully funded by the National Science Foundation and operated by Battelle.",
+    "text": "Contact Info\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1\nWebsite: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.",
     "crumbs": [
       "Welcome",
       "2025 ESA Workshop"
@@ -191,7 +191,7 @@
     "href": "CODE_OF_CONDUCT.html",
     "title": "Code of Conduct",
     "section": "",
-    "text": "We are dedicated to fostering a respectful environment for everyone contributing to this project. We expect all participants to treat each other with respect, professionalism, and kindness.\n\n\n\n\nBe respectful and considerate of others.\nEngage in constructive discussions and offer helpful feedback.\nGracefully accept constructive criticism.\n\n\n\n\nThe following behaviors will not be tolerated:\n\nHarassment, discrimination, or intimidation of any kind.\nOffensive, abusive, or derogatory language and actions.\nPersonal attacks or insults.\nTrolling or disruptive conduct.\nSharing inappropriate content.\n\n\n\n\nIf you experience or witness any behavior that violates this Code of Conduct, please report it by contacting the project maintainers. All reports will be reviewed confidentially.\n\n\n\nViolations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.\n\n\n\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\nDate last modified: 01-22-2025\n¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.",
+    "text": "We are dedicated to fostering a respectful environment for everyone contributing to this project. We expect all participants to treat each other with respect, professionalism, and kindness.\n\n\n\n\nBe respectful and considerate of others.\nEngage in constructive discussions and offer helpful feedback.\nGracefully accept constructive criticism.\n\n\n\n\nThe following behaviors will not be tolerated:\n\nHarassment, discrimination, or intimidation of any kind.\nOffensive, abusive, or derogatory language and actions.\nPersonal attacks or insults.\nTrolling or disruptive conduct.\nSharing inappropriate content.\n\n\n\n\nIf you experience or witness any behavior that violates this Code of Conduct, please report it by contacting the project maintainers. All reports will be reviewed confidentially.\n\n\n\nViolations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.",
     "crumbs": [
       "Contributing",
       "Code of Conduct"
@@ -247,17 +247,6 @@
     "title": "Code of Conduct",
     "section": "",
     "text": "Violations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.",
-    "crumbs": [
-      "Contributing",
-      "Code of Conduct"
-    ]
-  },
-  {
-    "objectID": "CODE_OF_CONDUCT.html#contact-info",
-    "href": "CODE_OF_CONDUCT.html#contact-info",
-    "title": "Code of Conduct",
-    "section": "",
-    "text": "Email: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\nDate last modified: 01-22-2025\n¹Work performed under USGS contract G15PD00467 for NASA contract NNG14HH33I.",
     "crumbs": [
       "Contributing",
       "Code of Conduct"
@@ -400,7 +389,7 @@
     "href": "neon-nasa.html",
     "title": "NEON and NASA Airborne and Field Tutorials",
     "section": "",
-    "text": "Please view the NEON NASA Workshop Page for workshop details. Resources in this repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace. For local Python environment setup instructions please see the Setup Instructions.\nWelcome to the NEON - NASA Airborne Hyperspectral Data Resources Repository! This repository provides Python Jupyter notebooks to help the community work with visible to short-wave infrared imaging spectroscopy data from NEON’s Airbonre Observation Platform and missions carried out with the NASA AVIRIS sensor. These complimentary hyperspectral datasets provide an opportunity to …\nIn the interest of open science this repository has been made public but is still under active development. Make sure to consult the change log for the most recent changes to the repository. Contributions from all parties are welcome.",
+    "text": "Please view the NEON NASA Workshop Page for workshop details. Resources in this repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace. For local Python environment setup instructions please see the Setup Instructions.\nWelcome to the NEON - NASA Airborne Hyperspectral Data Resources Repository! This repository provides Python Jupyter notebooks to help the community work with visible to short-wave infrared imaging spectroscopy data from NEON’s Airbonre Observation Platform and missions carried out with the NASA AVIRIS sensor. These complimentary hyperspectral datasets provide an opportunity to …\nIn the interest of open science, this repository has been made public, but is still under active development. Make sure to consult the change log for the most recent changes to the repository. Contributions from all parties are welcome.",
     "crumbs": [
       "Welcome",
       "Repository Description"
@@ -411,7 +400,7 @@
     "href": "neon-nasa.html#contact-info",
     "title": "NEON and NASA Airborne and Field Tutorials",
     "section": "Contact Info",
-    "text": "Contact Info\nLP DAAC\nEmail: LPDAAC@usgs.gov\nVoice: +1-866-573-3222\nOrganization: Land Processes Distributed Active Archive Center (LP DAAC)¹\nWebsite: https://lpdaac.usgs.gov/\n¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I.\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)2 Website: https://neonscience.org/\n2NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nDate last modified: 06-16-2025",
+    "text": "Contact Info\nNEON AOP\nContact: https://www.neonscience.org/about/contact-us/\nOrganization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)1 Website: https://neonscience.org/\n1NEON is a project fully funded by the National Science Foundation and operated by Battelle.\nDate last modified: 06-16-2025",
     "crumbs": [
       "Welcome",
       "Repository Description"
