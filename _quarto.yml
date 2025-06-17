@@ -8,7 +8,7 @@ execute:
 website:
   page-navigation: true
   page-footer: 
-    center: "VSWIR Imaging and Thermal Applications, Learning, and Science."
+    center: "NASA and NEON Airborne Hyperspectral Workshop 2025"
 
   title: "VITALS"
   site-url: https://NEONScience.github.io/neon-nasa-hsi-workshop/
