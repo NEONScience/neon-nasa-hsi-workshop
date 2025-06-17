@@ -1,0 +1,28 @@
+name: Sync Selected NEON Tutorials
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'  # Runs every Monday at 6:00 UTC
+
+jobs:
+  sync-tutorials:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v4
+
+      - name: Download selected tutorial files
+        run: |
+          mkdir -p neon
+          curl -L -o neon/02_neon-l3-refl-h5-brdf-corrected.ipynb \
+            https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/Hyperspectral/intro-hyperspectral/intro-refl-h5-bidirectional/intro-l3-refl-h5-brdf-corrected.ipynb
+          curl -L -o neon/01_neon-hyperspectral-functions.ipynb \
+            https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/Hyperspectral/intro-hyperspectral/hyperspectral_functions/intro_hyperspectral_functions.ipynb
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add neon/01_neon-hyperspectral-functions.ipynb neon/02_neon-l3-refl-h5-brdf-corrected.ipynb
+          git commit -m "Sync selected NEON tutorials from NEON-Data-Skills repository" || echo "No changes to commit"
+          git push
