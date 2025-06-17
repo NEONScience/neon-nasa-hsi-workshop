@@ -8,14 +8,14 @@ execute:
 website:
   page-navigation: true
   page-footer: 
-    center: "NASA and NEON Airborne Hyperspectral Workshop 2025"
+    center: "NASA and NEON Airborne Hyperspectral Workshop - ESA 2025"
 
-  title: "NEON AOP & NASA AVIRIS Workshop"
+  title: "NEON AOP & NASA AVIRIS Airborne and Field Data Workshop"
   site-url: https://NEONScience.github.io/neon-nasa-hsi-workshop/
   repo-url: https://github.com/nasa/neon-nasa-hsi-workshop/
 
   sidebar:
-    title: "NEON AOP & NASA AVIRIS Workshop"
+    title: "NEON AOP & NASA AVIRIS Hyperspectral Data Workshop"
     logo: img/nasa_neon_combined_logo_light.png
     pinned: true
     align: center

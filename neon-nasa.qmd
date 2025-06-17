@@ -23,10 +23,10 @@ Website: <https://lpdaac.usgs.gov/>
 
 **NEON AOP**
 
-Contact: <https://www.neonscience.org/about/contact-us/>
-Organization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)¹  
+Contact: <https://www.neonscience.org/about/contact-us/> 
+Organization: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)^2^  
 Website: <https://neonscience.org/>  
 
-¹Work performed under USGS contract 140G0121D0001 for NASA contract NNG14HH33I. 
+^2^NEON is a project fully funded by the National Science Foundation and operated by Battelle.
 
 Date last modified: 06-16-2025
