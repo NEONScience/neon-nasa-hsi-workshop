@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>setup_instructions – NEON AOP &amp; NASA AVIRIS Airborne and Field Data Workshop</title>
+<title>Comparing NEON and NASA Airborne Campaigns – NEON AOP &amp; NASA AVIRIS Airborne and Field Data Workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +29,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../background/neon_background.html" rel="next">
-<link href="../setup/workshop_setup.html" rel="prev">
+<link href="../notebooks/01_neon-hyperspectral-functions.html" rel="next">
+<link href="../background/neon_background.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -283,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../setup/prerequisites.html">Setup Instructions</a></li><li class="breadcrumb-item"><a href="../setup/setup_instructions.html">Local Python Environment Setup</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../background/neon_background.html">Background</a></li><li class="breadcrumb-item"><a href="../background/nasa_neon_comparison.html">Comparing NEON and NASA Airborne Campaigns</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -362,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../setup/setup_instructions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../setup/setup_instructions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Local Python Environment Setup</span></a>
   </div>
 </li>
@@ -385,7 +350,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../background/nasa_neon_comparison.html" class="sidebar-item-text sidebar-link">
+  <a href="../background/nasa_neon_comparison.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Comparing NEON and NASA Airborne Campaigns</span></a>
   </div>
 </li>
@@ -447,39 +412,100 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#repository-setup-instructions" id="toc-repository-setup-instructions" class="nav-link active" data-scroll-target="#repository-setup-instructions">Repository Setup Instructions</a>
+  <li><a href="#comparison-of-nasa-aviris-v.-neon-aop-imaging-spectrometer-datasets" id="toc-comparison-of-nasa-aviris-v.-neon-aop-imaging-spectrometer-datasets" class="nav-link active" data-scroll-target="#comparison-of-nasa-aviris-v.-neon-aop-imaging-spectrometer-datasets">Comparison of NASA AVIRIS v. NEON AOP Imaging Spectrometer Datasets</a></li>
+  <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data Processing</a>
   <ul class="collapse">
-  <li><a href="#python-environment-setup" id="toc-python-environment-setup" class="nav-link" data-scroll-target="#python-environment-setup">Python Environment Setup</a></li>
+  <li><a href="#data-products" id="toc-data-products" class="nav-link" data-scroll-target="#data-products">Data products</a></li>
+  <li><a href="#atmospheric-correction" id="toc-atmospheric-correction" class="nav-link" data-scroll-target="#atmospheric-correction">Atmospheric correction:</a></li>
+  </ul></li>
+  <li><a href="#data-storage-and-access" id="toc-data-storage-and-access" class="nav-link" data-scroll-target="#data-storage-and-access">Data Storage and Access</a>
+  <ul class="collapse">
+  <li><a href="#neon" id="toc-neon" class="nav-link" data-scroll-target="#neon">NEON</a></li>
+  <li><a href="#nasa" id="toc-nasa" class="nav-link" data-scroll-target="#nasa">NASA</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../setup/prerequisites.html">Setup Instructions</a></li><li class="breadcrumb-item"><a href="../setup/setup_instructions.html">Local Python Environment Setup</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../background/neon_background.html">Background</a></li><li class="breadcrumb-item"><a href="../background/nasa_neon_comparison.html">Comparing NEON and NASA Airborne Campaigns</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Comparing NEON and NASA Airborne Campaigns</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-<section id="repository-setup-instructions" class="level1">
-<h1>Repository Setup Instructions</h1>
-<p>The how-tos and tutorials in this repository require a <a href="https://urs.earthdata.nasa.gov/">NASA Earthdata account</a>, an installation of <a href="https://git-scm.com/downloads">Git</a>, and a compatible Python Environment. Resources in this repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace.</p>
-<p>For local Python environment setup we recommend using <a href="https://mamba.readthedocs.io/en/latest/">mamba</a> to manage Python packages. To install <em>mamba</em>, download <a href="https://github.com/conda-forge/miniforge">miniforge</a> for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. <strong>Note that this may cause an issue if you have an existing mamba install through Anaconda.</strong></p>
-<section id="python-environment-setup" class="level2">
-<h2 class="anchored" data-anchor-id="python-environment-setup">Python Environment Setup</h2>
-<p>These Python Environments will work for all of the guides, how-to’s, and tutorials within this repository.</p>
-<ol type="1">
-<li><p>Using your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to create a compatible Python environment.</p>
-<p>For Windows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> ornl_daac_neon <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> jupyterlab seaborn dask ray<span class="at">-default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For MacOSX:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> ornl_daac_neon <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> seaborn jupyterlab dask ray<span class="at">-default</span> ray<span class="at">-dashboard</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Next, activate the Python Environment that you just created.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mamba activate ornl_daac_neon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Now you can launch Jupyter Notebook to open the notebooks included.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jupyter notebook </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<p><strong>Still having trouble getting a compatible Python environment set up? Contact <a href="uso@daac.ornl.gov">ORNL DAAC User Services</a>.</strong></p>
+</header>
+
+
+<p>While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences in two airborne campaigns and datasets. This section provides a high-level overview of some of the similarities and differences between the two.</p>
+<section id="comparison-of-nasa-aviris-v.-neon-aop-imaging-spectrometer-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="comparison-of-nasa-aviris-v.-neon-aop-imaging-spectrometer-datasets">Comparison of NASA AVIRIS v. NEON AOP Imaging Spectrometer Datasets</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 52%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>NASA AVIRIS</th>
+<th>NEON AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Where?</td>
+<td>Worldwide</td>
+<td>80 sites throughout the continental U.S., Alaska, Hawaii, and Puerto Rico</td>
+</tr>
+<tr class="even">
+<td>When?</td>
+<td>…</td>
+<td>2013 - present; Each site is collected 3 out of every 5 years</td>
+</tr>
+<tr class="odd">
+<td>Why?</td>
+<td>Specific research questions</td>
+<td>Long-term ecological monitoring of the United States</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="data-processing" class="level2">
+<h2 class="anchored" data-anchor-id="data-processing">Data Processing</h2>
+<section id="data-products" class="level3">
+<h3 class="anchored" data-anchor-id="data-products">Data products</h3>
+<p>NEON data are processed to Level 2 (flightline) and Level 3 (tiled mosaic) data products, and include a number of derived data products such as vegetation and water indices, LAI, fPAR, and Albedo. NASA data are processed to Level 1 (flightline) radiance.</p>
+</section>
+<section id="atmospheric-correction" class="level3">
+<h3 class="anchored" data-anchor-id="atmospheric-correction">Atmospheric correction:</h3>
+<p>NEON uses ATCOR-4 for the atmospheric correction. NASA uses ISOFIT …</p>
+</section>
+</section>
+<section id="data-storage-and-access" class="level2">
+<h2 class="anchored" data-anchor-id="data-storage-and-access">Data Storage and Access</h2>
+<section id="neon" class="level3">
+<h3 class="anchored" data-anchor-id="neon">NEON</h3>
+<p>NEON data are stored on Google Cloud Storage (GCS) and are accessible via the <a href="https://data.neonscience.org/">NEON Data Portal</a>. A subset of the L3 data products are also available on <a href="https://developers.google.com/earth-engine/datasets/publisher/neon-prod-earthengine">Google Earth Engine</a>.</p>
+<p>NEON provides an API for downloading from the Data Portal, and has developed tools in R (<a href="https://cran.r-project.org/web/packages/neonUtilities/index.html">neonUtilities</a>) and Python (<a href="https://pypi.org/project/neonutilities/">neonutilities</a>) for downloading NEON data, and wrangling OS and IS data.</p>
+</section>
+<section id="nasa" class="level3">
+<h3 class="anchored" data-anchor-id="nasa">NASA</h3>
+<p>NASA airborne data are stored on AWS and can be accessed through the <a href="https://daac.ornl.gov/">ORNL DAAC</a>. NASA provides tools including Earthdata Search to help data users discover and download datasets.</p>
+<p>This workshop will provide more details on accessing NEON and NASA airborne datasets in the <a href="../notebooks">Jupyter Notebooks</a> section.</p>
 
 
 </section>
@@ -900,13 +926,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../setup/workshop_setup.html" class="pagination-link" aria-label="Cloud Workspace Setup">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Cloud Workspace Setup</span>
+      <a href="../background/neon_background.html" class="pagination-link" aria-label="NEON Background">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">NEON Background</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../background/neon_background.html" class="pagination-link" aria-label="NEON Background">
-        <span class="nav-page-text">NEON Background</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../notebooks/01_neon-hyperspectral-functions.html" class="pagination-link" aria-label="1 NEON - Working with Hyperspectral Data using Functions">
+        <span class="nav-page-text">1 NEON - Working with Hyperspectral Data using Functions</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

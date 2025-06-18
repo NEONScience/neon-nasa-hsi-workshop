@@ -335,7 +335,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Python Notebooks</span></a>
+ <span class="menu-text">Background</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -343,14 +343,14 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./neon/01_neon-hyperspectral-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1 NEON - Working with Hyperspectral Data using Functions</span></a>
+  <a href="./background/neon_background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NEON Background</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./neon/02_neon-l3-refl-h5-brdf-corrected.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 NEON - BRDF-Corrected Hyperspectral Data</span></a>
+  <a href="./background/nasa_neon_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Comparing NEON and NASA Airborne Campaigns</span></a>
   </div>
 </li>
       </ul>
@@ -358,12 +358,35 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
- <span class="menu-text">Contributing</span></a>
+ <span class="menu-text">Python Notebooks</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/01_neon-hyperspectral-functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 NEON - Working with Hyperspectral Data using Functions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./notebooks/02_neon-l3-refl-h5-brdf-corrected.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2 NEON - BRDF-Corrected Hyperspectral Data</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Contributing</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
@@ -419,8 +442,8 @@ ul.task-list li input[type="checkbox"] {
 <p>NASA’s airborne science program and the NSF-funded National Ecological Observatory Network’s (NEON’s) Airborne Observation Platform (AOP) offer complementary remote sensing datasets ideal for carrying out large-scale ecological research. Both facilities operate similar airborne imaging spectrometers to collect visible to shortwave infrared (VSWIR) hyperspectral data, supporting regional ecosystem studies.</p>
 <p>The Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) archives data from NASA-funded ecological campaigns focusing on diverse environments such as river deltas and wetlands, the arctic, and tropics across multiple continents (North and Central America, South Africa). NEON’s AOP gathers high-resolution hyperspectral imagery, lidar, and RGB photography at 81 U.S. sites, offering repeat data spanning 2-10 years, with collections starting in 2013.</p>
 <p>This workshop introduces NEON and NASA airborne and field datasets through live-coding exercises presented as Python Jupyter Notebook tutorials, demonstrating data access, exploration, and analysis. Participants will learn to apply these datasets to answer ecological research questions, gaining insights into regional and landscape areas of interest.</p>
-<p>This workshop is hosted by <a href="https://neonscience.org/">National Ecological Observatory Network (NEON)</a>, NASA <a href="https://lpdaac.usgs.gov/">Land Processes Distributed Activate Archive Center (LP DAAC)</a> and NASA <a href="https://www.jpl.nasa.gov/">Jet Propulsion Laboratory (JPL)</a> with support from the NASA <a href="https://nasa-openscapes.github.io/">Openscapes</a> project.<br>
-Hands-on exercises will be executed from a <a href="https://workshop.openscapes.2i2c.cloud/">Jupyter Hub on the Openscapes 2i2c cloud instance</a>.</p>
+<p>This workshop is hosted by <a href="https://neonscience.org/">National Ecological Observatory Network (NEON)</a>, NASA <a href="https://lpdaac.usgs.gov/">Land Processes Distributed Activate Archive Center (LP DAAC)</a> and NASA <a href="https://www.jpl.nasa.gov/">Jet Propulsion Laboratory (JPL)</a> with support from the NASA <a href="https://nasa-openscapes.github.io/">Openscapes</a> project.</p>
+<p>Hands-on exercises will be executed from a <a href="https://workshop.openscapes.2i2c.cloud/">Jupyter Hub on the Openscapes 2i2c cloud instance</a>. Instructions for setting up the Python environment locally are provided in the <a href="setup_instructions.md">setup instructions</a>.</p>
 <!--
 <iframe src="https://docs.google.com/presentation/d/1XrdG9P5rLNR8C1TeLpf80YZUCtqdmUev/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 -->
@@ -452,12 +475,12 @@ Hands-on exercises will be executed from a <a href="https://workshop.openscapes.
 </tr>
 <tr class="odd">
 <td>8:30 AM</td>
-<td>Notebook 1: Download and Explore NEON Hyperspectral Data</td>
+<td>Notebook 1: Download and Explore NEON AOP Hyperspectral Data</td>
 <td>Bridget Hass</td>
 </tr>
 <tr class="even">
 <td>9:00 AM</td>
-<td>Notebook 2: Pairing NEON and Field Hyperspectral Data</td>
+<td>Notebook 2: Pairing NEON AOP Hyperspectral and Field Data</td>
 <td>Bridget Hass</td>
 </tr>
 <tr class="odd">

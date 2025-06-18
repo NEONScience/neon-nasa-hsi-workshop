@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>setup_instructions – NEON AOP &amp; NASA AVIRIS Airborne and Field Data Workshop</title>
+<title>NEON Airborne and Field Datasets – NEON AOP &amp; NASA AVIRIS Airborne and Field Data Workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -64,8 +29,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../background/neon_background.html" rel="next">
-<link href="../setup/workshop_setup.html" rel="prev">
+<link href="../background/nasa_neon_comparison.html" rel="next">
+<link href="../setup/setup_instructions.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -283,7 +248,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../setup/prerequisites.html">Setup Instructions</a></li><li class="breadcrumb-item"><a href="../setup/setup_instructions.html">Local Python Environment Setup</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../background/neon_background.html">Background</a></li><li class="breadcrumb-item"><a href="../background/neon_background.html">NEON Background</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -362,7 +327,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../setup/setup_instructions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../setup/setup_instructions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Local Python Environment Setup</span></a>
   </div>
 </li>
@@ -379,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../background/neon_background.html" class="sidebar-item-text sidebar-link">
+  <a href="../background/neon_background.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">NEON Background</span></a>
   </div>
 </li>
@@ -447,39 +412,269 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#repository-setup-instructions" id="toc-repository-setup-instructions" class="nav-link active" data-scroll-target="#repository-setup-instructions">Repository Setup Instructions</a>
+  <li><a href="#what-is-neon" id="toc-what-is-neon" class="nav-link active" data-scroll-target="#what-is-neon">What is NEON?</a></li>
+  <li><a href="#neon-airborne-observation-platform-aop" id="toc-neon-airborne-observation-platform-aop" class="nav-link" data-scroll-target="#neon-airborne-observation-platform-aop">NEON Airborne Observation Platform (AOP)</a>
   <ul class="collapse">
-  <li><a href="#python-environment-setup" id="toc-python-environment-setup" class="nav-link" data-scroll-target="#python-environment-setup">Python Environment Setup</a></li>
+  <li><a href="#aop-payload-sensors" id="toc-aop-payload-sensors" class="nav-link" data-scroll-target="#aop-payload-sensors">AOP Payload Sensors</a></li>
+  <li><a href="#aop-data-products" id="toc-aop-data-products" class="nav-link" data-scroll-target="#aop-data-products">AOP Data Products</a></li>
+  </ul></li>
+  <li><a href="#neon-field-data" id="toc-neon-field-data" class="nav-link" data-scroll-target="#neon-field-data">NEON Field Data</a>
+  <ul class="collapse">
+  <li><a href="#observational-sampling" id="toc-observational-sampling" class="nav-link" data-scroll-target="#observational-sampling">Observational Sampling</a></li>
+  <li><a href="#instrumented-sampling" id="toc-instrumented-sampling" class="nav-link" data-scroll-target="#instrumented-sampling">Instrumented Sampling</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../setup/prerequisites.html">Setup Instructions</a></li><li class="breadcrumb-item"><a href="../setup/setup_instructions.html">Local Python Environment Setup</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../background/neon_background.html">Background</a></li><li class="breadcrumb-item"><a href="../background/neon_background.html">NEON Background</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">NEON Airborne and Field Datasets</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-<section id="repository-setup-instructions" class="level1">
-<h1>Repository Setup Instructions</h1>
-<p>The how-tos and tutorials in this repository require a <a href="https://urs.earthdata.nasa.gov/">NASA Earthdata account</a>, an installation of <a href="https://git-scm.com/downloads">Git</a>, and a compatible Python Environment. Resources in this repository have been developed using the Openscapes 2i2c JupyterHub cloud workspace.</p>
-<p>For local Python environment setup we recommend using <a href="https://mamba.readthedocs.io/en/latest/">mamba</a> to manage Python packages. To install <em>mamba</em>, download <a href="https://github.com/conda-forge/miniforge">miniforge</a> for your operating system. If using Windows, be sure to check the box to “Add mamba to my PATH environment variable” to enable use of mamba directly from your command line interface. <strong>Note that this may cause an issue if you have an existing mamba install through Anaconda.</strong></p>
-<section id="python-environment-setup" class="level2">
-<h2 class="anchored" data-anchor-id="python-environment-setup">Python Environment Setup</h2>
-<p>These Python Environments will work for all of the guides, how-to’s, and tutorials within this repository.</p>
+</header>
+
+
+<section id="what-is-neon" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-neon">What is NEON?</h2>
+<p>NEON is a continental-scale observation facility designed to collect long-term open-access ecological data to better understand the complexities of Earth’s ecosystems and how they are changing. NEON uses cutting-edge sensor networks, instrumentation, observational sampling, natural history archive facilities and remote sensing methods and technologies to collect data on plants, animals, soil, nutrients, freshwater and the atmosphere.</p>
+<p>NEON operates 81 <a href="https://www.neonscience.org/field-sites/about-field-sites">field sites</a> strategically located across 20 ecoclimatic Domains across the United States, including 47 terrestrial sites and 34 freshwater aquatic sites. When logistically possible, aquatic and terrestrial field sites are colocated (i.e.&nbsp;in close proximity) to support understanding of linkages across terrestrial and aquatic ecosystems and their interactions with the atmosphere. For example, Domain 08, the Ozarks Complex, has three co-located sets of terrestrial and aquatic field sites. These sites are situated along the same watershed system, creating a unique opportunity to study hydrology, nutrient transport, and biogeochemical cycling through the watershed.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img/neon_field_site_map.png" class="img-fluid figure-img" width="750"></p>
+<figcaption>NEON Field Sites Map; Green: Terrestrial Sites, Blue: Aquatic Sites</figcaption>
+</figure>
+</div>
+</section>
+<section id="neon-airborne-observation-platform-aop" class="level2">
+<h2 class="anchored" data-anchor-id="neon-airborne-observation-platform-aop">NEON Airborne Observation Platform (AOP)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img/neon_aop_banner.png" class="img-fluid figure-img" width="750"></p>
+<figcaption>NEON Airborne Remote Sensing</figcaption>
+</figure>
+</div>
+<p>Airborne remote sensing surveys are conducted over NEON field sites during peak greenness and provide quantitative information on land cover and changes to ecological structure and chemistry, including the presence and effects of invasive species. The surveys are supported by the NEON Airborne Observation Platform (AOP), a suite of earth observation instruments installed into a Twin Otter aircraft designed to collect high-resolution remote sensing data at low altitude. AOP was designed to collect regional-scale landscape information at the NEON field sites. The AOP maps areas where NEON’s observational and instrumented sampling is occurring and allows relationships to be drawn between NEON’s detailed in-situ observations to the broader environmental and ecological conditions.</p>
+<section id="aop-payload-sensors" class="level3">
+<h3 class="anchored" data-anchor-id="aop-payload-sensors">AOP Payload Sensors</h3>
+<p>The AOP consists of three complete and comparable instrument payloads. Typically, two of the payloads are dedicated to collections of the NEON field sites while the third is dedicated to NEON’s Research Support services which support externally driven research. The primary sensors on each payload include</p>
 <ol type="1">
-<li><p>Using your preferred command line interface (command prompt, terminal, cmder, etc.) navigate to your local copy of the repository, then type the following to create a compatible Python environment.</p>
-<p>For Windows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> ornl_daac_neon <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 fiona=1.8.22 gdal hvplot geoviews rioxarray rasterio jupyter geopandas earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> jupyterlab seaborn dask ray<span class="at">-default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For MacOSX:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mamba create <span class="at">-n</span> ornl_daac_neon <span class="at">-c</span> conda<span class="at">-forge</span> -<span class="at">-yes</span> python=3.10 gdal=3.7.2 hvplot geoviews rioxarray rasterio geopandas fiona=1.9.4 jupyter earthaccess jupyter_bokeh h5py h5netcdf spectral scikit<span class="at">-image</span> seaborn jupyterlab dask ray<span class="at">-default</span> ray<span class="at">-dashboard</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Next, activate the Python Environment that you just created.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mamba activate ornl_daac_neon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Now you can launch Jupyter Notebook to open the notebooks included.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>jupyter notebook </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>A <a href="https://www.neonscience.org/data-collection/lidar">discrete and full-waveform lidar</a> to provide three-dimensional structural information of the landscape,</p></li>
+<li><p>An <a href="https://www.neonscience.org/data-collection/imaging-spectrometer">imaging spectrometer</a> to allow discrimination of land cover types and chemical content of vegetation,</p></li>
+<li><p>A high-resolution <a href="https://www.neonscience.org/data-collection/camera">digital camera</a> to provide spatially accurate and detailed contextual information, and</p></li>
+<li><p>A GPS antenna and receiver and Inertial Measurement Unit (IMU) to provide high-accuracy positioning and orientation of the aircraft.</p></li>
 </ol>
-<p><strong>Still having trouble getting a compatible Python environment set up? Contact <a href="uso@daac.ornl.gov">ORNL DAAC User Services</a>.</strong></p>
+</section>
+<section id="aop-data-products" class="level3">
+<h3 class="anchored" data-anchor-id="aop-data-products">AOP Data Products</h3>
+<p>The AOP produces approximately 30 data products. The products are separated into categories of Level 1, Level 2, and Level 3 (L1, L2, L3). L1 represents the least processed data products. Additional processing steps are required to transition the L1 data to the derived L2 and L3 data. Broadly, the L1 and L2 products are provided by individual aircraft flight line, while L3 products are provided in 1 km by 1 km tiles. Generally, the data volume for L1 products is the highest and decreases for L2 and L3 products. Details of the different products within each Level can be found in the individual webpages for each sensor. All AOP data products can be found on the <a href="https://data.neonscience.org/">NEON Data Portal</a>, and a subset of the L3 data products are available on <a href="https://developers.google.com/earth-engine/datasets/publisher/neon-prod-earthengine">Google Earth Engine</a>.</p>
+<section id="imaging-spectrometer-data-products" class="level4">
+<h4 class="anchored" data-anchor-id="imaging-spectrometer-data-products"><strong>Imaging Spectrometer Data Products</strong></h4>
+<p>Level 1 (L1) products include at-sensor radiance and surface reflectance which are distributed by flightline. The image data is georeferenced to the ITRF00 datum and projected into the appropriate UTM zone, and provided at 1 m spatial resolution. Both the radiance and reflectance image data are stored in an HDF5 file format that includes extensive metadata and data quality information. The HDF5 format was selected because of the flexibility it allows in storing associated metadata.</p>
+<p>Level 2 (L2) products are derived from the L1 surface reflectance and are produced at the same spatial resolution (1 m), datum and map projection as the Level 1 products. The L2 products include a suite of spectral indices designed to strategically combine bands to highlight vegetation characteristics such as photosynthetic activity or water content. For example, NDVI (Normalized Difference Vegetation Index) is a well-known and commonly used vegetation index which combines information from the NIR and Red regions to estimate vegetative greenness and can be used as a proxy for plant health. The L2 products also include fPAR (fraction of photosynthetically active radiation) and LAI (leaf area index), products further derived from vegetation indices. Additionally, a surface Albedo product that estimates the integrated reflectance of all the NIS bands into a single value is also provided. All L2 products are distributed by flightline in a GeoTIFF (gtiff) format. Currently, all vegetation indices, water indices, fPAR, and LAI are delivered with associated simulated error images.</p>
+<p>Level 3 (L3) products include mosaics of all L1 and L2 products, excluding at-sensor radiance, and are distributed as 1 km x 1 km tiles instead of flightlines. Tiles are created by making a full mosaic of all the data and sub-setting the 1 km x 1 km tiles. The tiles are designed so their boundaries are set to even 1000 m UTM coordinate intervals. During the mosaic generation, the algorithm preferentially selects pixels that were collected under the best weather conditions in regions with multiple potential pixels due to flightline overlap. If weather conditions were equivalent, pixels acquired nearest to nadir of the image acquisition are selected. Generally, this will correspond to pixels that are nearest to the center of the flightline. The tiles are created at the same spatial resolution (1 m) as the L1 and L2 products are in delivered in gtiff format, with the exception of the surface reflectance, which is delivered in HDF5 format.</p>
+</section>
+<section id="brdf-and-topographic-corrections" class="level4">
+<h4 class="anchored" data-anchor-id="brdf-and-topographic-corrections"><strong>BRDF and topographic corrections</strong></h4>
+<p>Starting in 2024, NEON began producing BRDF (Bidirectional Reflectance Distribution Function) and topographic corrected reflectance data, which include “bidirectional” in the name, and end with revision .002 in the Data Product IDs. As of 2025, these bidirectional reflectance are currently only available for data collected between 2022-2024. NEON is beginning to back-process earlier years (pre-2022) to apply the BRDF and topographic corrections. Please look at the data availability charts for each product on the data portal to determine whether the bidirectional data are available. Eventually, only bidirectional data products will be delivered, with the exception of the Level 1 Spectrometer orthorectified surface directional reflectance (DP1.30006.001), which will continue to be delivered, so that researchers who wish to carry out their own BRDF, topographic, or other corrections may do so.</p>
+<p>The table below shows a full list of the spectrometer-derived data products, including the corresponding bidirectional reflectance data products, if applicable.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Product Name</th>
+<th>Level</th>
+<th>Data Product ID (DPID)</th>
+<th>BRDF-Corrected DPID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Spectrometer orthorectified at-sensor radiance</td>
+<td>L1</td>
+<td><a href="https://data.neonscience.org/data-products/DP1.30001.001">DP1.30008.001</a></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Spectrometer orthorectified surface (bi)directional reflectance</td>
+<td>L1</td>
+<td><a href="https://data.neonscience.org/data-products/DP1.30006.001">DP1.30006.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP1.30006.001">DP1.30006.002</a></td>
+</tr>
+<tr class="odd">
+<td>Albedo - spectrometer - flightline</td>
+<td>L2</td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30011.001">DP2.30011.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30011.002">DP2.30011.002</a></td>
+</tr>
+<tr class="even">
+<td>LAI - spectrometer - flightline</td>
+<td>L2</td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30012.001">DP2.30012.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30012.002">DP2.30012.002</a></td>
+</tr>
+<tr class="odd">
+<td>fPAR - spectrometer - flightline</td>
+<td>L2</td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30014.001">DP2.30014.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30014.002">DP2.30014.002</a></td>
+</tr>
+<tr class="even">
+<td>Canopy water indices - flightline</td>
+<td>L2</td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30019.001">DP2.30019.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30019.002">DP2.30019.002</a></td>
+</tr>
+<tr class="odd">
+<td>Vegetation indices - spectrometer - flightline</td>
+<td>L2</td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30026.001">DP2.30026.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP2.30026.002">DP2.30026.002</a></td>
+</tr>
+<tr class="even">
+<td>Albedo - spectrometer - mosaic</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30011.001">DP3.30011.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30011.002">DP3.30011.002</a></td>
+</tr>
+<tr class="odd">
+<td>LAI - Spectrometer - mosaic</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30012.001">DP3.30012.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30012.002">DP3.30012.002</a></td>
+</tr>
+<tr class="even">
+<td>fPAR - spectrometer - mosaic</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30014.001">DP3.30014.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30014.002">DP3.30014.002</a></td>
+</tr>
+<tr class="odd">
+<td>Canopy water indices - mosaic</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30019.001">DP3.30019.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30019.002">DP3.30019.002</a></td>
+</tr>
+<tr class="even">
+<td>Vegetation indices - spectrometer - mosaic</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30026.001">DP3.30026.001</a></td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30026.002">DP3.30026.002</a></td>
+</tr>
+</tbody>
+</table>
+<p>In addition to the spectrometer-derived data products, NEON generates 5 lidar-derived products and 2 RGB camera data products. These are summarized in the tables below.</p>
+</section>
+<section id="lidar-data-products" class="level4">
+<h4 class="anchored" data-anchor-id="lidar-data-products"><strong>LiDAR Data Products</strong></h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Product Name</th>
+<th>Level</th>
+<th>Data Product ID (DPID)</th>
+<th>ATBD Document #</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>LiDAR Slant Range Waveform</td>
+<td>L1</td>
+<td><a href="https://data.neonscience.org/data-products/DP1.30001.001">DP1.30001.001</a></td>
+<td>NEON.DOC.001293</td>
+</tr>
+<tr class="even">
+<td>Discrete Return LiDAR Point Cloud</td>
+<td>L1</td>
+<td><a href="https://data.neonscience.org/data-products/DP1.30003.001">DP1.30003.001</a></td>
+<td>NEON.DOC.001292, NEON.DOC.001288</td>
+</tr>
+<tr class="odd">
+<td>Ecosystem Structure</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30015.001">DP3.30015.001</a></td>
+<td>NEON.DOC.002387</td>
+</tr>
+<tr class="even">
+<td>Elevation – LiDAR</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30024.001">DP3.30024.001</a></td>
+<td>NEON.DOC.002390</td>
+</tr>
+<tr class="odd">
+<td>Slope and Aspect – LiDAR</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30025.001">DP3.30025.001</a></td>
+<td>NEON.DOC.003791</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rgb-camera-products" class="level4">
+<h4 class="anchored" data-anchor-id="rgb-camera-products"><strong>RGB Camera Products</strong></h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Product Name</th>
+<th>Level</th>
+<th>Data Product ID (DPID)</th>
+<th>ATBD Document #</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>High-resolution orthorectified camera imagery</td>
+<td>L1</td>
+<td><a href="https://data.neonscience.org/data-products/DP1.30010.001">DP1.30010.001</a></td>
+<td>NEON.DOC.001211vB</td>
+</tr>
+<tr class="even">
+<td>High-resolution orthorectified camera imagery mosaic</td>
+<td>L3</td>
+<td><a href="https://data.neonscience.org/data-products/DP3.30025.001">DP3.30010.001</a></td>
+<td>NEON.DOC.005052vB</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="neon-field-data" class="level2">
+<h2 class="anchored" data-anchor-id="neon-field-data">NEON Field Data</h2>
+<p>In addition to the AOP remote sensing data, NEON also provides <a href="https://www.neonscience.org/data-collection/observational-sampling">Observational Sampling (OS)</a> data and <a href="https://www.neonscience.org/data-collection/automated-instruments">Instrumented Sampling (IS)</a> data at terrestrial and aquatic sites. The field and instrumented sampling are briefly described below, but we encourage exploring the NEON website further for a more detailed understanding of the sensors and data products provided by the OS and IS groups.</p>
+<section id="observational-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="observational-sampling">Observational Sampling</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img/neon_os_banner.png" class="img-fluid figure-img" width="750"></p>
+<figcaption>NEON Observational Samples</figcaption>
+</figure>
+</div>
+<p>NEON field scientists collect a broad variety of observations and samples at terrestrial and aquatic field sites at regular intervals throughout the year. The data and samples collected by NEON’s Aquatic Observation System (AOS) and Terrestrial Observation System (TOS) are designed to provide standardized, continentally distributed observations of organisms, biogeochemistry, and physical properties.</p>
+</section>
+<section id="instrumented-sampling" class="level3">
+<h3 class="anchored" data-anchor-id="instrumented-sampling">Instrumented Sampling</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../img/neon_is_banner.png" class="img-fluid figure-img" width="750"></p>
+<figcaption>NEON Instrumented Sampling</figcaption>
+</figure>
+</div>
+<p>NEON deploys automated instruments to collect <a href="https://www.neonscience.org/data-collection/meteorology">meteorological</a>, <a href="https://www.neonscience.org/data-collection/soil-sensors">soil</a>, <a href="https://www.neonscience.org/data-collection/phenocams">phenological</a>, <a href="https://www.neonscience.org/data-collection/surface-water">surface water</a>, and <a href="https://www.neonscience.org/data-collection/groundwater">groundwater</a> data at NEON field sites.</p>
+<p>Where logistically possible, NEON colocated aquatic sites with terrestrial sites (21 in total) to support an understanding of linkages across atmospheric, terrestrial, and aquatic ecosystems. The suite of OS, IS, and AOP data provide an unparalleled opportunity to study ecosystem-level change over time in the United States.</p>
 
 
 </section>
@@ -900,13 +1095,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../setup/workshop_setup.html" class="pagination-link" aria-label="Cloud Workspace Setup">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Cloud Workspace Setup</span>
+      <a href="../setup/setup_instructions.html" class="pagination-link" aria-label="Local Python Environment Setup">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Local Python Environment Setup</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../background/neon_background.html" class="pagination-link" aria-label="NEON Background">
-        <span class="nav-page-text">NEON Background</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../background/nasa_neon_comparison.html" class="pagination-link" aria-label="Comparing NEON and NASA Airborne Campaigns">
+        <span class="nav-page-text">Comparing NEON and NASA Airborne Campaigns</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -45,12 +45,18 @@ website:
           href: setup/workshop_setup.qmd
         - text: "Local Python Environment Setup"
           href: setup/setup_instructions.md
+      - section: "Background"            
+        contents: 
+          - text: "NEON Background"
+            href:  background/neon_background.qmd
+          - text: "Comparing NEON and NASA Airborne Campaigns"
+            href:  background/nasa_neon_comparison.qmd
       - section: "Python Notebooks"            
         contents: 
           - text: "1 NEON - Working with Hyperspectral Data using Functions"
-            href: neon/01_neon-hyperspectral-functions.ipynb
+            href: notebooks/01_neon-hyperspectral-functions.ipynb
           - text: "2 NEON - BRDF-Corrected Hyperspectral Data"
-            href: neon/02_neon-l3-refl-h5-brdf-corrected.ipynb
+            href: notebooks/02_neon-l3-refl-h5-brdf-corrected.ipynb
       - section: "Contributing"
         contents:
           - href: CONTRIBUTING.md

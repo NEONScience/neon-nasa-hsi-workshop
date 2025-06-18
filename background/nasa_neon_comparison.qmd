@@ -1,0 +1,39 @@
+---
+title: "Comparing NEON and NASA Airborne Campaigns"
+---
+
+While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences in two airborne campaigns and datasets. This section provides a high-level overview of some of the similarities and differences between the two.
+
+## Comparison of NASA AVIRIS v. NEON AOP Imaging Spectrometer Datasets
+
+| Parameter | NASA AVIRIS | NEON AOP |  
+|------|---------------------|-------------| 
+|Where?|Worldwide|80 sites throughout the continental U.S., Alaska, Hawaii, and Puerto Rico|  
+|When?|...|2013 - present; Each site is collected 3 out of every 5 years|   
+|Why?|Specific research questions|Long-term ecological monitoring of the United States|
+
+
+## Data Processing
+
+### Data products
+NEON data are processed to Level 2 (flightline) and Level 3 (tiled mosaic) data products, and include a number of derived data products such as vegetation and water indices, LAI, fPAR, and Albedo. NASA data are processed to Level 1 (flightline) radiance. 
+
+### Atmospheric correction:
+NEON uses ATCOR-4 for the atmospheric correction. NASA uses ISOFIT ...
+
+
+## Data Storage and Access
+
+### NEON
+
+NEON data are stored on Google Cloud Storage (GCS) and are accessible via the [NEON Data Portal](https://data.neonscience.org/). A subset of the L3 data products are also available on [Google Earth Engine](https://developers.google.com/earth-engine/datasets/publisher/neon-prod-earthengine).
+
+NEON provides an API for downloading from the Data Portal, and has developed tools in R ([neonUtilities](https://cran.r-project.org/web/packages/neonUtilities/index.html)) and Python ([neonutilities](https://pypi.org/project/neonutilities/)) for downloading NEON data, and wrangling OS and IS data.
+
+### NASA
+
+NASA airborne data are stored on AWS and can be accessed through the [ORNL DAAC](https://daac.ornl.gov/). NASA provides tools including Earthdata Search to help data users discover and download datasets.
+
+This workshop will provide more details on accessing NEON and NASA airborne datasets in the [Python Notebooks](../notebooks) section.
+
+
