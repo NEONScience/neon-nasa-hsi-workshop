@@ -35,18 +35,19 @@ The AOP produces approximately 30 data products. The products are separated into
 
 #### **Imaging Spectrometer Data Products**
 
-Level 1 (L1) products include at-sensor radiance and surface reflectance which are distributed by flightline. The image data is georeferenced to the ITRF00 datum and projected into the appropriate UTM zone, and provided at 1 m spatial resolution. Both the radiance and reflectance image data are stored in an HDF5 file format that includes extensive metadata and data quality information. The HDF5 format was selected because of the flexibility it allows in storing associated metadata. 
+**Level 1 (L1)** products include at-sensor radiance and surface reflectance which are distributed by flightline. The image data is georeferenced to the ITRF00 datum and projected into the appropriate UTM zone, and provided at 1 m spatial resolution. Both the radiance and reflectance image data are stored in an HDF5 file format that includes extensive metadata and data quality information. The HDF5 format was selected because of the flexibility it allows in storing associated metadata. 
 
-Level 2 (L2) products are derived from the L1 surface reflectance and are produced at the same spatial resolution (1 m), datum and map projection as the Level 1 products. The L2 products include a suite of spectral indices designed to strategically combine bands to highlight vegetation characteristics such as photosynthetic activity or water content. For example, NDVI (Normalized Difference Vegetation Index) is a well-known and commonly used vegetation index which combines information from the NIR and Red regions to estimate vegetative greenness and can be used as a proxy for plant health. The L2 products also include fPAR (fraction of photosynthetically active radiation) and LAI (leaf area index), products further derived from vegetation indices. Additionally, a surface Albedo product that estimates the integrated reflectance of all the NIS bands into a single value is also provided. All L2 products are distributed by flightline in a GeoTIFF (gtiff) format. Currently, all vegetation indices, water indices, fPAR, and LAI are delivered with associated simulated error images. 
+**Level 2 (L2)** products are derived from the L1 surface reflectance and are produced at the same spatial resolution (1 m), datum and map projection as the Level 1 products. The L2 products include a suite of spectral indices designed to strategically combine bands to highlight vegetation characteristics such as photosynthetic activity or water content. For example, NDVI (Normalized Difference Vegetation Index) is a well-known and commonly used vegetation index which combines information from the NIR and Red regions to estimate vegetative greenness and can be used as a proxy for plant health. The L2 products also include fPAR (fraction of photosynthetically active radiation) and LAI (leaf area index), products further derived from vegetation indices. Additionally, a surface Albedo product that estimates the integrated reflectance of all the NIS bands into a single value is also provided. All L2 products are distributed by flightline in a GeoTIFF (gtiff) format. Currently, all vegetation indices, water indices, fPAR, and LAI are delivered with associated simulated error images. 
 
-Level 3 (L3) products include mosaics of all L1 and L2 products, excluding at-sensor radiance, and are distributed as 1 km x 1 km tiles instead of flightlines. Tiles are created by making a full mosaic of all the data and sub-setting the 1 km x 1 km tiles. The tiles are designed so their boundaries are set to even 1000 m UTM coordinate intervals. During the mosaic generation, the algorithm preferentially selects pixels that were collected under the best weather conditions in regions with multiple potential pixels due to flightline overlap. If weather conditions were equivalent, pixels acquired nearest to nadir of the image acquisition are selected. Generally, this will correspond to pixels that are nearest to the center of the flightline. The tiles are created at the same spatial resolution (1 m) as the L1 and L2 products are in delivered in gtiff format, with the exception of the surface reflectance, which is delivered in HDF5 format. 
+**Level 3 (L3)** products include mosaics of all L1 and L2 products, excluding at-sensor radiance, and are distributed as 1 km x 1 km tiles instead of flightlines. Tiles are created by making a full mosaic of all the data and sub-setting the 1 km x 1 km tiles. The tiles are designed so their boundaries are set to even 1000 m UTM coordinate intervals. During the mosaic generation, the algorithm preferentially selects pixels that were collected under the best weather conditions in regions with multiple potential pixels due to flightline overlap. If weather conditions were equivalent, pixels acquired nearest to nadir of the image acquisition are selected. Generally, this will correspond to pixels that are nearest to the center of the flightline. The tiles are created at the same spatial resolution (1 m) as the L1 and L2 products are in delivered in gtiff format, with the exception of the surface reflectance, which is delivered in HDF5 format. 
 
-#### **BRDF and topographic corrections**
+##### **BRDF and topographic corrections**
 
 Starting in 2024, NEON began producing BRDF (Bidirectional Reflectance Distribution Function) and topographic corrected reflectance data, which include "bidirectional" in the name, and end with revision .002 in the Data Product IDs. As of 2025, these bidirectional reflectance are currently only available for data collected between 2022-2024. NEON is beginning to back-process earlier years (pre-2022) to apply the BRDF and topographic corrections. Please look at the data availability charts for each product on the data portal to determine whether the bidirectional data are available. Eventually, only bidirectional data products will be delivered, with the exception of the Level 1 Spectrometer orthorectified surface directional reflectance (DP1.30006.001), which will continue to be delivered, so that researchers who wish to carry out their own BRDF, topographic, or other corrections may do so.
 
-The table below shows a full list of the spectrometer-derived data products, including the corresponding bidirectional reflectance data products, if applicable.
+@tbl-neon_nis_data_products below shows a full list of NEON's spectrometer-derived data products, including the corresponding bidirectional reflectance data products, if applicable.
 
+::: {#tbl-neon_nis_data_products .table tbl-cap="NEON AOP Imaging Spectrometer Datasets"}
 |Product Name|Level|Data Product ID (DPID)|BRDF-Corrected DPID|
 |------------|-------------|--------------|---------------------------------------------| 
 |Spectrometer orthorectified at-sensor radiance|L1|[DP1.30008.001](https://data.neonscience.org/data-products/DP1.30001.001)||
@@ -61,11 +62,13 @@ The table below shows a full list of the spectrometer-derived data products, inc
 |fPAR - spectrometer - mosaic|L3|[DP3.30014.001](https://data.neonscience.org/data-products/DP3.30014.001)|[DP3.30014.002](https://data.neonscience.org/data-products/DP3.30014.002)|
 |Canopy water indices - mosaic|L3|[DP3.30019.001](https://data.neonscience.org/data-products/DP3.30019.001)|[DP3.30019.002](https://data.neonscience.org/data-products/DP3.30019.002)|
 |Vegetation indices - spectrometer - mosaic|L3|[DP3.30026.001](https://data.neonscience.org/data-products/DP3.30026.001)|[DP3.30026.002](https://data.neonscience.org/data-products/DP3.30026.002)| 
+:::
 
-In addition to the spectrometer-derived data products, NEON generates 5 lidar-derived products and 2 RGB camera data products. These are summarized in the tables below.
+In addition to the spectrometer-derived data products, NEON generates 5 lidar-derived products (@tbl-neon_lidar_data_products) and 2 RGB camera data products (@tbl-neon_camera_data_products), summarized below. These data products provide valuable structural and visual information that compliment the spectrometer data.
 
 #### **LiDAR Data Products**
 
+::: {#tbl-neon_lidar_data_products .table tbl-cap="NEON AOP Lidar Datasets"}
 |Product Name|Level|Data Product ID (DPID)|ATBD Document #|
 |------------|-----|---------------|---------------| 
 |LiDAR Slant Range Waveform|L1|[DP1.30001.001](https://data.neonscience.org/data-products/DP1.30001.001)|NEON.DOC.001293|
@@ -73,13 +76,16 @@ In addition to the spectrometer-derived data products, NEON generates 5 lidar-de
 |Ecosystem Structure|L3|[DP3.30015.001](https://data.neonscience.org/data-products/DP3.30015.001)|NEON.DOC.002387|
 |Elevation – LiDAR|L3|[DP3.30024.001](https://data.neonscience.org/data-products/DP3.30024.001)|NEON.DOC.002390|
 |Slope and Aspect – LiDAR|L3|[DP3.30025.001](https://data.neonscience.org/data-products/DP3.30025.001)|NEON.DOC.003791|
+:::
 
 #### **RGB Camera Products**
 
+::: {#tbl-neon_camera_data_products .table tbl-cap="NEON AOP Camera Datasets"}
 |Product Name|Level|Data Product ID (DPID)|ATBD Document #|
 |------------|-------------|--------------|--------------------| 
 |High-resolution orthorectified camera imagery|L1|[DP1.30010.001](https://data.neonscience.org/data-products/DP1.30010.001)|NEON.DOC.001211vB|
 |High-resolution orthorectified camera imagery mosaic|L3|[DP3.30010.001](https://data.neonscience.org/data-products/DP3.30025.001)|NEON.DOC.005052vB|
+:::
 
 
 ## NEON Field Data

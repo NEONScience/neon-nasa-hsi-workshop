@@ -2,16 +2,17 @@
 title: "Comparing NEON and NASA Airborne Campaigns"
 ---
 
-While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences in two airborne campaigns and datasets. This section provides a high-level overview of some of the similarities and differences between the two.
+While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences between the two in terms of the goals driving the airborne campaigns as well as the datasets provided. This section provides a high-level overview of some of the similarities and differences between the two.
 
 ## Comparison of NASA AVIRIS v. NEON AOP Imaging Spectrometer Datasets
 
+::: {#tbl-nasa_neon_comparison .table tbl-cap="Comparison of NASA and NEON Airborne Campaigns"}
 | Parameter | NASA AVIRIS | NEON AOP |  
-|------|---------------------|-------------| 
+|-----------|-------------|----------| 
 |Where?|Worldwide|80 sites throughout the continental U.S., Alaska, Hawaii, and Puerto Rico|  
 |When?|...|2013 - present; Each site is collected 3 out of every 5 years|   
 |Why?|Specific research questions|Long-term ecological monitoring of the United States|
-
+:::
 
 ## Data Processing
 
@@ -32,8 +33,6 @@ NEON provides an API for downloading from the Data Portal, and has developed too
 
 ### NASA
 
-NASA airborne data are stored on AWS and can be accessed through the [ORNL DAAC](https://daac.ornl.gov/). NASA provides tools including Earthdata Search to help data users discover and download datasets.
+NASA airborne data are stored on Amazon Web Services (AWS) and can be accessed through the [ORNL DAAC](https://daac.ornl.gov/). NASA provides tools including Earthdata Search to help data users discover and download datasets.
 
 This workshop will provide more details on accessing NEON and NASA airborne datasets in the [Python Notebooks](../notebooks) section.
-
-
