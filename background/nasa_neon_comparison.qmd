@@ -1,10 +1,8 @@
 ---
-title: "Comparing NEON and NASA Airborne Campaigns"
+title: "Comparing NEON and NASA Airborne Campaigns and Datasets"
 ---
 
-While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences between the two in terms of the goals driving the airborne campaigns as well as the datasets provided. This section provides a high-level overview of some of the similarities and differences between the two.
-
-## Comparison of NASA AVIRIS v. NEON AOP Imaging Spectrometer Datasets
+While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences between the two in terms of the goals driving the airborne campaigns as well as the datasets provided. This section provides a high-level overview of some of the similarities and differences between the two. @tbl-nasa_neon_comparison shows some of the differences in terms of the major questions (when, where, why) about the two missions.
 
 ::: {#tbl-nasa_neon_comparison .table tbl-cap="Comparison of NASA and NEON Airborne Campaigns"}
 | Parameter | NASA AVIRIS | NEON AOP |  
