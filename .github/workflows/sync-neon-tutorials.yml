@@ -19,7 +19,7 @@ jobs:
             https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/Hyperspectral/intro-hyperspectral/hyperspectral_functions/intro_hyperspectral_functions.ipynb
           curl -L -o neon/02_neon-l3-refl-h5-brdf-corrected.ipynb \
             https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/Hyperspectral/intro-hyperspectral/intro-refl-h5-bidirectional/intro-l3-refl-h5-brdf-corrected.ipynb
-          curl -L -o neon/03_neon-linking-veg-structure-chm.ipynb \
+          curl -L -o neon/03_neon-linking-veg-structure-chm.Rmd \
             https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/R/AOP/Lidar/lidar-topography/veg_structure_and_chm/veg_structure_and_chm-content.Rmd
       - name: Commit and push changes
         run: |
