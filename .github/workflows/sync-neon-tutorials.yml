@@ -25,6 +25,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add neon/01_neon-hyperspectral-functions.ipynb neon/02_neon-l3-refl-h5-brdf-corrected.ipynb
+          git add neon/01_neon-hyperspectral-functions.ipynb neon/02_neon-l3-refl-h5-brdf-corrected.ipynb neon/03_neon-linking-veg-structure-chm.Rmd
           git commit -m "Sync selected NEON tutorials from NEON-Data-Skills repository" || echo "No changes to commit"
           git push
