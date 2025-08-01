@@ -19,12 +19,12 @@ While both NEON and NASA provide free, open datasets, the major difference betwe
 ::: {#tbl-nasa_neon_comparison2 .table tbl-cap="Comparison of attributes of NASA and NEON Airborne Campaigns"}
 | Parameter | NASA AVIRIS | NEON AOP |  
 |-----------|-------------|----------| 
-|Data Products|L1 Radiance|L1 Radiance, L1 Reflectance, L2 Derived Indices (Flightline), L3 Derived Indices (Tiled) + Reflectance| 
+|Data Products|L1B Calibrated Radiance, L2 Surface Reflectance|L1: Radiance and Reflectance, L2: Derived Indices (Flightline), L3: Reflectance and Derived Indices (Tiled)|
 |Flight Altitude|?|1000m AGL|  
-|Data Resolution|varies depending on altitude flown; 1 - 5m|1m| 
+|Data Resolution|1 - 5m (varies depending on altitude flown)|1m| 
 |Atmospheric Correction Method|ISOFIT|ATCOR|   
 |Data Storage Platform|AWS|GCP|
-|Data Portal URL|https://daac.ornl.gov|https://data.neonscience.org/|
+|Data Portal URL|https://daac.ornl.gov|https://data.neonscience.org|
 |Open-source packages|earthaccess (Python)|neonUtilities (R), neonutilities (Python)|
 :::
 
