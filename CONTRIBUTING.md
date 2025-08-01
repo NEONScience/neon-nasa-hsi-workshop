@@ -4,7 +4,7 @@
 
 We want your help! Even if you're not a coder! There are several ways you can contribute to this repository:
 
-- Report an [Issue](https://github.com/nasa/VITALS/issues) or make a recommendation
+- Report an [Issue](https://github.com/NEONScience/neon-nasa-hsi-workshop/issues) or make a recommendation
 - Update code, documentation, notebooks, or other files (even fixing typos)
 - Propose a new notebook
 
@@ -12,13 +12,13 @@ In the sections below we outline how to approach each of these types of contribu
 
 ## Report an Issue or Make a Recommendation
 
-If you've found a problem with the repository, we want to know about it! Please submit an [Issue](https://github.com/nasa/VITALS/issues). Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!
+If you've found a problem with the repository, we want to know about it! Please submit an [Issue](https://github.com/NEONScience/neon-nasa-hsi-workshop/issues). Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!
 
 ## Updating Code, Documentation, Notebooks, or Other Files
 
 To contribute a solution to an issue or make a change to files within the repository we've created a typical outline of how to do that below. If you want to make a simple change, like correcting a typo within a markdown document or other documentation, there's a great video explaining how to do that without leaving the GitHub website [here](https://www.youtube.com/watch?v=PHoScPeMWHI). To make a more complex change to a notebook, code, or other file follow the instructions below.  
 
-1. Please create an [Issue](https://github.com/nasa/VITALS/issues) or comment on an existing issue describing the changes you intend to make.  
+1. Please create an [Issue](https://github.com/NEONScience/neon-nasa-hsi-workshop/issues) or comment on an existing issue describing the changes you intend to make.  
 2. Create a [fork](https://docs.github.com/en/get-started/quickstart/contributing-to-projects#about-forking) of this repository. This will create your own copy of the repository. When working from your fork, you can do whatever you want, you won't mess up anyone else's work so you're safe to try things out. Worst case scenario you can delete your fork and recreate it.  
 3. Clone your fork to your local computer or cloud workspace using your preferred command line interface after navigating to the directory you want to place the repository in:
 

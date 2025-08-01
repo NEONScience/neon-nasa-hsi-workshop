@@ -29,8 +29,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../neon/01_neon-hyperspectral-functions.html" rel="next">
-<link href="../background/neon_background.html" rel="prev">
+<link href="../neon/01_neon-refl-classification.html" rel="next">
+<link href="../background/nasa_airborne_background.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -345,7 +345,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../background/neon_background.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">NEON Background</span></a>
+ <span class="menu-text">NEON Airborne Data Background</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../background/nasa_airborne_background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NASA Airborne Data Background</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -367,14 +373,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../neon/01_neon-hyperspectral-functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1 NEON - Working with Hyperspectral Data using Functions</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../neon/02_neon-l3-refl-h5-brdf-corrected.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2 NEON - BRDF-Corrected Hyperspectral Data</span></a>
+  <a href="../neon/01_neon-refl-classification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1 NEON - Reflectance Visualization and Classification</span></a>
   </div>
 </li>
       </ul>
@@ -412,15 +412,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-processing" id="toc-data-processing" class="nav-link active" data-scroll-target="#data-processing">Data Processing</a>
+  <li><a href="#data-processing-storage-etc." id="toc-data-processing-storage-etc." class="nav-link active" data-scroll-target="#data-processing-storage-etc.">Data Processing, Storage, etc.</a>
   <ul class="collapse">
   <li><a href="#data-products" id="toc-data-products" class="nav-link" data-scroll-target="#data-products">Data products</a></li>
   <li><a href="#atmospheric-correction" id="toc-atmospheric-correction" class="nav-link" data-scroll-target="#atmospheric-correction">Atmospheric correction:</a></li>
-  </ul></li>
-  <li><a href="#data-storage-and-access" id="toc-data-storage-and-access" class="nav-link" data-scroll-target="#data-storage-and-access">Data Storage and Access</a>
-  <ul class="collapse">
-  <li><a href="#neon" id="toc-neon" class="nav-link" data-scroll-target="#neon">NEON</a></li>
-  <li><a href="#nasa" id="toc-nasa" class="nav-link" data-scroll-target="#nasa">NASA</a></li>
+  <li><a href="#data-storage-and-access" id="toc-data-storage-and-access" class="nav-link" data-scroll-target="#data-storage-and-access">Data Storage and Access</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -448,13 +444,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences between the two in terms of the goals driving the airborne campaigns as well as the datasets provided. This section provides a high-level overview of some of the similarities and differences between the two. <a href="#tbl-nasa_neon_comparison" class="quarto-xref">Table&nbsp;1</a> shows some of the differences in terms of the major questions (when, where, why) about the two missions.</p>
-<div id="tbl-nasa_neon_comparison" class="table quarto-float quarto-figure quarto-figure-center anchored">
+<p>While NASA and NEON operate similar imaging spectrometer instruments, there are a number of differences between the two in terms of the goals driving the airborne campaigns as well as the datasets provided. This section provides a high-level overview of some of the similarities and differences between the two. <a href="#tbl-nasa_neon_comparison1" class="quarto-xref">Table&nbsp;1</a> shows some of the differences in terms of the major questions (when, where, why) about the two missions. <a href="#tbl-nasa_neon_comparison2" class="quarto-xref">Table&nbsp;2</a> compares some of the differences in terms of the data products, processing methods, and data management (storage and access).</p>
+<div id="tbl-nasa_neon_comparison1" class="table quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nasa_neon_comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Comparison of NASA and NEON Airborne Campaigns
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nasa_neon_comparison1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Comparing the where, when, and why of NASA and NEON Airborne Campaigns
 </figcaption>
-<div aria-describedby="tbl-nasa_neon_comparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div aria-describedby="tbl-nasa_neon_comparison1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table caption-top">
 <colgroup>
 <col style="width: 32%">
@@ -470,49 +466,109 @@ Table&nbsp;1: Comparison of NASA and NEON Airborne Campaigns
 </thead>
 <tbody>
 <tr class="odd">
-<td>Where?</td>
-<td>Worldwide</td>
-<td>80 sites throughout the continental U.S., Alaska, Hawaii, and Puerto Rico</td>
+<td>Why?</td>
+<td>Campaign-driven: Specific research questions</td>
+<td>Long-term ecological monitoring of sites across the United States</td>
 </tr>
 <tr class="even">
-<td>When?</td>
-<td>…</td>
-<td>2013 - present; Each site is collected 3 out of every 5 years</td>
+<td>Where?</td>
+<td>Worldwide (U.S., South Africa, Central America)</td>
+<td>80 sites throughout the continental U.S., Alaska, Hawaii, and Puerto Rico</td>
 </tr>
 <tr class="odd">
-<td>Why?</td>
-<td>Specific research questions</td>
-<td>Long-term ecological monitoring of the United States</td>
+<td>When?</td>
+<td>? - present; campaigns may be during a short season or over multiple years</td>
+<td>2013 - present; Each site is collected 3 out of every 5 years</td>
 </tr>
 </tbody>
 </table>
 </div>
 </figure>
 </div>
-<section id="data-processing" class="level2">
-<h2 class="anchored" data-anchor-id="data-processing">Data Processing</h2>
+<p>While both NEON and NASA provide free, open datasets, the major difference between the NEON and NASA remote sensing airborne campaigns is related to their missions. NEON’s overarching mission is to produce a long-term archive of standardized data over the same sites over a 30 year time period, in order to provide a picture of long-term ecological change. NASA’s missions are campaign-driven, meaning that each campaign is typically designed around a specific research question, or instrument testing in some cases. For a more complete list of the NASA airborne campaigns hosted by the ORNL DAAC, refer to <a href="https://ornldaac.github.io/airborne/docs/datasets.html">Datasets from Airborne Campaigns</a>. Despite the differences in the drivers of the missions, the NEON and NASA datasets provide complimentary hyperspectral data, which could be used together for studies in their own right. In addition, both field and airborne datasets provide ground-truth (or close to ground-truth) sources that can help calibrate and validate data acquired from NASA’s upcoming <a href="https://science.nasa.gov/earth-science/decadal-surveys/decadal-sbg/">Surface Biology and Geology SBG</a> satellite mission.</p>
+<section id="data-processing-storage-etc." class="level2">
+<h2 class="anchored" data-anchor-id="data-processing-storage-etc.">Data Processing, Storage, etc.</h2>
+<div id="tbl-nasa_neon_comparison2" class="table quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-nasa_neon_comparison2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Comparison of attributes of NASA and NEON Airborne Campaigns
+</figcaption>
+<div aria-describedby="tbl-nasa_neon_comparison2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table caption-top">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 38%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>NASA AVIRIS</th>
+<th>NEON AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data Products</td>
+<td>L1 Radiance</td>
+<td>L1 Radiance, L1 Reflectance, L2 Derived Indices (Flightline), L3 Derived Indices (Tiled) + Reflectance</td>
+</tr>
+<tr class="even">
+<td>Flight Altitude</td>
+<td>?</td>
+<td>1000m AGL</td>
+</tr>
+<tr class="odd">
+<td>Data Resolution</td>
+<td>varies depending on altitude flown; 1 - 5m</td>
+<td>1m</td>
+</tr>
+<tr class="even">
+<td>Atmospheric Correction Method</td>
+<td>ISOFIT</td>
+<td>ATCOR</td>
+</tr>
+<tr class="odd">
+<td>Data Storage Platform</td>
+<td>AWS</td>
+<td>GCP</td>
+</tr>
+<tr class="even">
+<td>Data Portal URL</td>
+<td>https://daac.ornl.gov</td>
+<td>https://data.neonscience.org/</td>
+</tr>
+<tr class="odd">
+<td>Open-source packages</td>
+<td>earthaccess (Python)</td>
+<td>neonUtilities (R), neonutilities (Python)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 <section id="data-products" class="level3">
 <h3 class="anchored" data-anchor-id="data-products">Data products</h3>
-<p>NEON data are processed to Level 2 (flightline) and Level 3 (tiled mosaic) data products, and include a number of derived data products such as vegetation and water indices, LAI, fPAR, and Albedo. NASA data are processed to Level 1 (flightline) radiance.</p>
+<p>NEON data are processed to Level 1 (flightline), Level 2 (derived; flightline) and Level 3 (derived; tiled mosaic) data products, and include a number of derived data products such as vegetation and water indices, LAI, fPAR, and Albedo. NASA data are processed to Level 1 (flightline) radiance, however some missions (e.g.&nbsp;Bioscape) have been mosaicked and tiled.</p>
 </section>
 <section id="atmospheric-correction" class="level3">
 <h3 class="anchored" data-anchor-id="atmospheric-correction">Atmospheric correction:</h3>
-<p>NEON uses ATCOR-4 for the atmospheric correction. NASA uses ISOFIT …</p>
+<p>NEON uses ATCOR-4 for the atmospheric correction. NASA uses ISOFIT. There may be differences data derived from NEON v. NASA due to the different atmospheric correction method applied, as well as other corrections. NEON and NASA have been in communication about using the same atmospheric correction algorithm (ISOFIT) but this is still being scoped out.</p>
 </section>
-</section>
-<section id="data-storage-and-access" class="level2">
-<h2 class="anchored" data-anchor-id="data-storage-and-access">Data Storage and Access</h2>
-<section id="neon" class="level3">
-<h3 class="anchored" data-anchor-id="neon">NEON</h3>
+<section id="data-storage-and-access" class="level3">
+<h3 class="anchored" data-anchor-id="data-storage-and-access">Data Storage and Access</h3>
+<section id="neon" class="level4">
+<h4 class="anchored" data-anchor-id="neon">NEON</h4>
 <p>NEON data are stored on Google Cloud Storage (GCS) and are accessible via the <a href="https://data.neonscience.org/">NEON Data Portal</a>. A subset of the L3 data products are also available on <a href="https://developers.google.com/earth-engine/datasets/publisher/neon-prod-earthengine">Google Earth Engine</a>.</p>
 <p>NEON provides an API for downloading from the Data Portal, and has developed tools in R (<a href="https://cran.r-project.org/web/packages/neonUtilities/index.html">neonUtilities</a>) and Python (<a href="https://pypi.org/project/neonutilities/">neonutilities</a>) for downloading NEON data, and wrangling OS and IS data.</p>
 </section>
-<section id="nasa" class="level3">
-<h3 class="anchored" data-anchor-id="nasa">NASA</h3>
-<p>NASA airborne data are stored on Amazon Web Services (AWS) and can be accessed through the <a href="https://daac.ornl.gov/">ORNL DAAC</a>. NASA provides tools including Earthdata Search to help data users discover and download datasets.</p>
-<p>This workshop will provide more details on accessing NEON and NASA airborne datasets in the <a href="../notebooks">Python Notebooks</a> section.</p>
+<section id="nasa" class="level4">
+<h4 class="anchored" data-anchor-id="nasa">NASA</h4>
+<p>NASA airborne data are stored on Amazon Web Services (AWS) and can be accessed through the <a href="https://daac.ornl.gov/">ORNL DAAC</a>. NASA provides tools including Earthdata Search as well as the Python <a href="https://www.earthdata.nasa.gov/data/tools/earthaccess">earthaccess</a> package to help data users discover and download datasets.</p>
 
 
+</section>
 </section>
 </section>
 
@@ -931,13 +987,13 @@ Table&nbsp;1: Comparison of NASA and NEON Airborne Campaigns
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../background/neon_background.html" class="pagination-link" aria-label="NEON Background">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">NEON Background</span>
+      <a href="../background/nasa_airborne_background.html" class="pagination-link" aria-label="NASA Airborne Data Background">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">NASA Airborne Data Background</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../neon/01_neon-hyperspectral-functions.html" class="pagination-link" aria-label="1 NEON - Working with Hyperspectral Data using Functions">
-        <span class="nav-page-text">1 NEON - Working with Hyperspectral Data using Functions</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../neon/01_neon-refl-classification.html" class="pagination-link" aria-label="1 NEON - Reflectance Visualization and Classification">
+        <span class="nav-page-text">1 NEON - Reflectance Visualization and Classification</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

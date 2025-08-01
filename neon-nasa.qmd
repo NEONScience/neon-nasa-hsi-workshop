@@ -30,7 +30,7 @@ In the interest of open science, this repository has been made public, but is st
 *Website*:  <https://www.earthdata.nasa.gov/centers/ornl-daac>  
 
 *Contact*:  
-    NASA Earthdata Forum:  https://forum.earthdata.nasa.gov/  
+    NASA Earthdata Forum: <https://forum.earthdata.nasa.gov/>  
     ORNL DAAC - <uso@daac.ornl.gov>  
 
 Date last modified: 06-17-2025
