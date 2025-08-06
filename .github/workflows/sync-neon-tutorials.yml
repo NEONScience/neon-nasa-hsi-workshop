@@ -15,14 +15,14 @@ jobs:
       - name: Download selected tutorial files
         run: |
           mkdir -p neon
-          curl -L -o neon/01_neon-refl-classification.md \
-            https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/Hyperspectral/classification/refl-h5-xarray/aop_refl_xarray_classification.md
-          curl -L -o neon/01_neon-refl-classification.ipynb \
+          curl -L -o neon/01_make-classification-training-df.ipynb \
+            https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/Hyperspectral/classification/refl-h5-xarray/make_classification_training_data.ipynb
+          curl -L -o neon/02_neon-refl-classification.ipynb \
             https://raw.githubusercontent.com/NEONScience/NEON-Data-Skills/main/tutorials/Python/AOP/Hyperspectral/classification/refl-h5-xarray/aop_refl_xarray_classification.ipynb
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add neon/01_neon-refl-classification.md neon/01_neon-refl-classification.ipynb
+          git add neon/01_make-classification-training-df.ipynb neon/02_neon-refl-classification.ipynb
           git commit -m "Sync selected NEON tutorials from NEON-Data-Skills repository" || echo "No changes to commit"
           git push
