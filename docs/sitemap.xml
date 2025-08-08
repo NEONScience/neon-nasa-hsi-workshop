@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/setup/workshop_setup.html</loc>
-    <lastmod>2025-06-17T20:28:55.954Z</lastmod>
+    <lastmod>2025-08-08T16:06:45.006Z</lastmod>
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/setup/prerequisites.html</loc>
@@ -13,12 +13,12 @@
     <lastmod>2025-08-06T19:24:36.709Z</lastmod>
   </url>
   <url>
-    <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/index.html</loc>
-    <lastmod>2025-07-31T21:29:16.227Z</lastmod>
+    <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/instructor-bios.html</loc>
+    <lastmod>2025-08-08T16:02:11.121Z</lastmod>
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/CODE_OF_CONDUCT.html</loc>
-    <lastmod>2025-06-17T19:03:34.125Z</lastmod>
+    <lastmod>2025-08-08T15:54:27.766Z</lastmod>
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/background/nasa_neon_comparison.html</loc>
@@ -26,23 +26,23 @@
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/background/nasa_airborne_background.html</loc>
-    <lastmod>2025-08-01T18:22:24.004Z</lastmod>
+    <lastmod>2025-08-08T15:50:56.316Z</lastmod>
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/background/neon_background.html</loc>
     <lastmod>2025-06-18T17:45:06.147Z</lastmod>
   </url>
   <url>
-    <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/CONTRIBUTING.html</loc>
-    <lastmod>2025-06-26T19:06:50.710Z</lastmod>
+    <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/index.html</loc>
+    <lastmod>2025-08-08T16:12:55.800Z</lastmod>
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/neon/01_make-classification-training-df.html</loc>
-    <lastmod>2025-08-06T19:24:36.709Z</lastmod>
+    <lastmod>2025-08-08T16:14:35.896Z</lastmod>
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/neon-nasa.html</loc>
-    <lastmod>2025-06-26T19:06:50.710Z</lastmod>
+    <lastmod>2025-08-08T16:10:22.367Z</lastmod>
   </url>
   <url>
     <loc>https://NEONScience.github.io/neon-nasa-hsi-workshop/setup/setup_instructions.html</loc>

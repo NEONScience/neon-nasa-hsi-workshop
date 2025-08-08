@@ -37,6 +37,8 @@ website:
           href: index.qmd
         - text: "Repository Description"
           href: neon-nasa.qmd
+        - text: "Instructors"
+          href: instructor-bios.qmd
       - section: "Setup Instructions"
         contents:
         - text: "Prerequisites"
@@ -58,10 +60,9 @@ website:
           - text: "1 NEON - Make a Training Dataset from Vegetation Structure Data"
             href: neon/01_make-classification-training-df.ipynb
           - text: "2 NEON - Reflectance Visualization and Classification"
-            href: neon/01_make-classification-training-df.ipynb
-      - section: "Contributing"
+            href: neon/02_neon-refl-classification.ipynb
+      - section: "Code of Conduct"
         contents:
-          - href: CONTRIBUTING.md
           - href: CODE_OF_CONDUCT.md
 format:
   html:

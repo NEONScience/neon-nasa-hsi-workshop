@@ -46,27 +46,6 @@ The AVIRIS-3 is the third of the AVIRIS spectrometer FI series and has higher si
 ## AVIRIS Data Tutorials
 - [AVIRIS Data - Discovery, Access and Analysis](https://github.com/ornldaac/airborne/blob/main/events/2025-SBG/notebooks/AVIRIS-NG_L3_BioSCape.ipynb)
 
-# HyTES
-![](../img/hytes.png)
-
-The Hyperspectral Thermal Emissions Spectrometer (HyTES) instrument has 512 pixels across track with pixel sizes in the range of 5 to 50 m depending on aircraft flying height and 256 spectral channels between 7.5 and 12 micrometer. 
-
-HyTES started science flights in 2012. Since then HyTES has flown on Twin Otter aircraft from Twin Otter International and the British Antarctic Survey, [NASA ER-2](https://airbornescience.nasa.gov/aircraft/ER-2_-_AFRC) and [NASA Gulfstream V](httphttps://airbornescience.nasa.gov/aircraft/Gulfstream_V_-_JSC).
-
-More information about HyTES and its data products are available here: https://hytes.jpl.nasa.gov/
-
-## HyTES Data Products
-| Data Product |
-| --- |
-| Level 1a - Calibrated but not geocoded Level 1 Brightness Temperature at Sensor | 
-| Level 1b - Calibrated and geolocated Level 1 Brightness Temperature at Sensor |
-| Level 2 - HyTES Level 2 Data for Emissivity and Land Surface Temperature |
-| Level 3 - Multi-species gas products (geolocated) CH4, H2S, S02, N02 |
-
-## HyTES Data Tutorials
-
-- [Accessing and Visualizing HyTES data](https://github.com/ornldaac/airborne/blob/main/events/2025-SBG/notebooks/hytes_access.ipynb)
-
 # NASA Field Datasets
 
 Placeholder for more info about NASA's field datasets.
@@ -74,6 +53,3 @@ Placeholder for more info about NASA's field datasets.
 # Additional Resources
 
 For more details on NASA Airborne data, please see the ORNL DAAC [Airborne GitHub Repository](https://github.com/ornldaac/airborne) and associated [website](https://ornldaac.github.io/airborne/README.html).
-
-
-

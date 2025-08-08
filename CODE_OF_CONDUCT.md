@@ -1,4 +1,4 @@
-# Code of Conduct
+# NEON's Code of Conduct
 
 ## 1. Our Commitment
 
@@ -25,6 +25,3 @@ If you experience or witness any behavior that violates this Code of Conduct, pl
 
 ## 5. Enforcement
 Violations of this Code of Conduct may result in actions such as warnings, temporary bans, or permanent exclusion from participation at the discretion of the maintainers.
-
-## Contact Info  
-

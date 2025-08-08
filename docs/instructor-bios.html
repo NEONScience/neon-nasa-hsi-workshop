@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>contributing – NEON AOP &amp; NASA AVIRIS Airborne and Field Data Workshop</title>
+<title>Workshop Instructors – NEON AOP &amp; NASA AVIRIS Airborne and Field Data Workshop</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,8 +29,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./CODE_OF_CONDUCT.html" rel="next">
-<link href="./neon/01_make-classification-training-df.html" rel="prev">
+<link href="./setup/prerequisites.html" rel="next">
+<link href="./neon-nasa.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -248,7 +248,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./CONTRIBUTING.html">Contributing</a></li><li class="breadcrumb-item"><a href="./CONTRIBUTING.html">Contributing to this Repository</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li><li class="breadcrumb-item"><a href="./instructor-bios.html">Instructors</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -300,6 +300,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./neon-nasa.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Repository Description</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./instructor-bios.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Instructors</span></a>
   </div>
 </li>
       </ul>
@@ -379,7 +385,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./neon/01_make-classification-training-df.html" class="sidebar-item-text sidebar-link">
+  <a href="./neon/02_neon-refl-classification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2 NEON - Reflectance Visualization and Classification</span></a>
   </div>
 </li>
@@ -388,7 +394,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Contributing</span></a>
+ <span class="menu-text">Code of Conduct</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -396,14 +402,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CONTRIBUTING.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Contributing to this Repository</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Code of Conduct</span></a>
+ <span class="menu-text">NEON’s Code of Conduct</span></a>
   </div>
 </li>
       </ul>
@@ -418,111 +418,48 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#contributing-to-this-repository" id="toc-contributing-to-this-repository" class="nav-link active" data-scroll-target="#contributing-to-this-repository">Contributing to this Repository</a>
-  <ul class="collapse">
-  <li><a href="#report-an-issue-or-make-a-recommendation" id="toc-report-an-issue-or-make-a-recommendation" class="nav-link" data-scroll-target="#report-an-issue-or-make-a-recommendation">Report an Issue or Make a Recommendation</a></li>
-  <li><a href="#updating-code-documentation-notebooks-or-other-files" id="toc-updating-code-documentation-notebooks-or-other-files" class="nav-link" data-scroll-target="#updating-code-documentation-notebooks-or-other-files">Updating Code, Documentation, Notebooks, or Other Files</a></li>
-  <li><a href="#adding-new-notebooks-or-example-workflows" id="toc-adding-new-notebooks-or-example-workflows" class="nav-link" data-scroll-target="#adding-new-notebooks-or-example-workflows">Adding New Notebooks or Example Workflows</a></li>
-  <li><a href="#attribution" id="toc-attribution" class="nav-link" data-scroll-target="#attribution">Attribution</a></li>
-  </ul></li>
+  <li><a href="#bridget-hass" id="toc-bridget-hass" class="nav-link active" data-scroll-target="#bridget-hass">Bridget Hass</a></li>
+  <li><a href="#michele-thornton" id="toc-michele-thornton" class="nav-link" data-scroll-target="#michele-thornton">Michele Thornton</a></li>
+  <li><a href="#rupesh-shrestha" id="toc-rupesh-shrestha" class="nav-link" data-scroll-target="#rupesh-shrestha">Rupesh Shrestha</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./CONTRIBUTING.html">Contributing</a></li><li class="breadcrumb-item"><a href="./CONTRIBUTING.html">Contributing to this Repository</a></li></ol></nav></header>
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li><li class="breadcrumb-item"><a href="./instructor-bios.html">Instructors</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Workshop Instructors</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
-<section id="contributing-to-this-repository" class="level1">
-<h1>Contributing to this Repository</h1>
-<blockquote class="blockquote">
-<p>Please submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.</p>
-</blockquote>
-<p>We want your help! Even if you’re not a coder! There are several ways you can contribute to this repository:</p>
-<ul>
-<li>Report an <a href="https://github.com/NEONScience/neon-nasa-hsi-workshop/issues">Issue</a> or make a recommendation</li>
-<li>Update code, documentation, notebooks, or other files (even fixing typos)</li>
-<li>Propose a new notebook</li>
-</ul>
-<p>In the sections below we outline how to approach each of these types of contributions. If you’re new to GitHub, you can <a href="https://github.com/">sign up here</a>. There are a bunch of great resources on the <a href="https://docs.github.com/en/get-started/quickstart">GitHub Quickstart page</a>. The <a href="https://training.github.com/downloads/github-git-cheat-sheet/">GitHub Cheatsheet</a> is also quite helpful, even for experienced users. Please reach out to <a href="lpdaac@usgs.gov">lpdaac@usgs.gov</a> with questions or concerns.</p>
-<section id="report-an-issue-or-make-a-recommendation" class="level2">
-<h2 class="anchored" data-anchor-id="report-an-issue-or-make-a-recommendation">Report an Issue or Make a Recommendation</h2>
-<p>If you’ve found a problem with the repository, we want to know about it! Please submit an <a href="https://github.com/NEONScience/neon-nasa-hsi-workshop/issues">Issue</a>. Before submitting, we would appreciate if you check to see if a similar issue already exists. If not, create a new issue, providing as much detail as possible. Things like screenshots and code excerpts demonstrating the problem are very helpful!</p>
+</header>
+
+
+<section id="bridget-hass" class="level2">
+<h2 class="anchored" data-anchor-id="bridget-hass">Bridget Hass</h2>
+<p>Bridget is a Data Scientist at NEON and splits her time between the Airborne Observation Platform (AOP) and Data Skills teams. She enjoys working on all things related to remote sensing data - from generating the data products, field work, calibration/validation, data management and teaching. Prior to working in airborne research at NEON, she received her Master’s degree from Oregon State University specializing in marine geophysics, and worked at the Scripps Institution of Oceanography, supporting marine geophysical expeditions.</p>
 </section>
-<section id="updating-code-documentation-notebooks-or-other-files" class="level2">
-<h2 class="anchored" data-anchor-id="updating-code-documentation-notebooks-or-other-files">Updating Code, Documentation, Notebooks, or Other Files</h2>
-<p>To contribute a solution to an issue or make a change to files within the repository we’ve created a typical outline of how to do that below. If you want to make a simple change, like correcting a typo within a markdown document or other documentation, there’s a great video explaining how to do that without leaving the GitHub website <a href="https://www.youtube.com/watch?v=PHoScPeMWHI">here</a>. To make a more complex change to a notebook, code, or other file follow the instructions below.</p>
-<ol type="1">
-<li><p>Please create an <a href="https://github.com/NEONScience/neon-nasa-hsi-workshop/issues">Issue</a> or comment on an existing issue describing the changes you intend to make.<br>
-</p></li>
-<li><p>Create a <a href="https://docs.github.com/en/get-started/quickstart/contributing-to-projects#about-forking">fork</a> of this repository. This will create your own copy of the repository. When working from your fork, you can do whatever you want, you won’t mess up anyone else’s work so you’re safe to try things out. Worst case scenario you can delete your fork and recreate it.<br>
-</p></li>
-<li><p>Clone your fork to your local computer or cloud workspace using your preferred command line interface after navigating to the directory you want to place the repository in:</p>
-<pre class="git"><code>git clone your-fork-repository-url</code></pre>
-<ul>
-<li>Change directories to the one you cloned</li>
-</ul>
-<pre class="git"><code>cd repository-name</code></pre>
-<ul>
-<li>Add the upstream repository, this is the original repository that you want to contribute to.</li>
-</ul>
-<pre class="git"><code>git remote add upstream original-repository-url</code></pre>
-<ul>
-<li>You can use the following to view the remote repositories:</li>
-</ul>
-<pre class="git"><code>git remote -v</code></pre>
-<ul>
-<li><code>upstream</code>, which refers to the original repository<br>
-</li>
-<li><code>origin</code>, which refers to your personal fork</li>
-</ul></li>
-<li><p>Develop your contribution:</p>
-<ul>
-<li>Create a new branch named appropriately for the feature you want to work on:</li>
-</ul>
-<pre class="git"><code>git checkout -b new-branch-name</code></pre>
-<ul>
-<li>Often, updates to an <code>upstream</code> repository will occur while you are developing changes on your personal fork. You can pull the latest changes from <code>upstream</code></li>
-</ul>
-<pre class="git"><code>git pull upstream dev</code></pre>
-<ul>
-<li>You can check the status of your local copy of the repository to see what changes have been made using:</li>
-</ul>
-<pre class="git"><code>git status</code></pre>
-<ul>
-<li>Commit locally as you progress using <code>git add</code> and <code>git commit</code>. For example, updating a readme.md file:</li>
-</ul>
-<pre class="git"><code>git add readme.md
-git commit -m "updated readme file"</code></pre>
-<ul>
-<li>You can check the status of your local copy of the repository again to see what pending changes have not been added or committed using:</li>
-</ul>
-<pre class="git"><code>git status</code></pre>
-<ul>
-<li>After making some changes, push your changes back to your fork on GitHub:</li>
-</ul>
-<pre class="git"><code>git push origin branch-name</code></pre>
-<ul>
-<li>Enter username and password, depending on your settings, you may need to use a <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">Personal access token</a></li>
-</ul></li>
-<li><p>To submit your contribution, navigate to your forked repository GitHub page and make a pull request using the <code>Compare &amp;pull request</code> green button. Make sure to select the <code>base repository</code> and its <code>dev</code> branch. Also select your forked repository as <code>head repository</code> and make sure <code>compare</code> shows your branch name. You can add your comments and press <code>Create pull request</code> green button. Our team will be notified and will review your suggested revisions.</p>
-<ul>
-<li><strong>Please submit a pull request early in the development phase, outlining the changes you intend to make or features you intend to add. This allows us to offer feedback early on, ensuring your contribution can be added to the repository before you invest a significant amount of time.</strong></li>
-</ul></li>
-</ol>
+<section id="michele-thornton" class="level2">
+<h2 class="anchored" data-anchor-id="michele-thornton">Michele Thornton</h2>
+<p>Michele an ecologist and geospatial professional working at the Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC); part of NASA’s Earth Observing System Data and Information System and the ORNL Biological and Environmental Systems Science Directorate. …</p>
 </section>
-<section id="adding-new-notebooks-or-example-workflows" class="level2">
-<h2 class="anchored" data-anchor-id="adding-new-notebooks-or-example-workflows">Adding New Notebooks or Example Workflows</h2>
-<p>In the spirit of open science, we want to minimize barriers to sharing code and examples. We have added a <code>community_contributed</code> directory to the repository for anyone to share examples of their work in notebook or code form. Documentation and descriptions do not need to be as thorough as the examples we’ve created, but we ask that you provide as much as possible. Follow the <a href="#updating-code-documentation-notebooks-or-other-files">instructions</a> above, placing your new notebook or module in a suitably named directory within the <code>community_contributed</code> directory. Be sure to remove any large datasets and indicate where users can retrieve them.</p>
-</section>
-<section id="attribution" class="level2">
-<h2 class="anchored" data-anchor-id="attribution">Attribution</h2>
-<p>These contributing guidelines are adapted from the NASA Transform to Open Science GitHub, available at <a href="https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md" class="uri">https://github.com/nasa/Transform-to-Open-Science/blob/main/CONTRIBUTING.md</a>.</p>
+<section id="rupesh-shrestha" class="level2">
+<h2 class="anchored" data-anchor-id="rupesh-shrestha">Rupesh Shrestha</h2>
+<p>Rupesh is a research scientist at ORNL DAAC. Rupesh has an extensive background in remote sensing applied to vegetation measurements, cyber-infrastructure development, and data science. Rupesh has led the development of several tools, algorithms, and data services that enable the estimation of earth science observables from satellite, airborne, and ground-based remote sensing. Rupesh holds a Ph.D.&nbsp;from Virginia Tech and M.S. in Photogrammetry and Geoinformatics from Stuttgart, Germany. He also serves as an adjunct faculty in the Department of Forestry, Wildlife &amp; Fisheries at the University of Tennessee, Knoxville.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -940,13 +877,13 @@ git commit -m "updated readme file"</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./neon/01_make-classification-training-df.html" class="pagination-link" aria-label="1 NEON - Make a Training Dataset from Vegetation Structure Data">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">1 NEON - Make a Training Dataset from Vegetation Structure Data</span>
+      <a href="./neon-nasa.html" class="pagination-link" aria-label="Repository Description">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Repository Description</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./CODE_OF_CONDUCT.html" class="pagination-link" aria-label="Code of Conduct">
-        <span class="nav-page-text">Code of Conduct</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./setup/prerequisites.html" class="pagination-link" aria-label="Prerequisites">
+        <span class="nav-page-text">Prerequisites</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

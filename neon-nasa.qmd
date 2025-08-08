@@ -12,25 +12,25 @@ In the interest of open science, this repository has been made public, but is st
 
 ## Contact Info  
 
-**NEON AOP**
+### NEON AOP
 
-*Organization*: National Ecological Observatory Network Airborne Observation Platform (NEON AOP)^1^  
 
-*Website*: <https://neonscience.org/>  
-
-*Contact*: <https://www.neonscience.org/about/contact-us/>  
+|||
+|-----------|-------------|
+|Organization|National Ecological Observatory Network Airborne Observation Platform (NEON AOP)^1^||
+|Website|<https://neonscience.org/>|  
+|Contact|<https://www.neonscience.org/about/contact-us/>|   
 
 ^1^NEON is a project fully funded by the National Science Foundation and operated by Battelle.
 
 
-**ORNL DAAC**
+### ORNL DAAC
 
-*Organization*: NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC) 
- 
-*Website*:  <https://www.earthdata.nasa.gov/centers/ornl-daac>  
+|||
+|-----------|-------------|
+|Organization|NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)|
+|Website|<https://www.earthdata.nasa.gov/centers/ornl-daac>|  
+|Contact|NASA Earthdata Forum: <https://forum.earthdata.nasa.gov/>|   
 
-*Contact*:  
-    NASA Earthdata Forum: <https://forum.earthdata.nasa.gov/>  
-    ORNL DAAC - <uso@daac.ornl.gov>  
 
-Date last modified: 06-17-2025
+Date last modified: 08-08-2025

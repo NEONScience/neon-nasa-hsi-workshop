@@ -302,6 +302,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Repository Description</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructor-bios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instructors</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -379,7 +385,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../neon/01_make-classification-training-df.html" class="sidebar-item-text sidebar-link">
+  <a href="../neon/02_neon-refl-classification.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2 NEON - Reflectance Visualization and Classification</span></a>
   </div>
 </li>
@@ -388,7 +394,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
- <span class="menu-text">Contributing</span></a>
+ <span class="menu-text">Code of Conduct</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -396,14 +402,8 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Contributing to this Repository</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Code of Conduct</span></a>
+ <span class="menu-text">NEON’s Code of Conduct</span></a>
   </div>
 </li>
       </ul>
@@ -425,11 +425,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#aviris-ng-datasets" id="toc-aviris-ng-datasets" class="nav-link" data-scroll-target="#aviris-ng-datasets">AVIRIS-NG Datasets</a></li>
   <li><a href="#aviris-3-datasets" id="toc-aviris-3-datasets" class="nav-link" data-scroll-target="#aviris-3-datasets">AVIRIS-3 Datasets</a></li>
   <li><a href="#aviris-data-tutorials" id="toc-aviris-data-tutorials" class="nav-link" data-scroll-target="#aviris-data-tutorials">AVIRIS Data Tutorials</a></li>
-  </ul></li>
-  <li><a href="#hytes" id="toc-hytes" class="nav-link" data-scroll-target="#hytes">HyTES</a>
-  <ul class="collapse">
-  <li><a href="#hytes-data-products" id="toc-hytes-data-products" class="nav-link" data-scroll-target="#hytes-data-products">HyTES Data Products</a></li>
-  <li><a href="#hytes-data-tutorials" id="toc-hytes-data-tutorials" class="nav-link" data-scroll-target="#hytes-data-tutorials">HyTES Data Tutorials</a></li>
   </ul></li>
   <li><a href="#nasa-field-datasets" id="toc-nasa-field-datasets" class="nav-link" data-scroll-target="#nasa-field-datasets">NASA Field Datasets</a></li>
   <li><a href="#additional-resources" id="toc-additional-resources" class="nav-link" data-scroll-target="#additional-resources">Additional Resources</a></li>
@@ -534,46 +529,6 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="aviris-data-tutorials">AVIRIS Data Tutorials</h2>
 <ul>
 <li><a href="https://github.com/ornldaac/airborne/blob/main/events/2025-SBG/notebooks/AVIRIS-NG_L3_BioSCape.ipynb">AVIRIS Data - Discovery, Access and Analysis</a></li>
-</ul>
-</section>
-</section>
-<section id="hytes" class="level1">
-<h1>HyTES</h1>
-<p><img src="../img/hytes.png" class="img-fluid"></p>
-<p>The Hyperspectral Thermal Emissions Spectrometer (HyTES) instrument has 512 pixels across track with pixel sizes in the range of 5 to 50 m depending on aircraft flying height and 256 spectral channels between 7.5 and 12 micrometer.</p>
-<p>HyTES started science flights in 2012. Since then HyTES has flown on Twin Otter aircraft from Twin Otter International and the British Antarctic Survey, <a href="https://airbornescience.nasa.gov/aircraft/ER-2_-_AFRC">NASA ER-2</a> and <a href="httphttps://airbornescience.nasa.gov/aircraft/Gulfstream_V_-_JSC">NASA Gulfstream V</a>.</p>
-<p>More information about HyTES and its data products are available here: https://hytes.jpl.nasa.gov/</p>
-<section id="hytes-data-products" class="level2">
-<h2 class="anchored" data-anchor-id="hytes-data-products">HyTES Data Products</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 100%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Data Product</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Level 1a - Calibrated but not geocoded Level 1 Brightness Temperature at Sensor</td>
-</tr>
-<tr class="even">
-<td>Level 1b - Calibrated and geolocated Level 1 Brightness Temperature at Sensor</td>
-</tr>
-<tr class="odd">
-<td>Level 2 - HyTES Level 2 Data for Emissivity and Land Surface Temperature</td>
-</tr>
-<tr class="even">
-<td>Level 3 - Multi-species gas products (geolocated) CH4, H2S, S02, N02</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="hytes-data-tutorials" class="level2">
-<h2 class="anchored" data-anchor-id="hytes-data-tutorials">HyTES Data Tutorials</h2>
-<ul>
-<li><a href="https://github.com/ornldaac/airborne/blob/main/events/2025-SBG/notebooks/hytes_access.ipynb">Accessing and Visualizing HyTES data</a></li>
 </ul>
 </section>
 </section>

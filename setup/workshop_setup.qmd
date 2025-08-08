@@ -18,7 +18,7 @@ At this point you can use the terminal to clone the repository.
 
 ## Cloning the NEON-Data-Skills Repository
 
-If you plan to edit or contribute to the NEON-Data-Skills repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository. An example can be found in the [CONTRIBUTING.md](../CONTRIBUTING.md) file.
+If you plan to edit or contribute to this workshop repository, or the [NEON-Data-Skills](https://github.com/NEONScience/NEON-Data-Skills) repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository. 
 
 If you just want to work with the notebooks or modules, you can simply clone the repository.
 
