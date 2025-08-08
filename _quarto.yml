@@ -55,8 +55,10 @@ website:
             href:  background/nasa_neon_comparison.qmd
       - section: "Tutorials"            
         contents: 
-          - text: "1 NEON - Reflectance Visualization and Classification"
-            href: neon/01_neon-refl-classification.ipynb
+          - text: "1 NEON - Make a Training Dataset from Vegetation Structure Data"
+            href: neon/01_make-classification-training-df.ipynb
+          - text: "2 NEON - Reflectance Visualization and Classification"
+            href: neon/01_make-classification-training-df.ipynb
       - section: "Contributing"
         contents:
           - href: CONTRIBUTING.md

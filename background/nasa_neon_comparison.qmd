@@ -14,7 +14,7 @@ While NASA and NEON operate similar imaging spectrometer instruments, there are 
 
 While both NEON and NASA provide free, open datasets, the major difference between the NEON and NASA remote sensing airborne campaigns is related to their missions. NEON's overarching mission is to produce a long-term archive of standardized data over the same sites over a 30 year time period, in order to provide a picture of long-term ecological change. NASA's missions are campaign-driven, meaning that each campaign is typically designed around a specific research question, or instrument testing in some cases. For a more complete list of the NASA airborne campaigns hosted by the ORNL DAAC, refer to [Datasets from Airborne Campaigns](https://ornldaac.github.io/airborne/docs/datasets.html). Despite the differences in the drivers of the missions, the NEON and NASA datasets provide complimentary hyperspectral data, which could be used together for studies in their own right. In addition, both field and airborne datasets provide ground-truth (or close to ground-truth) sources that can help calibrate and validate data acquired from NASA's upcoming [Surface Biology and Geology SBG](https://science.nasa.gov/earth-science/decadal-surveys/decadal-sbg/) satellite mission.
 
-## Data Processing, Storage, etc.
+# Data Attributes
 
 ::: {#tbl-nasa_neon_comparison2 .table tbl-cap="Comparison of attributes of NASA and NEON Airborne Campaigns"}
 | Parameter | NASA AVIRIS | NEON AOP |  
@@ -28,20 +28,22 @@ While both NEON and NASA provide free, open datasets, the major difference betwe
 |Open-source packages|earthaccess (Python)|neonUtilities (R), neonutilities (Python)|
 :::
 
-### Data products
+## Data products
 NEON data are processed to Level 1 (flightline), Level 2 (derived; flightline) and Level 3 (derived; tiled mosaic) data products, and include a number of derived data products such as vegetation and water indices, LAI, fPAR, and Albedo. NASA data are processed to Level 1 (flightline) radiance, however some missions (e.g. Bioscape) have been mosaicked and tiled. 
 
-### Atmospheric correction:
+## Data Processing
+
+### Atmospheric correction
 NEON uses ATCOR-4 for the atmospheric correction. NASA uses ISOFIT. There may be differences data derived from NEON v. NASA due to the different atmospheric correction method applied, as well as other corrections. NEON and NASA have been in communication about using the same atmospheric correction algorithm (ISOFIT) but this is still being scoped out.
 
-### Data Storage and Access
+## Data Storage and Access
 
-#### NEON
+### NEON
 
 NEON data are stored on Google Cloud Storage (GCS) and are accessible via the [NEON Data Portal](https://data.neonscience.org/). A subset of the L3 data products are also available on [Google Earth Engine](https://developers.google.com/earth-engine/datasets/publisher/neon-prod-earthengine).
 
 NEON provides an API for downloading from the Data Portal, and has developed tools in R ([neonUtilities](https://cran.r-project.org/web/packages/neonUtilities/index.html)) and Python ([neonutilities](https://pypi.org/project/neonutilities/)) for downloading NEON data, and wrangling OS and IS data.
 
-#### NASA
+### NASA
 
 NASA airborne data are stored on Amazon Web Services (AWS) and can be accessed through the [ORNL DAAC](https://daac.ornl.gov/). NASA provides tools including Earthdata Search as well as the Python [earthaccess](https://www.earthdata.nasa.gov/data/tools/earthaccess) package to help data users discover and download datasets.
