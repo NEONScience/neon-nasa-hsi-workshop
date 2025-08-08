@@ -59,7 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
@@ -108,9 +108,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -520,6 +517,24 @@ window.Quarto = {
 
 <div id="ds-objectives" data-markdown="1">
 <p>This notebook demonstrates how to generate a training dataset consisting of tree species, family, and location from the NEON Terrestrial Observation System (TOS) Vegetation Structure data product <a href="https://data.neonscience.org/data-products/DP1.10098.001" target="_blank">DP1.10098.001</a>. We will use data from the <a href="https://www.neonscience.org/field-sites/serc" target="_blank">Smithsonian Environmental Research Center (SERC)</a> site in Maryland. In a subsequent tutorial titled <a href="https://www.neonscience.org/resources/learning-hub/tutorials/refl-classification-pyxarray" target="_blank">Tree Classification with NEON Airborne Imaging Spectrometer Data using Python xarray</a>, we will use this training dataset to train a random forest machine learning model that predicts tree families from the hyperspectral signatures obtained from the airborne remote sensing data. These two tutorials outline a relatively simple modeling example, and represent a starting point for conducting machine learning analyses using NEON data!</p>
+<section id="set-up-python-environment" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-python-environment">Set Up Python Environment</h3>
+<p>To run this notebook, you will need the following Python packages, which can be installed using <code>!pip install</code> or <code>!conda install</code> from within the notebook. Note that to use the <code>neonutilities</code> package, you will need Python version 3.9 or higher.</p>
+<ul>
+<li>matplotlib</li>
+<li>neonutilities</li>
+<li>numpy</li>
+<li>pandas</li>
+<li>requests</li>
+<li>seaborn</li>
+</ul>
+</section>
+<section id="create-a-neon-aop-token" class="level3">
+<h3 class="anchored" data-anchor-id="create-a-neon-aop-token">Create a NEON AOP Token</h3>
+<ul>
+<li>NEON API Token (optional, but strongly recommended), see <a href="https://www.neonscience.org/resources/learning-hub/tutorials/neon-api-tokens-tutorial">NEON API Tokens Tutorial</a> for more details on how to create and set up your token in Python (and R). Once you create your token (on the <a href="https://www.neonscience.org/about/user-accounts">NEON User Accounts</a>) page, this notebook will show you how to set it as an environment variable and use it for downloading AOP data.</li>
+</ul>
+</section>
 <section id="learning-objectives" class="level3">
 <h3 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h3>
 <ul>
@@ -528,6 +543,7 @@ window.Quarto = {
 <li>Filter the datset to include only the latest data and columns of interest</li>
 <li>Filter the data geospatially to keep data that are within a single AOP 1 km x 1 km tile</li>
 </ul>
+<p><strong>Disclaimer</strong>: this notebook is intended to provide an example of how to create an initial training data set for pairing with remote sensing data, and to conduct some exploratory analysis of the vegetation structure data. This does not incorporate outlier detection and removal, or comprehensive pre-processing steps. As part of creating a machine learning model, it is important to assess the training data quality and look for outliers or other potential data quality issues which may impact model results. Refer to the <a href="https://www.neonscience.org/resources/learning-hub/tutorials/tree-heights-veg-structure-chm" target="_blank">Compare tree height measured from the ground to a Lidar-based Canopy Height Model</a> lesson (the first additional resource above) for more details on how you would address geographic mismatch between the AOP and TOS data.</p>
 </section>
 <section id="additional-resources" class="level3">
 <h3 class="anchored" data-anchor-id="additional-resources">Additional Resources</h3>
@@ -541,10 +557,13 @@ window.Quarto = {
 </p><ul>
 <li>Refer to the <a href="https://data.neonscience.org/api/v0/documents/NEON_vegStructure_userGuide_vE?inline=true" target="_blank">Vegetation Structure User Guide</a> for more details on this data product, and to better understand the data quality flags, the sampling.</li>
 </ul>
-<p><strong>Disclaimer</strong>: this notebook is intended to provide an example of how to create an initial training data set for pairing with remote sensing data, and to conduct some exploratory analysis of the vegetation structure data. This does not incorporate outlier detection and removal, or comprehensive pre-processing steps. As part of creating a machine learning model, it is important to assess the training data quality and look for outliers or other potential data quality issues which may impact model results. Refer to the <a href="https://www.neonscience.org/resources/learning-hub/tutorials/tree-heights-veg-structure-chm" target="_blank">Compare tree height measured from the ground to a Lidar-based Canopy Height Model</a> lesson (the first additional resource above) for more details on how you would address geographic mismatch between the AOP and TOS data.</p>
 </section></div>
+
+<section id="download-and-explore-vegetation-structure-data-dp1.10098.001" class="level2">
+<h2 class="anchored" data-anchor-id="download-and-explore-vegetation-structure-data-dp1.10098.001">1. Download and Explore Vegetation Structure Data (DP1.10098.001)</h2>
+<p>In this first section we’ll load the vegetation structure data, find the locations of the mapped trees, and join to the species and family observations.</p>
 <p>Let’s get started! First, import the required Python packages.</p>
-<div id="cell-2" class="cell" data-execution_count="2">
+<div id="cell-3" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.ticker <span class="im">as</span> mticker</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> neonutilities <span class="im">as</span> nu</span>
@@ -553,102 +572,41 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-
-<section id="download-and-explore-vegetation-structure-data-dp1.10098.001" class="level2">
-<h2 class="anchored" data-anchor-id="download-and-explore-vegetation-structure-data-dp1.10098.001">Download and Explore Vegetation Structure Data (DP1.10098.001)</h2>
-<p>In this first section we’ll load the vegetation structure data, find the locations of the mapped trees, and join to the species and family observations.</p>
-<p>Download the vegetation structure data using the <code>load_by_product</code> function in the <code>neonutilities</code> package (imported as <code>nu</code>). Inputs to the function can be shown by typing <code>help(load_by_product)</code>.</p>
-<p>Refer to t e&lt;a href”=https://www.neonscience.org/sites/default/files/cheat-sheet-neonUtilities.pd”f target=_blank R neonutilities cheat sheet or the neonUtilities package for more details and the complete index of possible function inputs. The cheat sheet is focused on the R package, but nearly all the inputs are the sam.e</p>
-<p>Note that in this example, we will pull in all the woody vegetation data (collected over all years), but if you are trying to modeldata collected in a single year, you can select just that year by specifying the <code>startdate</code> and <code>enddate</code>, or later filtering out the vegetation data by the<code>eventI</code>D We have set <code>check_size=False</code> since the data are not very large, but to check the size of what the data you are downloading first, you could omit this input, or set it to <code>True</code>..</p>
-<div id="cell-4" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>veg_dict <span class="op">=</span> nu.load_by_product(dpid<span class="op">=</span><span class="st">"DP1.10098.001"</span>, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                              site<span class="op">=</span><span class="st">"SERC"</span>, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                              package<span class="op">=</span><span class="st">"basic"</span>, </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                              release<span class="op">=</span><span class="st">"RELEASE-2025"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                              check_size<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Finding available files
-100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 23/23 [00:56&lt;00:00,  2.46s/it]
-Downloading 23 NEON DP1.10098.001 files totaling approximately 40.0 MB.
-Downloading files
-100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 23/23 [00:24&lt;00:00,  1.07s/it]
-C:\Users\bhass\.conda\envs\lpdaac_vitals\lib\site-packages\neonutilities\unzip_and_stack.py:140: UserWarning: Filepaths on Windows are limited to 260 characters. Attempting to extract a filepath that is &gt; 260 characters long. Move your working or savepath directory closer to the root directory or enable long path support in Windows.
-  warnings.warn(
-Stacking data files
-100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 4/4 [00:01&lt;00:00,  2.38it/s]</code></pre>
+<p>Set up your NEON token. See the setup instructions at the beginning of the tutorial on how to set up a NEON user account and create a token, if you have not already done so.</p>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># copy and paste your NEON token from your NEON user account page here</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_token<span class="op">=</span><span class="st">""</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>Get a list of the points</p>
-<div id="cell-6" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>veg_map_all <span class="op">=</span> veg_dict[<span class="st">"vst_mappingandtagging"</span>]</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>veg_map <span class="op">=</span> veg_map_all.loc[veg_map_all[<span class="st">"pointID"</span>] <span class="op">!=</span> <span class="st">""</span>]</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>veg_map <span class="op">=</span> veg_map.reindex()</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"points"</span>] <span class="op">=</span> veg_map[<span class="st">"namedLocation"</span>] <span class="op">+</span> <span class="st">"."</span> <span class="op">+</span> veg_map[<span class="st">"pointID"</span>]</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>veg_points <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(<span class="bu">list</span>(veg_map[<span class="st">"points"</span>])))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Look at the unique <code>eventID</code>s. . All sampling at a site that occurs within a given bout is identified by a unique eventID, which represents the date of the bout.</p>
-<div id="cell-8" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>veg_map_all.eventID.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>array(['vst_SERC_2015', 'vst_SERC_2016', 'vst_SERC_2017', 'vst_SERC_2018',
-       'vst_SERC_2019', 'vst_SERC_2020', 'vst_SERC_2021', 'vst_SERC_2022',
-       'vst_SERC_2023'], dtype=object)</code></pre>
-</div>
-</div>
-<p>Get the number of records for each <code>eventID</code>:</p>
-<div id="cell-10" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Group by 'eventID' and get the count</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>eventID_counts <span class="op">=</span> veg_map_all[[<span class="st">'individualID'</span>,<span class="st">'eventID'</span>]].groupby([<span class="st">'eventID'</span>]).count()</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Counts of each eventID:</span><span class="ch">\n</span><span class="st">"</span>, eventID_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Counts of each eventID:
-                individualID
-eventID                    
-vst_SERC_2015          1890
-vst_SERC_2016          1330
-vst_SERC_2017            96
-vst_SERC_2018           127
-vst_SERC_2019           254
-vst_SERC_2020            22
-vst_SERC_2021            54
-vst_SERC_2022           494
-vst_SERC_2023            40</code></pre>
-</div>
-</div>
-<p>It looks like most of the trees were mapped in 2015 and 2016, which was when the SERC plots were first established. You could look at data only from one year, and compare to AOP data from the same year, or if you are not too worried about matching measurements to remote sensing data collected in the same year, you could use all years. We’ll do the latter in this example.</p>
-</section>
-<section id="determine-the-geographic-location-of-the-surveyed-vegetation" class="level2">
-<h2 class="anchored" data-anchor-id="determine-the-geographic-location-of-the-surveyed-vegetation">Determine the geographic location of the surveyed vegetation</h2>
-<p>Loop through all of the points in <code>veg_points</code> to determine the easting and norhting from the <a href="https://data.neonscience.org/data-api/endpoints/locations/" target="_blank">NEON Locations API</a>.</p>
-<div id="cell-13" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>easting <span class="op">=</span> []</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>northing <span class="op">=</span> []</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>coord_uncertainty <span class="op">=</span> []</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>elev_uncertainty <span class="op">=</span> []</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> veg_points:</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    vres <span class="op">=</span> requests.get(<span class="st">"https://data.neonscience.org/api/v0/locations/"</span><span class="op">+</span>i)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    vres_json <span class="op">=</span> vres.json()</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    easting.append(vres_json[<span class="st">"data"</span>][<span class="st">"locationUtmEasting"</span>])</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    northing.append(vres_json[<span class="st">"data"</span>][<span class="st">"locationUtmNorthing"</span>])</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    props <span class="op">=</span> pd.DataFrame.from_dict(vres_json[<span class="st">"data"</span>][<span class="st">"locationProperties"</span>])</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    cu <span class="op">=</span> props.loc[props[<span class="st">"locationPropertyName"</span>]<span class="op">==</span><span class="st">"Value for Coordinate uncertainty"</span>][<span class="st">"locationPropertyValue"</span>]</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    coord_uncertainty.append(cu[cu.index[<span class="dv">0</span>]])</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    eu <span class="op">=</span> props.loc[props[<span class="st">"locationPropertyName"</span>]<span class="op">==</span><span class="st">"Value for Elevation uncertainty"</span>][<span class="st">"locationPropertyValue"</span>]</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    elev_uncertainty.append(eu[eu.index[<span class="dv">0</span>]])</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>pt_dict <span class="op">=</span> <span class="bu">dict</span>(points<span class="op">=</span>veg_points, </span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>               easting<span class="op">=</span>easting,</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>               northing<span class="op">=</span>northing,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>               coordinateUncertainty<span class="op">=</span>coord_uncertainty,</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>               elevationUncertainty<span class="op">=</span>elev_uncertainty)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>pt_df <span class="op">=</span> pd.DataFrame.from_dict(pt_dict)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>pt_df.set_index(<span class="st">"points"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>veg_map <span class="op">=</span> veg_map.join(pt_df, </span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>                     on<span class="op">=</span><span class="st">"points"</span>, </span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>                     how<span class="op">=</span><span class="st">"inner"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can load the vegetation structure data using the <code>load_by_product</code> function in the <code>neonutilities</code> package (imported as <code>nu</code>). Inputs to the function can be shown by typing <code>help(load_by_product)</code>.</p>
+<p>Refer tot e <a href="https://www.neonscience.org/sites/default/files/cheat-sheet-neonUtilities.pdf" target="_blank">R neonUtilities cheat sheet</a> or teh <a href="https://neon-utilities-python.readthedocs.io/en/latest/" target="_blank">Python neonutilities documentation</a>NEON Locations API.</p>
+<div id="cell-16" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>easting <span class="op">=</span> []</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>northing <span class="op">=</span> []</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>coord_uncertainty <span class="op">=</span> []</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>elev_uncertainty <span class="op">=</span> []</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> veg_points:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    vres <span class="op">=</span> requests.get(<span class="st">"https://data.neonscience.org/api/v0/locations/"</span><span class="op">+</span>i)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    vres_json <span class="op">=</span> vres.json()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    easting.append(vres_json[<span class="st">"data"</span>][<span class="st">"locationUtmEasting"</span>])</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    northing.append(vres_json[<span class="st">"data"</span>][<span class="st">"locationUtmNorthing"</span>])</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    props <span class="op">=</span> pd.DataFrame.from_dict(vres_json[<span class="st">"data"</span>][<span class="st">"locationProperties"</span>])</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    cu <span class="op">=</span> props.loc[props[<span class="st">"locationPropertyName"</span>]<span class="op">==</span><span class="st">"Value for Coordinate uncertainty"</span>][<span class="st">"locationPropertyValue"</span>]</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    coord_uncertainty.append(cu[cu.index[<span class="dv">0</span>]])</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    eu <span class="op">=</span> props.loc[props[<span class="st">"locationPropertyName"</span>]<span class="op">==</span><span class="st">"Value for Elevation uncertainty"</span>][<span class="st">"locationPropertyValue"</span>]</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    elev_uncertainty.append(eu[eu.index[<span class="dv">0</span>]])</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>pt_dict <span class="op">=</span> <span class="bu">dict</span>(points<span class="op">=</span>veg_points, </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>               easting<span class="op">=</span>easting,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>               northing<span class="op">=</span>northing,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>               coordinateUncertainty<span class="op">=</span>coord_uncertainty,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>               elevationUncertainty<span class="op">=</span>elev_uncertainty)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>pt_df <span class="op">=</span> pd.DataFrame.from_dict(pt_dict)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>pt_df.set_index(<span class="st">"points"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>veg_map <span class="op">=</span> veg_map.join(pt_df, </span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                     on<span class="op">=</span><span class="st">"points"</span>, </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                     how<span class="op">=</span><span class="st">"inner"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, use the <code>stemDistance</code> and <code>stemAzimuth</code> data to calculate the precise locations of individuals, relative to the reference locations.</p>
 <ul>
@@ -657,698 +615,63 @@ vst_SERC_2023            40</code></pre>
 <li><span class="math inline">\(\theta = stemAzimuth*\pi/180\)</span></li>
 </ul>
 <p>Also adjust the coordinate and elevation uncertainties.</p>
-<div id="cell-15" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjEasting"</span>] <span class="op">=</span> (veg_map[<span class="st">"easting"</span>]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                        <span class="op">+</span> veg_map[<span class="st">"stemDistance"</span>]</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span> np.sin(veg_map[<span class="st">"stemAzimuth"</span>]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">180</span>))</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjNorthing"</span>] <span class="op">=</span> (veg_map[<span class="st">"northing"</span>]</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                        <span class="op">+</span> veg_map[<span class="st">"stemDistance"</span>]</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span> np.cos(veg_map[<span class="st">"stemAzimuth"</span>]</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">180</span>))</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjCoordinateUncertainty"</span>] <span class="op">=</span> veg_map[<span class="st">"coordinateUncertainty"</span>] <span class="op">+</span> <span class="fl">0.6</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjElevationUncertainty"</span>] <span class="op">=</span> veg_map[<span class="st">"elevationUncertainty"</span>] <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-18" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjEasting"</span>] <span class="op">=</span> (veg_map[<span class="st">"easting"</span>]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                        <span class="op">+</span> veg_map[<span class="st">"stemDistance"</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span> np.sin(veg_map[<span class="st">"stemAzimuth"</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">180</span>))</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjNorthing"</span>] <span class="op">=</span> (veg_map[<span class="st">"northing"</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                        <span class="op">+</span> veg_map[<span class="st">"stemDistance"</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                        <span class="op">*</span> np.cos(veg_map[<span class="st">"stemAzimuth"</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                                   <span class="op">*</span> np.pi <span class="op">/</span> <span class="dv">180</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjCoordinateUncertainty"</span>] <span class="op">=</span> veg_map[<span class="st">"coordinateUncertainty"</span>] <span class="op">+</span> <span class="fl">0.6</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>veg_map[<span class="st">"adjElevationUncertainty"</span>] <span class="op">=</span> veg_map[<span class="st">"elevationUncertainty"</span>] <span class="op">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Look at the columns to see all the information contained in this dataset.</p>
-<div id="cell-17" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>veg_map.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>Index(['uid', 'namedLocation', 'date', 'eventID', 'domainID', 'siteID',
-       'plotID', 'pointID', 'stemDistance', 'stemAzimuth', 'recordType',
-       'individualID', 'supportingStemIndividualID', 'previouslyTaggedAs',
-       'otherTagID', 'otherTagOrg', 'samplingProtocolVersion',
-       'identificationHistoryID', 'taxonID', 'scientificName', 'genus',
-       'family', 'taxonRank', 'identificationReferences', 'morphospeciesID',
-       'morphospeciesIDRemarks', 'identificationQualifier', 'remarks',
-       'measuredBy', 'recordedBy', 'dataQF', 'publicationDate', 'release',
-       'points', 'easting', 'northing', 'coordinateUncertainty',
-       'elevationUncertainty', 'adjEasting', 'adjNorthing',
-       'adjCoordinateUncertainty', 'adjElevationUncertainty'],
-      dtype='object')</code></pre>
+<div id="cell-20" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at a subset of the columns that may be relevant</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>veg_map[[<span class="st">'date'</span>,<span class="st">'individualID'</span>,<span class="st">'scientificName'</span>,<span class="st">'taxonID'</span>,<span class="st">'family'</span>,<span class="st">'plotID'</span>,<span class="st">'pointID'</span>,<span class="st">'adjEasting'</span>,<span class="st">'adjNorthing'</span>]].head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<section id="combine-location-with-tree-traits" class="level3">
-<h3 class="anchored" data-anchor-id="combine-location-with-tree-traits">Combine location with tree traits</h3>
-<p>Now we have the mapped locations of individuals in the <code>vst_mappingandtagging</code> table, and the taxa (species, or <code>taxonID</code>), family, scientific name, as well as annual measurements of tree dimensions such as height and diameter in the <code>vst_apparentindividual</code> table. To bring these measurements together, join the two tables. Refer to the <a href="https://data.neonscience.org/api/v0/documents/quick-start-guides/NEON.QSG.DP1.00001.001v2?inline=TRUE" target="_blank">Quick Start Guide for Vegetation Structure</a> for more information about the data tables and the joining instructions.</p>
-<div id="cell-19" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>veg_dict[<span class="st">"vst_apparentindividual"</span>].set_index(<span class="st">"individualID"</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>veg <span class="op">=</span> veg_map.join(veg_dict[<span class="st">"vst_apparentindividual"</span>],</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                   on<span class="op">=</span><span class="st">"individualID"</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                   how<span class="op">=</span><span class="st">"inner"</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                   lsuffix<span class="op">=</span><span class="st">"_MAT"</span>,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                   rsuffix<span class="op">=</span><span class="st">"_AI"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div id="cell-20" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show all the columns in the joined veg dataset</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>veg.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>Index(['uid_MAT', 'namedLocation_MAT', 'date_MAT', 'eventID_MAT',
-       'domainID_MAT', 'siteID_MAT', 'plotID_MAT', 'pointID', 'stemDistance',
-       'stemAzimuth', 'recordType', 'individualID',
-       'supportingStemIndividualID', 'previouslyTaggedAs', 'otherTagID',
-       'otherTagOrg', 'samplingProtocolVersion', 'identificationHistoryID',
-       'taxonID', 'scientificName', 'genus', 'family', 'taxonRank',
-       'identificationReferences', 'morphospeciesID', 'morphospeciesIDRemarks',
-       'identificationQualifier', 'remarks_MAT', 'measuredBy_MAT',
-       'recordedBy_MAT', 'dataQF_MAT', 'publicationDate_MAT', 'release_MAT',
-       'points', 'easting', 'northing', 'coordinateUncertainty',
-       'elevationUncertainty', 'adjEasting', 'adjNorthing',
-       'adjCoordinateUncertainty', 'adjElevationUncertainty', 'uid_AI',
-       'namedLocation_AI', 'date_AI', 'eventID_AI', 'domainID_AI', 'siteID_AI',
-       'plotID_AI', 'subplotID', 'tempStemID', 'tagStatus', 'growthForm',
-       'plantStatus', 'stemDiameter', 'measurementHeight',
-       'changedMeasurementLocation', 'height', 'baseCrownHeight',
-       'breakHeight', 'breakDiameter', 'maxCrownDiameter',
-       'ninetyCrownDiameter', 'canopyPosition', 'shape', 'basalStemDiameter',
-       'basalStemDiameterMsrmntHeight', 'maxBaseCrownDiameter',
-       'ninetyBaseCrownDiameter', 'dendrometerInstallationDate',
-       'initialGapMeasurementDate', 'initialBandStemDiameter',
-       'initialDendrometerGap', 'dendrometerHeight', 'dendrometerGap',
-       'dendrometerCondition', 'bandStemDiameter', 'remarks_AI',
-       'recordedBy_AI', 'measuredBy_AI', 'dataEntryRecordID', 'dataQF_AI',
-       'publicationDate_AI', 'release_AI'],
-      dtype='object')</code></pre>
-</div>
-</div>
-<div id="cell-21" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the dataframe for out a subset of the columns that may be relevant</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>veg[[<span class="st">'date_AI'</span>,<span class="st">'individualID'</span>,<span class="st">'scientificName'</span>,<span class="st">'taxonID'</span>,<span class="st">'family'</span>,<span class="st">'growthForm'</span>,<span class="st">'plantStatus'</span>,<span class="st">'plotID_AI'</span>,<span class="st">'pointID'</span>,<span class="st">'stemDiameter'</span>,<span class="st">'adjEasting'</span>,<span class="st">'adjNorthing'</span>]].head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">date_AI</th>
-<th data-quarto-table-cell-role="th">individualID</th>
-<th data-quarto-table-cell-role="th">scientificName</th>
-<th data-quarto-table-cell-role="th">taxonID</th>
-<th data-quarto-table-cell-role="th">family</th>
-<th data-quarto-table-cell-role="th">growthForm</th>
-<th data-quarto-table-cell-role="th">plantStatus</th>
-<th data-quarto-table-cell-role="th">plotID_AI</th>
-<th data-quarto-table-cell-role="th">pointID</th>
-<th data-quarto-table-cell-role="th">stemDiameter</th>
-<th data-quarto-table-cell-role="th">adjEasting</th>
-<th data-quarto-table-cell-role="th">adjNorthing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2015-09-28</td>
-<td>NEON.PLA.D02.SERC.08038</td>
-<td>Carya glabra (Mill.) Sweet</td>
-<td>CAGL8</td>
-<td>Juglandaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_045</td>
-<td>43</td>
-<td>46.4</td>
-<td>364809.083993</td>
-<td>4.304727e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2016-10-11</td>
-<td>NEON.PLA.D02.SERC.08038</td>
-<td>Carya glabra (Mill.) Sweet</td>
-<td>CAGL8</td>
-<td>Juglandaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_045</td>
-<td>43</td>
-<td>47.1</td>
-<td>364809.083993</td>
-<td>4.304727e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2017-11-16</td>
-<td>NEON.PLA.D02.SERC.08038</td>
-<td>Carya glabra (Mill.) Sweet</td>
-<td>CAGL8</td>
-<td>Juglandaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_045</td>
-<td>43</td>
-<td>47.4</td>
-<td>364809.083993</td>
-<td>4.304727e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2018-10-02</td>
-<td>NEON.PLA.D02.SERC.08038</td>
-<td>Carya glabra (Mill.) Sweet</td>
-<td>CAGL8</td>
-<td>Juglandaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_045</td>
-<td>43</td>
-<td>47.9</td>
-<td>364809.083993</td>
-<td>4.304727e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1</td>
-<td>2019-11-07</td>
-<td>NEON.PLA.D02.SERC.08038</td>
-<td>Carya glabra (Mill.) Sweet</td>
-<td>CAGL8</td>
-<td>Juglandaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_045</td>
-<td>43</td>
-<td>47.9</td>
-<td>364809.083993</td>
-<td>4.304727e+06</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
+<div id="cell-21" class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(veg_map)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-</section>
-<section id="remove-duplicate-records" class="level2">
-<h2 class="anchored" data-anchor-id="remove-duplicate-records">Remove duplicate records</h2>
-<p>Some of these trees may have several recorded measurements, since we included all years of data. We will select only the latest recorded data so as to remove any duplicated data points. While measurements such as the tree height and stem diamter may change from one year to the next, the species should not.</p>
-<div id="cell-23" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert 'date_AI' to datetime</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>veg.loc[:, <span class="st">'date_AI'</span>] <span class="op">=</span> pd.to_datetime(veg[<span class="st">'date_AI'</span>])</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort the DataFrame by 'individualID' and 'date_AI' in descending order</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>veg_date_sorted <span class="op">=</span> veg.sort_values(by<span class="op">=</span>[<span class="st">'individualID'</span>, <span class="st">'date_AI'</span>], ascending<span class="op">=</span>[<span class="va">True</span>, <span class="va">False</span>])</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop duplicates, keeping the first occurrence (which is the latest, or most recent, due to sorting)</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>veg_latest <span class="op">=</span> veg_date_sorted.drop_duplicates(subset<span class="op">=</span><span class="st">'individualID'</span>, keep<span class="op">=</span><span class="st">'first'</span>).copy()</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the DataFrame with only the latest entries for each individualID</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(veg_latest))</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Display a subset of the columns</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>veg_latest[[<span class="st">'date_AI'</span>,<span class="st">'individualID'</span>,<span class="st">'scientificName'</span>,<span class="st">'taxonID'</span>,<span class="st">'family'</span>,<span class="st">'growthForm'</span>,<span class="st">'plantStatus'</span>,<span class="st">'plotID_AI'</span>,<span class="st">'pointID'</span>,<span class="st">'stemDiameter'</span>,<span class="st">'adjEasting'</span>,<span class="st">'adjNorthing'</span>]].head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>1185</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">date_AI</th>
-<th data-quarto-table-cell-role="th">individualID</th>
-<th data-quarto-table-cell-role="th">scientificName</th>
-<th data-quarto-table-cell-role="th">taxonID</th>
-<th data-quarto-table-cell-role="th">family</th>
-<th data-quarto-table-cell-role="th">growthForm</th>
-<th data-quarto-table-cell-role="th">plantStatus</th>
-<th data-quarto-table-cell-role="th">plotID_AI</th>
-<th data-quarto-table-cell-role="th">pointID</th>
-<th data-quarto-table-cell-role="th">stemDiameter</th>
-<th data-quarto-table-cell-role="th">adjEasting</th>
-<th data-quarto-table-cell-role="th">adjNorthing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">805</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00017</td>
-<td>Acer rubrum L.</td>
-<td>ACRU</td>
-<td>Aceraceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_054</td>
-<td>39</td>
-<td>27.5</td>
-<td>365000.851457</td>
-<td>4.305652e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">823</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00029</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_054</td>
-<td>57</td>
-<td>34.2</td>
-<td>365008.826768</td>
-<td>4.305655e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">819</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00032</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_054</td>
-<td>39</td>
-<td>32.0</td>
-<td>365002.039970</td>
-<td>4.305661e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3865</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00039</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_054</td>
-<td>57</td>
-<td>10.7</td>
-<td>364993.798628</td>
-<td>4.305656e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3136</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00041</td>
-<td>Liquidambar styraciflua L.</td>
-<td>LIST2</td>
-<td>Hamamelidaceae</td>
-<td>small tree</td>
-<td>Standing dead</td>
-<td>SERC_054</td>
-<td>57</td>
-<td>9.7</td>
-<td>364990.841914</td>
-<td>4.305660e+06</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
+<section id="filter-to-trees-within-an-aop-tile-extent" class="level2">
+<h2 class="anchored" data-anchor-id="filter-to-trees-within-an-aop-tile-extent">3. Filter to trees within an AOP tile extent</h2>
 <p>Now create a new dataframe containing only the veg data that are within a single AOP tile (which are 1 km x 1 km in size). For this, you will need to know the bounds (minimum and maximum UTM easting and northing) of the area you are sampling. For this exercise, we will choose the AOP data with SW (lower left) UTM coordinates of 364000, 4305000. This tile encompasses the NEON tower at the SERC site.</p>
-<div id="cell-25" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>veg_tower_tile <span class="op">=</span> veg_latest[(veg_latest[<span class="st">'adjEasting'</span>].between(<span class="dv">364000</span>, <span class="dv">365000</span>)) <span class="op">&amp;</span> (veg_latest[<span class="st">'adjNorthing'</span>].between(<span class="dv">4305000</span>, <span class="dv">4306000</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-23" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>veg_tower_tile <span class="op">=</span> veg_map[(veg_map[<span class="st">'adjEasting'</span>].between(<span class="dv">364000</span>, <span class="dv">365000</span>)) <span class="op">&amp;</span> (veg_map[<span class="st">'adjNorthing'</span>].between(<span class="dv">4305000</span>, <span class="dv">4306000</span>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>How many records do we have within this tile?</p>
-<div id="cell-27" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(veg_tower_tile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
-<pre><code>207</code></pre>
+<div id="cell-25" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(veg_tower_tile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>There are 207 unique vegetation records in this area. We can also look at the unique <code>taxonID</code>s that are represented.</p>
-<div id="cell-29" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the unique Taxon IDs</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile.taxonID.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>array(['FAGR', 'LIST2', 'QUFA', 'LITU', 'ACRU', 'CACA18', 'NYSY', 'ULMUS',
-       'CAGL8', 'QURU', 'QUAL', 'CATO6', 'PINUS', 'QUERC', 'COFL2',
-       'PRAV', 'QUVE'], dtype=object)</code></pre>
-</div>
+<p>There are 211 unique vegetation records in this area. We can also look at the unique <code>taxonID</code>s that are represented.</p>
+<div id="cell-27" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the unique Taxon IDs</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile.taxonID.unique()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s keep only a subset of the columns that we are interested in, and look at the dataframe:</p>
-<div id="cell-31" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_short <span class="op">=</span> veg_tower_tile[[<span class="st">'date_AI'</span>,<span class="st">'individualID'</span>,<span class="st">'scientificName'</span>,<span class="st">'taxonID'</span>,<span class="st">'family'</span>,<span class="st">'growthForm'</span>,<span class="st">'plantStatus'</span>,<span class="st">'plotID_AI'</span>,<span class="st">'pointID'</span>,<span class="st">'stemDiameter'</span>,<span class="st">'adjEasting'</span>,<span class="st">'adjNorthing'</span>]]</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_short</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">date_AI</th>
-<th data-quarto-table-cell-role="th">individualID</th>
-<th data-quarto-table-cell-role="th">scientificName</th>
-<th data-quarto-table-cell-role="th">taxonID</th>
-<th data-quarto-table-cell-role="th">family</th>
-<th data-quarto-table-cell-role="th">growthForm</th>
-<th data-quarto-table-cell-role="th">plantStatus</th>
-<th data-quarto-table-cell-role="th">plotID_AI</th>
-<th data-quarto-table-cell-role="th">pointID</th>
-<th data-quarto-table-cell-role="th">stemDiameter</th>
-<th data-quarto-table-cell-role="th">adjEasting</th>
-<th data-quarto-table-cell-role="th">adjNorthing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3865</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00039</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_054</td>
-<td>57</td>
-<td>10.7</td>
-<td>364993.798628</td>
-<td>4.305656e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3136</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00041</td>
-<td>Liquidambar styraciflua L.</td>
-<td>LIST2</td>
-<td>Hamamelidaceae</td>
-<td>small tree</td>
-<td>Standing dead</td>
-<td>SERC_054</td>
-<td>57</td>
-<td>9.7</td>
-<td>364990.841914</td>
-<td>4.305660e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">800</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00043</td>
-<td>Quercus falcata Michx.</td>
-<td>QUFA</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Dead, broken bole</td>
-<td>SERC_054</td>
-<td>57</td>
-<td>37.1</td>
-<td>364991.794414</td>
-<td>4.305655e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">911</td>
-<td>2022-12-05 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00062</td>
-<td>Quercus falcata Michx.</td>
-<td>QUFA</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_054</td>
-<td>39</td>
-<td>59.7</td>
-<td>364990.424114</td>
-<td>4.305650e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">1762</td>
-<td>2023-11-29 00:00:00</td>
-<td>NEON.PLA.D02.SERC.00173</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_047</td>
-<td>21</td>
-<td>22.5</td>
-<td>364673.259742</td>
-<td>4.305225e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-<td>...</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3787</td>
-<td>2023-11-29 00:00:00</td>
-<td>NEON.PLA.D02.SERC.14231</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_047</td>
-<td>23</td>
-<td>10.8</td>
-<td>364679.533579</td>
-<td>4.305222e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">4103</td>
-<td>2023-01-16 00:00:00</td>
-<td>NEON.PLA.D02.SERC.14548</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_057</td>
-<td>41</td>
-<td>11.1</td>
-<td>364455.772024</td>
-<td>4.305415e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4096</td>
-<td>2023-01-16 00:00:00</td>
-<td>NEON.PLA.D02.SERC.14563</td>
-<td>Quercus alba L.</td>
-<td>QUAL</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_057</td>
-<td>43</td>
-<td>10.1</td>
-<td>364470.101669</td>
-<td>4.305412e+06</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3818</td>
-<td>2022-11-15 00:00:00</td>
-<td>NEON.PLA.D02.SERC.14709</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live</td>
-<td>SERC_052</td>
-<td>41</td>
-<td>10.4</td>
-<td>364577.886559</td>
-<td>4.305883e+06</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">3828</td>
-<td>2022-11-17 00:00:00</td>
-<td>NEON.PLA.D02.SERC.14723</td>
-<td>Fagus grandifolia Ehrh.</td>
-<td>FAGR</td>
-<td>Fagaceae</td>
-<td>single bole tree</td>
-<td>Live, physically damaged</td>
-<td>SERC_067</td>
-<td>59</td>
-<td>10.1</td>
-<td>364353.644854</td>
-<td>4.305790e+06</td>
-</tr>
-</tbody>
-</table>
-
-<p>207 rows × 12 columns</p>
-</div>
-</div>
+<div id="cell-29" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_short <span class="op">=</span> veg_tower_tile[[<span class="st">'date'</span>,<span class="st">'individualID'</span>,<span class="st">'scientificName'</span>,<span class="st">'taxonID'</span>,<span class="st">'family'</span>,<span class="st">'plotID'</span>,<span class="st">'pointID'</span>,<span class="st">'adjEasting'</span>,<span class="st">'adjNorthing'</span>]]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_short.reset_index(drop<span class="op">=</span><span class="va">True</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_short</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>To get a better sense of the data, we can also look at the # of each species, to see if some species have more representation than others.</p>
-<div id="cell-33" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the taxonID counts, sorted descending</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_taxon_counts <span class="op">=</span> veg_tower_tile[[<span class="st">'individualID'</span>,<span class="st">'taxonID'</span>]].groupby([<span class="st">'taxonID'</span>]).count()</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_taxon_counts.sort_values(by<span class="op">=</span><span class="st">'individualID'</span>,ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">individualID</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">taxonID</th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">FAGR</td>
-<td>47</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">LITU</td>
-<td>35</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">LIST2</td>
-<td>29</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">ACRU</td>
-<td>16</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">CAGL8</td>
-<td>12</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">CACA18</td>
-<td>11</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">QUAL</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">NYSY</td>
-<td>10</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">CATO6</td>
-<td>10</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">QUFA</td>
-<td>9</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">ULMUS</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">QURU</td>
-<td>4</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">COFL2</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">PINUS</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">QUVE</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">PRAV</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">QUERC</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
+<div id="cell-31" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the taxonID counts, sorted descending</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_taxon_counts <span class="op">=</span> veg_tower_tile[[<span class="st">'individualID'</span>,<span class="st">'taxonID'</span>]].groupby([<span class="st">'taxonID'</span>]).count()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_taxon_counts.sort_values(by<span class="op">=</span><span class="st">'individualID'</span>,ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div id="cell-32" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the family counts, sorted descending</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_family_counts <span class="op">=</span> veg_tower_tile[[<span class="st">'individualID'</span>,<span class="st">'family'</span>]].groupby([<span class="st">'family'</span>]).count()</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_family_counts.sort_values(by<span class="op">=</span><span class="st">'individualID'</span>,ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<div id="cell-34" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># display the family counts, sorted descending</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_family_counts <span class="op">=</span> veg_tower_tile[[<span class="st">'individualID'</span>,<span class="st">'family'</span>]].groupby([<span class="st">'family'</span>]).count()</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_family_counts.sort_values(by<span class="op">=</span><span class="st">'individualID'</span>,ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">individualID</th>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">family</th>
-<th data-quarto-table-cell-role="th"></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Fagaceae</td>
-<td>73</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Magnoliaceae</td>
-<td>35</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Hamamelidaceae</td>
-<td>29</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Juglandaceae</td>
-<td>22</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Aceraceae</td>
-<td>16</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Cornaceae</td>
-<td>13</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Betulaceae</td>
-<td>11</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Ulmaceae</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">Pinaceae</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">Rosaceae</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>It looks like there are a number of species mapped in this tower plot. You can use the https://plants.usda.gov website to look up the species information. The top 5 most abundant mapped species are linked below.</p>
+<p>It looks like there are a number of different species (and families) mapped in this tower plot. You can use the https://plants.usda.gov website to look up the species information. The top 5 most abundant mapped species are linked below.</p>
 <ul>
 <li><a href="https://plants.usda.gov/plant-profile/FAGR">FAGR</a>: American Beech (Fagus grandifolia Ehrh.)</li>
 <li><a href="https://plants.usda.gov/plant-profile/LITU">LITU</a>: Tuliptree (Liriodendron tulipifera L.)</li>
@@ -1359,80 +682,51 @@ vst_SERC_2023            40</code></pre>
 <p>When carrying out classification, the species that only have small representation (1-5 samples) may not be modeled accurately due to a lack of sufficient training data. The challenge of mapping rarer species due to insufficient training data is well known. In the next tutorial, we will remove these poorly represented samples before generating a model.</p>
 </section>
 <section id="write-training-dataframe-to-csv-file" class="level2">
-<h2 class="anchored" data-anchor-id="write-training-dataframe-to-csv-file">Write training dataframe to csv file</h2>
+<h2 class="anchored" data-anchor-id="write-training-dataframe-to-csv-file">4. Write training dataframe to csv file</h2>
 <p>Nonetheless, we have a fairly decent training dataset to work with. We can save the dataframe to a csv file called <code>serc_training_data.csv</code> as follows:</p>
-<div id="cell-36" class="cell" data-execution_count="20">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_short.to_csv(<span class="vs">r'</span><span class="dv">.\d</span><span class="vs">ata</span><span class="dv">\s</span><span class="vs">erc_training_data</span><span class="dv">.</span><span class="vs">csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-34" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>veg_tower_tile_short.to_csv(<span class="vs">r'</span><span class="dv">.\d</span><span class="vs">ata</span><span class="dv">\s</span><span class="vs">erc_training_data</span><span class="dv">.</span><span class="vs">csv'</span>,index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="plot-species-and-stem-diameter" class="level2">
-<h2 class="anchored" data-anchor-id="plot-species-and-stem-diameter">Plot species and stem diameter</h2>
+<section id="plot-tree-families-in-map-view" class="level2">
+<h2 class="anchored" data-anchor-id="plot-tree-families-in-map-view">5. Plot tree families in map view</h2>
 <p>Finally, we can make a quick plot using <code>seaborn</code> (imported as <code>sns</code>) to show the spatial distrubtion of the trees surveyed in this area, along with their species (<code>scientificName</code>). Most of this code helps improve the formatting and appearance of the figure; the first <code>sns.scatterplot</code> chunk is all you really need to do to plot the essentials.</p>
-<div id="cell-38" class="cell" data-scrolled="true" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.scatterplot(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>veg_tower_tile_short,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'adjEasting'</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'adjNorthing'</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    size<span class="op">=</span><span class="st">'stemDiameter'</span>,</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'scientificName'</span>,</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    sizes<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">20</span>),</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.7</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'datalim'</span>)</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove scientific notation</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(mticker.FuncFormatter(<span class="kw">lambda</span> x, _: <span class="ss">f'</span><span class="sc">{</span>x<span class="sc">:.0f}</span><span class="ss">'</span>))</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(mticker.FuncFormatter(<span class="kw">lambda</span> y, _: <span class="ss">f'</span><span class="sc">{</span>y<span class="sc">:.0f}</span><span class="ss">'</span>))</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>ax.legend_.remove()</span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>handles, labels <span class="op">=</span> ax.get_legend_handles_labels()</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>n_species <span class="op">=</span> veg_tower_tile_short[<span class="st">'scientificName'</span>].nunique()</span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Species legend</span></span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>hue_handles <span class="op">=</span> handles[<span class="dv">1</span>:n_species<span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>hue_labels <span class="op">=</span> labels[<span class="dv">1</span>:n_species<span class="op">+</span><span class="dv">1</span>]</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>legend1 <span class="op">=</span> ax.legend(</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>    hue_handles, hue_labels,</span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Species"</span>,</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>    bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="fl">0.5</span>),</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">'center left'</span>,</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'small'</span>,</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>    title_fontsize<span class="op">=</span><span class="st">'small'</span></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>ax.add_artist(legend1)</span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Size legend (skip the first label, which is the old 'stemDiameter')</span></span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>size_handles <span class="op">=</span> handles[n_species<span class="op">+</span><span class="dv">2</span>:]</span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>size_labels <span class="op">=</span> labels[n_species<span class="op">+</span><span class="dv">2</span>:]</span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>legend2 <span class="op">=</span> ax.legend(</span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>    size_handles, size_labels,</span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">"Stem Diameter (cm)"</span>,</span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>    bbox_to_anchor<span class="op">=</span>(<span class="fl">1.5</span>, <span class="fl">0.5</span>),</span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>    loc<span class="op">=</span><span class="st">'center left'</span>,</span>
-<span id="cb28-43"><a href="#cb28-43" aria-hidden="true" tabindex="-1"></a>    fontsize<span class="op">=</span><span class="st">'small'</span>,</span>
-<span id="cb28-44"><a href="#cb28-44" aria-hidden="true" tabindex="-1"></a>    title_fontsize<span class="op">=</span><span class="st">'small'</span></span>
-<span id="cb28-45"><a href="#cb28-45" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-46"><a href="#cb28-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-47"><a href="#cb28-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title and axis labels</span></span>
-<span id="cb28-48"><a href="#cb28-48" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"SERC Tree Species and Stem Diameters"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb28-49"><a href="#cb28-49" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Easting (m)"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb28-50"><a href="#cb28-50" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Northing (m)"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb28-51"><a href="#cb28-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-52"><a href="#cb28-52" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="01_make-classification-training-df_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div id="cell-36" class="cell" data-scrolled="true">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.scatterplot(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>veg_tower_tile_short,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'adjEasting'</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'adjNorthing'</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'family'</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Make the x and y dimensions are equal</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">'equal'</span>, adjustable<span class="op">=</span><span class="st">'box'</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove scientific notation on the x and y axes labels</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_major_formatter(mticker.FuncFormatter(<span class="kw">lambda</span> x, _: <span class="ss">f'</span><span class="sc">{</span>x<span class="sc">:.0f}</span><span class="ss">'</span>))</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_major_formatter(mticker.FuncFormatter(<span class="kw">lambda</span> y, _: <span class="ss">f'</span><span class="sc">{</span>y<span class="sc">:.0f}</span><span class="ss">'</span>))</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Place the legend outside the plot at the center right</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'center left'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.05</span>, <span class="fl">0.5</span>))</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout to prevent legend overlap</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add title and axis labels</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"SERC Tree Families"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Easting (m)"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Northing (m)"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>plt.yticks(fontsize<span class="op">=</span><span class="dv">8</span>)  </span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>plt.xticks(fontsize<span class="op">=</span><span class="dv">8</span>)  </span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
+<p>Great! We can see all the trees that were surveyed in this AOP tile. The trees are sampled in discrete plots. For more information about the TOS sampling design, please refer to the <a href="https://data.neonscience.org/data-products/DP1.10098.001" target="_blank">Vegetation structure</a> data product page.</p>
 </section>
 <section id="recap" class="level2">
 <h2 class="anchored" data-anchor-id="recap">Recap</h2>
-<p>In this lesson we have curated a training data set containing information about the tree family and species as well as its geographic location in UTM x, y coordinates. We can now pair this dataset with remote sensing data and create a model to predict the tree’s family based off airborne spectral data. The next tutorial, <a href="https://www.neonscience.org/resources/learning-hub/tutorials/refl-classification-pyxarray" target="_blank">Tree Classification with NEON Airborne Imaging Spectrometer Data using Python xarray</a>, will show how to do this!</p>
+<p>In this lesson, we have created a training data set containing information about the tree family and species as well as their geographic locations in UTM x, y coordinates. We can now pair this training data set with the remote sensing data and create a model to predict the tree’s family based off airborne spectral data. The next tutorial, <a href="https://www.neonscience.org/resources/learning-hub/tutorials/refl-classification-pyxarray" target="_blank">Tree Classification with NEON Airborne Imaging Spectrometer Data using Python xarray</a>, will show how to do this!</p>
+<p><strong>Note:</strong> you may wish to create a training dataframe that contains additional information about the trees. For example, you can also include parameters like the growth form (e.g.&nbsp;whether the vegetation is a shrub, single-bole or multi-bole tree, etc.), the plant status (whether the tree is healthy or standing dead), and measurements such as the stem diameter and tree height. To do this, you would need to join the <code>vst_mappingandtagging</code> table with the <code>vst_apparentindividual</code> tables. Refer to the <a href="https://data.neonscience.org/api/v0/documents/quick-start-guides/NEON.QSG.DP1.00001.001v2?inline=TRUE" target="_blank">Quick Start Guide for Vegetation Structure</a> for more information about the data tables and the joining instructions. You can also refer to the lesson <a href="https://www.neonscience.org/resources/learning-hub/tutorials/tree-heights-veg-structure-chm" target="_blank">Compare tree height measured from the ground to a Lidar-based Canopy Height Model</a> which provides an example of how to do this and compare the TOS measured data with the AOP Lidar-derived Canopy Height Model (Ecosystem Structure) data product.</p>
 
 
 </section>
