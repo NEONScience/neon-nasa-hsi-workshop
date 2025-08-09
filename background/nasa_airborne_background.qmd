@@ -2,11 +2,9 @@
 title: "NASA Airborne and Field Datasets"
 ---
 
-Placeholder for general background on NASA Airborne and Field Data
-
 # NASA Airborne Data
 
-NASA has operated several airborne remote sensing platforms, summarized below. For the sake of this workshop, we will be focusing on the AVIRIS sensors, which are the same family the NEON Imaging Spectrometers (NIS), which are AVIRIS-NG sensors.
+NASA has operated several airborne remote sensing platforms, including AVIRIS, HyTES (Hyperspectral Thermal Emissions Spectrometer), and MASTER (MODIS/ASTER Airborne Simulator). This workshop focuses on data from the AVIRIS sensors, which are the same family the NEON Imaging Spectrometers (AVIRIS-NG).
 
 # AVIRIS
 ![](../img/aviris.png)
