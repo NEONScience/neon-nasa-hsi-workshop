@@ -12,21 +12,29 @@ After signing in you will be prompted for some server options:
   <img src="../img/2i2c_server_selection.png" width=100%/>
 </p>
 
-Be sure to select the radio button for **Python** and a size of **14.8 GB RAM and up to 3.75 CPUs**.
+Be sure to select the radio button for **Python** and a size of **28 GB RAM and up to 4 CPUs**.
 
-At this point you can use the terminal to clone the repository.
+## Cloning the nasa-neon-hsi-workshop Repository
 
-## Cloning the NEON-Data-Skills Repository
+Once the Python environment is spun up, you can clone the workshop repository.
 
-If you plan to edit or contribute to this workshop repository, or the [NEON-Data-Skills](https://github.com/NEONScience/NEON-Data-Skills) repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository. 
-
-If you just want to work with the notebooks or modules, you can simply clone the repository.
-
-To clone the repository, navigate to the directory where you want to store the repository on your local machine, then type the following:
+To clone the repository, navigate to the directory where you want to store the repository on Openscapes, or on your local machine, then type the following from the terminal or command prompt:
 
 ```cmd
-git clone https://github.com/NEONScience/NEON-Data-Skills.git
+git clone https://github.com/NEONScience/neon-nasa-hsi-workshop.git
 ```
+
+<p align="left">
+  <img src="../img/shut_down_kernels.png" width=100%/>
+</p>
+
+To locate and start running the NEON notebooks, change directories (cd) to neon-nasa-hsi-workshop/neon
+
+```cmd
+cd neon-nasa-hsi-workshop/neon
+```
+
+If you plan to edit or contribute to this [NEON NASA Airborne Hyperspectral Workshop Repository](https://github.com/NEONScience/neon-nasa-hsi-workshop) repository, or the [NEON-Data-Skills](https://github.com/NEONScience/NEON-Data-Skills) repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository. 
 
 ## Troubleshooting
 
@@ -38,6 +46,10 @@ We recommend *Shutting down all kernels* after running each notebook. This will 
 
 No single notebook exceeds roughly the limit using the provided data, but **if you choose to use your own data in the notebook, or have 2 notebooks open and do not shut down the kernel, you may get an out of memory error.**  
 
+If you run into any issues, or are testing changes, you may also wish to run *Restart Kernel and Clear Outputs of All Cells* to start over.
+<p align="left">
+  <img src="../img/restart_kernel_clear_outputs.png" width=100%/>
+</p>
+
+
 ---
-
-

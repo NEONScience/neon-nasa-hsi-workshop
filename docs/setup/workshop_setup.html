@@ -453,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#cloning-the-neon-data-skills-repository" id="toc-cloning-the-neon-data-skills-repository" class="nav-link active" data-scroll-target="#cloning-the-neon-data-skills-repository">Cloning the NEON-Data-Skills Repository</a></li>
+  <li><a href="#cloning-the-nasa-neon-hsi-workshop-repository" id="toc-cloning-the-nasa-neon-hsi-workshop-repository" class="nav-link active" data-scroll-target="#cloning-the-nasa-neon-hsi-workshop-repository">Cloning the nasa-neon-hsi-workshop Repository</a></li>
   <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
   </ul>
 </nav>
@@ -489,14 +489,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p align="left">
 <img src="../img/2i2c_server_selection.png" width="100%/">
 </p>
-<p>Be sure to select the radio button for <strong>Python</strong> and a size of <strong>14.8 GB RAM and up to 3.75 CPUs</strong>.</p>
-<p>At this point you can use the terminal to clone the repository.</p>
-<section id="cloning-the-neon-data-skills-repository" class="level2">
-<h2 class="anchored" data-anchor-id="cloning-the-neon-data-skills-repository">Cloning the NEON-Data-Skills Repository</h2>
-<p>If you plan to edit or contribute to this workshop repository, or the <a href="https://github.com/NEONScience/NEON-Data-Skills">NEON-Data-Skills</a> repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository.</p>
-<p>If you just want to work with the notebooks or modules, you can simply clone the repository.</p>
-<p>To clone the repository, navigate to the directory where you want to store the repository on your local machine, then type the following:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone https:/<span class="at">/github</span>.com<span class="at">/NEONScience/NEON-Data-Skills</span>.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Be sure to select the radio button for <strong>Python</strong> and a size of <strong>28 GB RAM and up to 4 CPUs</strong>.</p>
+<section id="cloning-the-nasa-neon-hsi-workshop-repository" class="level2">
+<h2 class="anchored" data-anchor-id="cloning-the-nasa-neon-hsi-workshop-repository">Cloning the nasa-neon-hsi-workshop Repository</h2>
+<p>Once the Python environment is spun up, you can clone the workshop repository.</p>
+<p>To clone the repository, navigate to the directory where you want to store the repository on Openscapes, or on your local machine, then type the following from the terminal or command prompt:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone https:/<span class="at">/github</span>.com<span class="at">/NEONScience/neon-nasa-hsi-workshop</span>.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p align="left">
+<img src="../img/shut_down_kernels.png" width="100%/">
+</p>
+<p>To locate and start running the NEON notebooks, change directories (cd) to neon-nasa-hsi-workshop/neon</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> neon<span class="at">-nasa-hsi-workshop/neon</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you plan to edit or contribute to this <a href="https://github.com/NEONScience/neon-nasa-hsi-workshop">NEON NASA Airborne Hyperspectral Workshop Repository</a> repository, or the <a href="https://github.com/NEONScience/NEON-Data-Skills">NEON-Data-Skills</a> repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository.</p>
 </section>
 <section id="troubleshooting" class="level2">
 <h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
@@ -505,6 +509,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <img src="../img/shut_down_kernels.png" width="100%/">
 </p>
 <p>No single notebook exceeds roughly the limit using the provided data, but <strong>if you choose to use your own data in the notebook, or have 2 notebooks open and do not shut down the kernel, you may get an out of memory error.</strong></p>
+If you run into any issues, or are testing changes, you may also wish to run <em>Restart Kernel and Clear Outputs of All Cells</em> to start over.
+<p align="left">
+<img src="../img/restart_kernel_clear_outputs.png" width="100%/">
+</p>
 <hr>
 
 
