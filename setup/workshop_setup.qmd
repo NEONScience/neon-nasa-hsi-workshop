@@ -24,10 +24,6 @@ To clone the repository, navigate to the directory where you want to store the r
 git clone https://github.com/NEONScience/neon-nasa-hsi-workshop.git
 ```
 
-<p align="left">
-  <img src="../img/shut_down_kernels.png" width=100%/>
-</p>
-
 To locate and start running the NEON notebooks, change directories (cd) to neon-nasa-hsi-workshop/neon
 
 ```cmd
@@ -45,11 +41,5 @@ We recommend *Shutting down all kernels* after running each notebook. This will 
 </p>
 
 No single notebook exceeds roughly the limit using the provided data, but **if you choose to use your own data in the notebook, or have 2 notebooks open and do not shut down the kernel, you may get an out of memory error.**  
-
-If you run into any issues, or are testing changes, you may also wish to run *Restart Kernel and Clear Outputs of All Cells* to start over.
-<p align="left">
-  <img src="../img/restart_kernel_clear_outputs.png" width=100%/>
-</p>
-
 
 ---
