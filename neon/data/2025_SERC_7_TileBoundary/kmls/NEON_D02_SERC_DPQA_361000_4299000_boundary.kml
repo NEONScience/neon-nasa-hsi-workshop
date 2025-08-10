@@ -1,0 +1,46 @@
+<kml>
+ <Document>
+  <Style id="yellow">
+   <LineStyle>
+   <color>ff00ffff</color>
+   <width>1</width>
+   </LineStyle>
+  </Style>
+  <Style id="red">
+   <LineStyle>
+   <color>ffff0000</color>
+   <width>2</width>
+   </LineStyle>
+  </Style>
+  <Style id="green">
+   <LineStyle>
+   <color>ff00ff00</color>
+   <width>1</width>
+   </LineStyle>
+  </Style>
+  <Placemark>
+  <styleUrl>#yellow</styleUrl>
+   <MultiGeometry>
+    <LineString>
+     <coordinates>
+-76.59560044,38.83791825,66.52
+-76.59563075,38.83791865,58.79
+-76.59587446,38.83791541,33.29
+-76.59596891,38.83791403,35.03
+-76.59607601,38.83791211,30.43
+-76.59609937,38.83791089,30.63
+-76.59610473,38.83790848,30.61
+-76.59609398,38.83788069,30.28
+-76.59599246,38.83774610,35.61
+-76.59598480,38.83774855,37.73
+-76.59588786,38.83778285,60.52
+-76.59576865,38.83783603,68.44
+-76.59575645,38.83784151,69.15
+-76.59574551,38.83784670,69.33
+-76.59560044,38.83791825,66.52
+     </coordinates>
+    </LineString>
+   </MultiGeometry>
+  </Placemark>
+ </Document>
+</kml>
