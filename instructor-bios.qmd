@@ -2,14 +2,14 @@
 title: "Workshop Instructors"
 ---
 
-## Bridget Hass
+## Bridget Hass (NEON)
 
 Bridget is a Data Scientist at NEON and splits her time between the Airborne Observation Platform (AOP) and Data Skills teams. She enjoys working on all things related to remote sensing data - including generating the data products, field work, calibration/validation, data management and teaching. Prior to working in remote sensing, she received her Master’s degree from Oregon State University specializing in marine geophysics, and worked at the Scripps Institution of Oceanography, supporting marine geophysical expeditions.
 
-## Michele Thornton
+## Michele Thornton (ORNL DAAC)
 
 Michele an ecologist and geospatial professional working at the Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC); part of NASA's Earth Observing System Data and Information System and the ORNL Biological and Environmental Systems Science Directorate. Michele has served as the Project Lead for the production and tool development and distribution of the Daymet dataset since 2009. She also provides geospatial technical and scientific support for datasets curated and distributed within the ORNL DAAC. Michele enjoys working with the NASA and ORNL Science Community to both provide data that are useful in their applications and to help with the long term curation of terrestrial ecology datasets.  
 
-## Rupesh Shrestha
+## Rupesh Shrestha (ORNL DAAC)
 
-Rupesh is a research scientist at ORNL DAAC. Rupesh has an extensive background in remote sensing applied to vegetation measurements, cyber-infrastructure development, and data science. Rupesh has led the development of several tools, algorithms, and data services that enable the estimation of earth science observables from satellite, airborne, and ground-based remote sensing. Rupesh holds a Ph.D. from Virginia Tech and M.S. in Photogrammetry and Geoinformatics from Stuttgart, Germany. He also serves as an adjunct faculty in the Department of Forestry, Wildlife & Fisheries at the University of Tennessee, Knoxville.
+Rupesh is a research scientist at the ORNL DAAC. Rupesh has an extensive background in remote sensing applied to vegetation measurements, cyber-infrastructure development, and data science. Rupesh has led the development of several tools, algorithms, and data services that enable the estimation of earth science observables from satellite, airborne, and ground-based remote sensing. Rupesh holds a Ph.D. from Virginia Tech and M.S. in Photogrammetry and Geoinformatics from Stuttgart, Germany. He also serves as an adjunct faculty in the Department of Forestry, Wildlife & Fisheries at the University of Tennessee, Knoxville.

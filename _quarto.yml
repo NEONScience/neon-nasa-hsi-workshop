@@ -45,8 +45,6 @@ website:
           href: setup/prerequisites.md
         - text: "Cloud Workspace Setup"
           href: setup/workshop_setup.qmd
-        - text: "Local Python Environment Setup"
-          href: setup/setup_instructions.md
       - section: "Background"            
         contents: 
           - text: "NEON Airborne Data Background"
