@@ -1,6 +1,6 @@
 # Prerequisites
 
-To follow along during the workshop, or to run through the notebooks contained within the repository using the Openscapes 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software or accounts are free.
+To follow along during the workshop, or to run through the notebooks contained within the repository using the Openscapes 2i2c Cloud JupyterHub (cloud workspace), the following are required. All software and accounts are free.
 
 1. **Laptop or tablet**
     - Participation in the exercises requires a laptop or tablet. Yes, a tablet works too! All workshop participants will have access to a 2i2c Jupyter Lab instance running in AWS us-west 2.  
