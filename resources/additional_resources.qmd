@@ -4,7 +4,7 @@ title: "Additional Resources"
 
 ## NEON
 
-We recommend the following tutorial series and tutorials for working with NEON AOP data. These provide example workflows at a range of levels from beginner to intermediate/advanced, in various languages including Python, R, Google Earth Engine (JavaScript and Python).
+We recommend the following tutorial series and tutorials for working with NEON AOP data. These provide example workflows at a range of levels from beginner to intermediate/advanced, in various programming languages including Python, R, and Google Earth Engine (JavaScript and Python).
 
 ### Python
 
@@ -47,6 +47,14 @@ We recommend the following tutorial series and tutorials for working with NEON A
 - [Exploring NEON AOP remote sensing and GBIF occurrence data in Google Earth Engine Python (geemap) to assess the impacts of a wildfire](https://www.neonscience.org/resources/learning-hub/tutorials/aop-gbif-gee-py)
 
 
-## NASA Airborne
+## NASA Airborne (and more!)
 
 - [Airborne and Field Data Resource Center](https://www.earthdata.nasa.gov/centers/afdrc)
+
+- [NASA Airborne Science Data Tutorials](https://ornldaac.github.io/airborne/README.html)
+
+- [BioSCape Campaign](https://www.bioscape.io/engage)
+
+- [SHIFT Campaign](https://impact.earthdata.nasa.gov/casei/campaign/SHIFT/)
+
+- [VSWIR Imaging and Thermal Applications, Learning, and Science Repository (VITALS)](https://github.com/nasa/VITALS)
