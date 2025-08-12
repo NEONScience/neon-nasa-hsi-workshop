@@ -30,7 +30,4 @@ In the interest of open science, this repository has been made public, but is st
 |-----------|-------------|
 |Organization|NASA Earthdata Data Center, Oak Ridge National Laboratory Distributed Active Archive Center (ORNL DAAC)|
 |Website|<https://www.earthdata.nasa.gov/centers/ornl-daac>|  
-|Contact|NASA Earthdata Forum: <https://forum.earthdata.nasa.gov/>|   
-
-
-Date last modified: 08-08-2025
+|Contact|NASA Earthdata Forum: <https://forum.earthdata.nasa.gov/>|

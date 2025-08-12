@@ -63,8 +63,8 @@ website:
             href: nasa/01_AVIRIS-NG_L3_BioSCape.ipynb
           - text: "4 NASA - Mapping Invasive Species Using Supervised Machine Learning and AVIRIS-NG"
             href: nasa/02_AVIRIS-NG_L3_invasive_species.ipynb
-      - section: "Additional Resources"
-      - contents:
+      - section: "Resources"
+        contents:
           - href:  resources/additional_resources.qmd
       - section: "Code of Conduct"
         contents:

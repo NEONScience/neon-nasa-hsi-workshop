@@ -398,8 +398,21 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Additional Resources</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Resources</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../resources/additional_resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Additional Resources</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -430,7 +443,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#data-attributes" id="toc-data-attributes" class="nav-link active" data-scroll-target="#data-attributes">Data Attributes</a>
   <ul class="collapse">
-  <li><a href="#data-products" id="toc-data-products" class="nav-link" data-scroll-target="#data-products">Data products</a></li>
+  <li><a href="#data-products" id="toc-data-products" class="nav-link" data-scroll-target="#data-products">Data Products</a></li>
   <li><a href="#data-processing" id="toc-data-processing" class="nav-link" data-scroll-target="#data-processing">Data Processing</a>
   <ul class="collapse">
   <li><a href="#atmospheric-correction" id="toc-atmospheric-correction" class="nav-link" data-scroll-target="#atmospheric-correction">Atmospheric correction</a></li>
@@ -500,8 +513,8 @@ Table&nbsp;1: Comparing the where, when, and why of NASA and NEON Airborne Campa
 </tr>
 <tr class="odd">
 <td>When?</td>
-<td>1987 - present; campaigns may be during a short season or over multiple years</td>
-<td>2013 - present; Each site is collected 3 out of every 5 years</td>
+<td>1986 - present (AVIRIS-NG first collections in 2012); campaigns may occur over short season or spanning multiple years</td>
+<td>2012 - present; NEON sites are collected roughly 3 out of every 5 years</td>
 </tr>
 </tbody>
 </table>
@@ -572,8 +585,8 @@ Table&nbsp;2: Comparison of attributes of NASA and NEON Airborne Campaigns
 </figure>
 </div>
 <section id="data-products" class="level2">
-<h2 class="anchored" data-anchor-id="data-products">Data products</h2>
-<p>NEON data are processed to Level 1 (flightline), Level 2 (derived; flightline) and Level 3 (derived; tiled mosaic) data products, and include a number of derived data products such as vegetation and water indices, LAI, fPAR, and Albedo. NASA data are processed to Level 1 (flightline) radiance, however some missions (e.g.&nbsp;Bioscape) have been mosaicked and tiled.</p>
+<h2 class="anchored" data-anchor-id="data-products">Data Products</h2>
+<p>NEON data are processed to Level 1 (flightline), Level 2 (derived; flightline) and Level 3 (derived; tiled mosaic) data products, and include a number of derived data products such as vegetation and water indices, LAI, fPAR, and Albedo. NASA data are processed to Level 1 (flightline) radiance, however some missions (e.g.&nbsp;BioSCape) have been mosaicked and tiled.</p>
 </section>
 <section id="data-processing" class="level2">
 <h2 class="anchored" data-anchor-id="data-processing">Data Processing</h2>

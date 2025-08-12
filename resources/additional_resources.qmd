@@ -1,0 +1,52 @@
+---
+title: "Additional Resources"
+---
+
+## NEON
+
+We recommend the following tutorial series and tutorials for working with NEON AOP data. These provide example workflows at a range of levels from beginner to intermediate/advanced, in various languages including Python, R, Google Earth Engine (JavaScript and Python).
+
+### Python
+
+- [Introduction to Hyperspectral Remote Sensing Data in Python](https://www.neonscience.org/resources/learning-hub/tutorials/introduction-hyperspectral-remote-sensing-data-python)
+
+- [Notebooks for working with NEON and EMIT Hyperspectral Data](https://github.com/nasa/VITALS/tree/main/community_contributed/NEON_EMIT)
+
+### R
+
+- [Introduction to Hyperspectral Remote Sensing Data in R](https://www.neonscience.org/resources/learning-hub/tutorials/introduction-hyperspectral-remote-sensing-data-r)
+
+- [Introduction to Light Detection and Ranging (LiDAR) in R](https://www.neonscience.org/resources/learning-hub/tutorials/introduction-light-detection-and-ranging-lidar-r)
+
+### Bilingual (Python/R)
+
+- [Download and Explore NEON Data](https://www.neonscience.org/resources/learning-hub/tutorials/download-explore-neon-data)
+
+- [Using an API Token when Accessing NEON Data with neonUtilities](https://www.neonscience.org/resources/learning-hub/tutorials/neon-api-tokens-tutorial)
+
+- [Compare tree height measured from the ground to a Lidar-based Canopy Height Model](https://www.neonscience.org/resources/learning-hub/tutorials/tree-heights-veg-structure-chm)
+
+### Google Earth Engine (GEE)
+
+[NEON GEE Publisher Catalog](https://developers.google.com/earth-engine/datasets/publisher/neon-prod-earthengine)
+
+#### GEE JavaScript
+
+- [Intro to AOP Data in Google Earth Engine (GEE) Tutorial Series](https://www.neonscience.org/resources/learning-hub/tutorials/intro-aop-data-google-earth-engine-gee-tutorial-series)
+
+- [Random Forest Species Classification using AOP and TOS data in GEE](https://www.neonscience.org/resources/learning-hub/tutorials/aop-gee-random-forest-classification)
+
+- [Principal Component Analysis of AOP Hyperspectral Data in GEE](https://www.neonscience.org/resources/learning-hub/tutorials/aop-gee-refl-pca)
+
+#### GEE Python
+
+- [Intro to AOP Datasets in Google Earth Engine (GEE) using Python](https://www.neonscience.org/resources/learning-hub/tutorials/aop-gee-py-intro)
+
+- [Intro to AOP Hyperspectral Data in Google Earth Engine (GEE) using Python geemap](https://www.neonscience.org/resources/learning-hub/tutorials/aop-refl-py-geemap)
+
+- [Exploring NEON AOP remote sensing and GBIF occurrence data in Google Earth Engine Python (geemap) to assess the impacts of a wildfire](https://www.neonscience.org/resources/learning-hub/tutorials/aop-gbif-gee-py)
+
+
+## NASA Airborne
+
+- [Airborne and Field Data Resource Center](https://www.earthdata.nasa.gov/centers/afdrc)
