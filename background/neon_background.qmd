@@ -2,6 +2,8 @@
 title: "NEON Airborne and Field Datasets"
 ---
 
+<iframe src="https://docs.google.com/presentation/d/1pwk2Tm29qUF0Erju7j5JI3KYKeHfrXranjx84mqDXXQ/embed?start=false&loop=false&delayms=3000" frameborder="0" width="745" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
 ## What is NEON?
 
 NEON is a continental-scale observation facility designed to collect long-term open-access ecological data to better understand the complexities of Earth's ecosystems and how they are changing. NEON uses cutting-edge sensor networks, instrumentation, observational sampling, natural history archive facilities and remote sensing methods and technologies to collect data on plants, animals, soil, nutrients, freshwater and the atmosphere.

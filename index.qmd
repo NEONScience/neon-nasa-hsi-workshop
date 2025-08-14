@@ -13,10 +13,6 @@ This workshop is hosted by [National Ecological Observatory Network (NEON)](http
 
 Hands-on exercises will be executed from a [Jupyter Hub on the Openscapes 2i2c cloud instance](https://workshop.openscapes.2i2c.cloud/).
 
-<!--
-<iframe src="https://docs.google.com/presentation/d/1XrdG9P5rLNR8C1TeLpf80YZUCtqdmUev/embed?start=false&loop=false&delayms=3000" frameborder="0" width="750" height="445" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
--->
-
 ## Agenda
 
 | Time | Description | Leads/Instructors |  

@@ -418,18 +418,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">2 NEON - Reflectance Visualization and Classification</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../nasa/01_AVIRIS-NG_L3_BioSCape.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3 NASA - AVIRIS Data - Discovery, Access, and Visualization</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../nasa/02_AVIRIS-NG_L3_invasive_species.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4 NASA - Mapping Invasive Species Using Supervised Machine Learning and AVIRIS-NG</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -476,8 +464,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#cloning-the-nasa-neon-hsi-workshop-repository" id="toc-cloning-the-nasa-neon-hsi-workshop-repository" class="nav-link active" data-scroll-target="#cloning-the-nasa-neon-hsi-workshop-repository">Cloning the nasa-neon-hsi-workshop Repository</a></li>
-  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a></li>
+  <li><a href="#cloning-the-neon-and-nasa-repositories" id="toc-cloning-the-neon-and-nasa-repositories" class="nav-link active" data-scroll-target="#cloning-the-neon-and-nasa-repositories">Cloning the NEON and NASA repositories</a>
+  <ul class="collapse">
+  <li><a href="#neon-notebooks" id="toc-neon-notebooks" class="nav-link" data-scroll-target="#neon-notebooks">NEON Notebooks</a></li>
+  <li><a href="#nasa-notebooks" id="toc-nasa-notebooks" class="nav-link" data-scroll-target="#nasa-notebooks">NASA Notebooks</a></li>
+  </ul></li>
+  <li><a href="#troubleshooting" id="toc-troubleshooting" class="nav-link" data-scroll-target="#troubleshooting">Troubleshooting</a>
+  <ul class="collapse">
+  <li><a href="#tricks-to-avoid-potential-pitfalls" id="toc-tricks-to-avoid-potential-pitfalls" class="nav-link" data-scroll-target="#tricks-to-avoid-potential-pitfalls">Tricks to avoid potential pitfalls</a></li>
+  </ul></li>
+  <li><a href="#contributing" id="toc-contributing" class="nav-link" data-scroll-target="#contributing">Contributing</a></li>
   </ul>
 </nav>
     </div>
@@ -509,18 +505,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>After completing the <a href="../setup/prerequisites.html">prerequisites</a> you will have access to the Openscapes 2i2c JupyterHub cloud workspace. <a href="https://workshop.openscapes.2i2c.cloud/">Click here to start JupyterLab</a>. Use your email and the provided password to sign in. This password will be provided in the workshop. If you’re interested in using the 2i2c cloud workspace outside of the workshop, please <a href="#contact-info">contact us</a>.</p>
 <p>After signing in you will be prompted for some server options:</p>
+<p>Select the following options:</p>
+<ul>
+<li><strong>Environment</strong>: Other…</li>
+<li><strong>Custom image</strong>: openscapes/python:d8e6ca2</li>
+<li><strong>Resource Allocation</strong>: ~15 GB RAM and ~1.8 CPUs</li>
+</ul>
 <p align="left">
 <img src="../img/2i2c_server_selection.png" width="100%/">
 </p>
-<p>Be sure to select the radio button for <strong>Python</strong> and a size of <strong>28 GB RAM and up to 4 CPUs</strong>.</p>
-<section id="cloning-the-nasa-neon-hsi-workshop-repository" class="level2">
-<h2 class="anchored" data-anchor-id="cloning-the-nasa-neon-hsi-workshop-repository">Cloning the nasa-neon-hsi-workshop Repository</h2>
-<p>Once the Python environment is spun up, you can clone the workshop repository.</p>
-<p>To clone the repository, navigate to the directory where you want to store the repository on Openscapes, or on your local machine, then type the following from the terminal or command prompt:</p>
+<section id="cloning-the-neon-and-nasa-repositories" class="level2">
+<h2 class="anchored" data-anchor-id="cloning-the-neon-and-nasa-repositories">Cloning the NEON and NASA repositories</h2>
+<p>Once the cloud workspace with the required Python environment is spun up, you can clone the repositories containing the NEON and NASA notebooks as follows.</p>
+<section id="neon-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="neon-notebooks">NEON Notebooks</h3>
+<p>To clone the repository containing the NEON notebooks, navigate to the directory where you want to store the repository on Openscapes (your home directory), then type the following from the terminal or command prompt:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>git clone https:/<span class="at">/github</span>.com<span class="at">/NEONScience/neon-nasa-hsi-workshop</span>.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To locate and start running the NEON notebooks, change directories (cd) to neon-nasa-hsi-workshop/neon</p>
+<p>To locate and start running the NEON notebooks, change directories (<code>cd</code>) to <code>neon-nasa-hsi-workshop/neon</code></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> neon<span class="at">-nasa-hsi-workshop/neon</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If you plan to edit or contribute to this <a href="https://github.com/NEONScience/neon-nasa-hsi-workshop">NEON NASA Airborne Hyperspectral Workshop Repository</a> repository, or the <a href="https://github.com/NEONScience/NEON-Data-Skills">NEON-Data-Skills</a> repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository.</p>
+</section>
+<section id="nasa-notebooks" class="level3">
+<h3 class="anchored" data-anchor-id="nasa-notebooks">NASA Notebooks</h3>
+<p>To clone the repository containing the NASA airborne notebooks, navigate to the directory where you want to store the repository on Openscapes (your home directory)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then type the following from the terminal or command prompt:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>git clone https:/<span class="at">/github</span>.com<span class="at">/ornldaac/airborne</span>.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To find and open the NASA notebooks, change directories to where the airborne notebooks are saved:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cmd code-with-copy"><code class="sourceCode dosbat"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> airborne<span class="at">/notebooks</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="troubleshooting" class="level2">
 <h2 class="anchored" data-anchor-id="troubleshooting">Troubleshooting</h2>
@@ -528,7 +540,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p align="left">
 <img src="../img/shut_down_kernels.png" width="100%/">
 </p>
-<p>No single notebook exceeds roughly the limit using the provided data, but <strong>if you choose to use your own data in the notebook, or have 2 notebooks open and do not shut down the kernel, you may get an out of memory error.</strong></p>
+<p>No single notebook exceeds roughly the limit using the provided data, but <em>if you choose to use your own data in the notebook, or have 2 notebooks open and do not shut down the kernel, you may get an out of memory error.</em></p>
+<section id="tricks-to-avoid-potential-pitfalls" class="level3">
+<h3 class="anchored" data-anchor-id="tricks-to-avoid-potential-pitfalls">Tricks to avoid potential pitfalls</h3>
+<p>The notebooks in this workshop use relative paths and assume you are working from the same working directory as the instructors. If you are not finding a data file in the right path, we recommend the following troubleshooting steps to make sure you are in the right place.</p>
+<ul>
+<li>To show your current working directory in Python, type into a notebook cell:</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>os.getcwd() <span class="co"># get current working directory</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>To display the contents (files, folders) in you current directory, use <code>!ls</code>. <code>ls</code> is a Linux command meaning list directory. You can run linux commands from a code cell directly when you add an exclamation mark (<code>!</code>) in front of the command.</li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls <span class="co"># list contents of current directory</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>You can also install Python packages in this way (using <code>!</code>), for example:</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install neonutilities <span class="co"># install the neonutilities Python package</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="contributing" class="level2">
+<h2 class="anchored" data-anchor-id="contributing">Contributing</h2>
+<p>If you plan to edit or contribute to this <a href="https://github.com/NEONScience/neon-nasa-hsi-workshop">NEON NASA Airborne Hyperspectral Workshop Repository</a> repository, or the <a href="https://github.com/NEONScience/NEON-Data-Skills">NEON-Data-Skills</a> repository, we recommend following a fork and pull workflow: first fork the repository, then clone your fork to your local machine, make changes, push changes to your fork, then make a pull request back to the main repository.</p>
 <hr>
 
 
