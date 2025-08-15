@@ -15,14 +15,18 @@ jobs:
       - name: Download selected tutorial files
         run: |
           mkdir -p nasa
-          curl -L -o nasa/01_AVIRIS-NG_L3_BioSCape.ipynb \
-            https://raw.githubusercontent.com/ornldaac/airborne/refs/heads/main/notebooks/AVIRIS-NG_L3_BioSCape.ipynb
-          curl -L -o nasa/02_AVIRIS-NG_L3_invasive_species.ipynb \
-            https://raw.githubusercontent.com/ornldaac/airborne/refs/heads/main/notebooks/AVIRIS-NG_L3_invasive_species.ipynb
+          curl -L -o nasa/1_AVIRIS_SearchandDiscover.ipynb \
+            https://github.com/ornldaac/airborne/blob/main/notebooks/1_AVIRIS_SearchandDiscover.ipynb
+          curl -L -o nasa/2_AVIRIS_AccessandAnalysis.ipynb \
+            https://github.com/ornldaac/airborne/blob/main/notebooks/2_AVIRIS_AccessandAnalysis.ipynb
+          curl -L -o nasa/3_AVIRIS-NG_L3_invasive_species.ipynb \
+            https://github.com/ornldaac/airborne/blob/main/notebooks/AVIRIS-NG_L3_invasive_species.ipynb
+          curl -L -o nasa/4_AVIRIS-NG_L3_CWC.ipynb \
+            https://github.com/ornldaac/airborne/blob/main/notebooks/AVIRIS-NG_L3_CWC.ipynb
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add nasa/01_AVIRIS-NG_L3_BioSCape.ipynb nasa/02_AVIRIS-NG_L3_invasive_species.ipynb
+          git add nasa/1_AVIRIS_SearchandDiscover.ipynb nasa/2_AVIRIS_AccessandAnalysis.ipynb nasa/3_AVIRIS-NG_L3_invasive_species.ipynb nasa/4_AVIRIS-NG_L3_CWC.ipynb
           git commit -m "Sync selected NASA tutorials from airborne repository" || echo "No changes to commit"
           git push
